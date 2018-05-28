@@ -42,6 +42,7 @@ public class Game extends Application implements Savable<JsonObject> {
     private String rivalName;
     private GameView gameView;
     private Fight fight;
+    private int pokemonMetInZone = 0;
 
     /**
      *
@@ -107,11 +108,13 @@ public class Game extends Application implements Savable<JsonObject> {
                     gameView.setScene(scenario.getEventFile());
                 } else {
                     currentZone = newZone;
+                    pokemonMetInZone = 0;
                     gameView.setScene("Scenario");
                 }
                 currentStoryEvent++;
             } else {
                 currentZone = newZone;
+                pokemonMetInZone = 0;
                 gameView.setScene("MainScreen");
             }
         }
@@ -134,7 +137,6 @@ public class Game extends Application implements Savable<JsonObject> {
             setFight(new DressorFight(
                     new Dressor(rivalName, currentPkmns,
                             Integer.parseInt(rivalStats[2]))));
-//            fight.setOnFinished(e -> myPlayer.healPokemon()); 
         } catch (ReaderException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -208,7 +210,9 @@ public class Game extends Application implements Savable<JsonObject> {
         if (Math.random() * currentZone.getMeetingDressorProba() > 1) {
             setFight(new DressorFight(Dressor.generateEnnemy(myPlayer)));
             return true;
-        } else if (Math.random() * currentZone.getMeetingPkmnProba() > 1) {
+        } else if (pokemonMetInZone <= currentZone.getMeetingPkmnProba()
+                && Math.random() * currentZone.getMeetingPkmnProba() > 1) {
+            pokemonMetInZone++;
             currentZone.searchWildPokemon();
             return true;
         }
@@ -262,6 +266,7 @@ public class Game extends Application implements Savable<JsonObject> {
             rivalName = save.getString("rivalName", null);
             currentZone = datas.getLoadedZone(save.getString("currentZone", null));
             currentStoryEvent = save.getInt("currentStoryEvent", 0);
+            scenario = datas.getScenario().get(currentStoryEvent);
             return true;
         } catch (Exception e) {
             return false;
