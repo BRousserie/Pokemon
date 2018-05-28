@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.Double?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" stylesheets="@generalsheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.Controller">
+  <children>
+    <GridPane layoutX="14.0" layoutY="427.0" prefHeight="276.0" prefWidth="808.0" styleClass="gridPane">
+      <children>
+        <Label id="goto" style="-fx-font-size: 12;" stylesheets="@mainGameSheet.css" text="ALLER à" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+        <Button fx:id="PC" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="PC" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Button fx:id="pokedex" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="POKéDEX" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Button fx:id="centrePokemon" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="tooLongButton" text="CENTRE POKéMON" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button fx:id="pokemon" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="POKéMON" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Button fx:id="shop" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="Magasin" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <Button fx:id="sac" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="SAC" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+        <Button fx:id="arena" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="ARèNE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Button fx:id="sauvegarder" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="SAUVEGARDER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <ChoiceBox fx:id="selectDestination" prefHeight="40.0" prefWidth="172.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <styleClass>
+                  <String fx:value="container" />
+                  <String fx:value="tooLongButton" />
+               </styleClass></ChoiceBox>
+            <Button fx:id="fish" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="Pêcher" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button fx:id="searchItems" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="tooLongButton" text="Chercher objets" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="goTo" contentDisplay="BOTTOM" maxWidth="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="26.0" styleClass="tooLongButton" text="OK" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <VBox fx:id="displayTeam" layoutX="829.0" layoutY="16.0" prefHeight="403.0" prefWidth="436.0" styleClass="container">
+      <children>
+        <Label text="Nom : ">
+          <font>
+            <Font size="16.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label fx:id="playerName" font="$x1" translateY="0.0" />
+        <Label text="Pokémons :" translateY="10.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+        </Label>
+            <GridPane prefHeight="171.0" prefWidth="426.0" translateY="10.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+              <Label fx:id="pokemon1" font="$x1" />
+              <Label fx:id="pokemon2" font="$x1" GridPane.rowIndex="1" />
+              <Label fx:id="pokemon3" font="$x1" GridPane.rowIndex="2" />
+              <Label fx:id="pokemon4" font="$x1" GridPane.rowIndex="3" />
+              <Label fx:id="pokemon5" font="$x1" GridPane.rowIndex="4" />
+              <Label fx:id="pokemon6" font="$x1" GridPane.rowIndex="5" />
+               </children>
+            </GridPane>
+        <Label text="Badges :" translateY="18.0">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <GridPane prefHeight="103.0" prefWidth="426.0" translateY="20.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+              <Label fx:id="badge1" font="$x1" />
+              <Label fx:id="badge2" font="$x1" GridPane.rowIndex="1" />
+              <Label fx:id="badge3" font="$x1" GridPane.rowIndex="2" />
+              <Label fx:id="badge4" font="$x1" GridPane.rowIndex="3" />
+              <Label fx:id="badge5" font="$x1" GridPane.columnIndex="1" />
+              <Label fx:id="badge6" font="$x1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              <Label fx:id="badge7" font="$x1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              <Label fx:id="badge8" font="$x1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+      </children>
+    </VBox>
+    <TextArea fx:id="displayScenario" editable="false" layoutX="14.0" layoutY="16.0" prefHeight="403.0" prefWidth="808.0" styleClass="container" wrapText="true" />
+    <Group id="Group" layoutX="828.0" layoutY="430.0">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="0.0" height="276.0" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="438.0">
+          <fill>
+            <Color blue="1.000" green="0.712" red="0.200" fx:id="x6" />
+          </fill>
+        </Rectangle>
+        <Ellipse layoutX="34.0" layoutY="186.0" radiusX="25.636629104614258" radiusY="44.38651657104492" rotate="215.0" strokeType="INSIDE">
+          <fill>
+            <Color blue="0.000" green="0.800" red="0.063" fx:id="x4" />
+          </fill>
+          <stroke>
+            <Color blue="1.000" green="1.000" opacity="0.000" red="1.000" fx:id="x3" />
+          </stroke>
+        </Ellipse>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="28.0" layoutX="1.0" layoutY="185.0" strokeType="INSIDE" width="20.0">
+          <fill>
+            <Color blue="0.000" green="0.800" red="0.064" fx:id="x2" />
+          </fill>
+               <stroke>
+                  <Color blue="0.000" green="0.800" red="0.064" fx:id="x11" />
+               </stroke>
+        </Rectangle>
+        <Ellipse fill="$x2" layoutX="112.0" layoutY="133.0" radiusX="29.41448974609375" radiusY="80.0" stroke="$x3" strokeType="INSIDE" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x4" height="172.10662841796875" layoutX="1.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="436.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="56.10662841796875" layoutX="214.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="222.6064453125">
+          <fill>
+            <Color blue="0.510" green="0.639" red="0.847" fx:id="x5" />
+          </fill>
+        </Rectangle>
+        <Ellipse fill="$x5" layoutX="197.0" layoutY="69.0" radiusX="39.0" radiusY="26.48756217956543" rotate="12.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x5" height="83.0" layoutX="1.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="220.0" />
+        <Ellipse fill="$x2" layoutX="290.0" layoutY="62.0" radiusX="70.00006103515625" radiusY="27.28125" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x2" layoutX="130.0" layoutY="95.0" radiusX="45.0" radiusY="34.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x5" layoutX="355.0" layoutY="65.0" radiusX="46.45928955078125" radiusY="28.03192138671875" rotate="12.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x5" height="103.0" layoutX="319.0" layoutY="50.0" stroke="TRANSPARENT" strokeType="INSIDE" width="117.53466796875" />
+        <Ellipse fill="$x6" layoutX="387.0" layoutY="27.0" radiusX="50.25" radiusY="26.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="369.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="68.2132568359375">
+          <fill>
+            <Color blue="1.000" green="0.714" red="0.200" fx:id="x7" />
+          </fill>
+        </Rectangle>
+        <Ellipse fill="$x7" layoutX="397.0" layoutY="37.0" radiusX="39.0" radiusY="26.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x4" height="56.10662841796875" layoutX="1.0" layoutY="131.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.5" />
+        <Ellipse fill="$x2" layoutX="328.0" layoutY="148.0" radiusX="55.0" radiusY="49.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x5" layoutX="360.0" layoutY="90.0" radiusX="42.0" radiusY="46.0" rotate="12.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x6" layoutX="391.0" layoutY="150.0" radiusX="28.0" radiusY="52.0" rotate="56.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x2" layoutX="313.0" layoutY="203.0" radiusX="69.0" radiusY="26.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x6" layoutX="242.0" layoutY="172.0" radiusX="50.40893745422363" radiusY="26.25" rotate="158.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x6" layoutX="188.0" layoutY="168.0" radiusX="49.60650634765625" radiusY="30.70709228515625" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Ellipse fill="$x2" layoutX="123.0" layoutY="246.0" radiusX="22.50006103515625" radiusY="19.5" rotate="32.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Line endX="100.0" layoutX="183.0" layoutY="70.0" startX="13.0" startY="-1.0" strokeMiterLimit="10.0" strokeWidth="15.0">
+          <stroke>
+            <Color blue="0.400" green="0.976" red="1.000" fx:id="x8" />
+          </stroke>
+        </Line>
+        <Line endX="48.0" endY="0.0" layoutX="285.0" layoutY="30.0" startX="13.0" startY="-1.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="69.0" endY="119.0" layoutX="227.0" layoutY="46.0" startX="71.0" startY="-4.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="72.0" endY="0.0" layoutX="295.0" layoutY="71.0" startX="13.0" startY="-1.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="72.0" endY="0.0" layoutX="291.0" layoutY="115.0" startX="-117.0" startY="-1.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="60.0" endY="0.0" layoutX="294.0" layoutY="165.0" startX="13.0" startY="-1.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="70.0" endY="112.0" layoutX="296.0" layoutY="86.0" startX="71.0" startY="-4.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="60.0" endY="0.0" layoutX="292.0" layoutY="198.0" startX="30.0" startY="0.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="74.0" endY="2.0" layoutX="236.0" layoutY="213.0" startX="-62.0" startY="0.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="14.0" endY="-54.0" layoutX="297.0" layoutY="252.0" startX="14.0" startY="-40.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="60.0" endY="5.0" layoutX="208.0" layoutY="240.0" startX="60.0" startY="-26.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="-2.0" endY="55.0" layoutX="176.0" layoutY="143.0" startX="-2.0" startY="-15.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="50.0" endY="-3.0" layoutX="218.0" layoutY="250.0" startX="-100.0" startY="-3.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="-2.0" endY="139.0" layoutX="120.0" layoutY="93.0" startX="-2.0" startY="-15.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Ellipse fill="$x5" layoutX="40.0" layoutY="112.0" radiusX="34.23738479614258" radiusY="91.38667297363281" rotate="12.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Line endX="-2.0" endY="55.0" layoutX="80.0" layoutY="85.0" startX="-2.0" startY="-15.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="30.0" endY="-19.0" layoutX="90.0" layoutY="97.0" startX="108.0" startY="-18.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Line endX="-16.0" endY="41.0" layoutX="129.0" layoutY="99.0" startX="-40.0" startY="41.0" stroke="$x8" strokeMiterLimit="10.0" strokeWidth="15.0" />
+        <Circle fill="RED" layoutX="118.0" layoutY="80.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="118.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="118.0" layoutY="192.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="297.0" layoutY="114.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="118.0" layoutY="246.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="239.0" layoutY="114.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="367.0" layoutY="114.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="297.0" layoutY="164.0" radius="10.000049999998737" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="268.0" layoutY="212.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="73.0" layoutY="85.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="113.0" layoutY="95.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="113.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="362.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="362.0" layoutY="80.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="367.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="307.0" layoutY="159.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="201.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Circle fill="RED" layoutX="78.0" layoutY="70.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="RED" layoutX="297.0" layoutY="70.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="211.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Circle fill="$x7" layoutX="70.0" layoutY="207.0" radius="27.28125" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Line endX="99.0" endY="63.0" layoutX="211.0" layoutY="102.0" startX="-91.0" startY="-1.0" stroke="#5e2a00" strokeWidth="2.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x6" height="50.0" layoutX="402.0" layoutY="125.0" stroke="TRANSPARENT" strokeType="INSIDE" width="35.0" />
+        <Polygon fill="$x6" layoutX="420.0" layoutY="125.0" rotate="270.0" scaleX="0.2799999953269959" scaleY="0.34" stroke="TRANSPARENT" strokeType="INSIDE">
+          <points>
+            <Double fx:value="-50.0" />
+            <Double fx:value="40.0" />
+            <Double fx:value="50.0" />
+            <Double fx:value="40.0" />
+            <Double fx:value="0.0" />
+            <Double fx:value="-60.0" />
+          </points>
+        </Polygon>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="$x5" height="98.0" layoutX="1.0" layoutY="40.0" stroke="TRANSPARENT" strokeType="INSIDE" width="39.0" />
+        <Ellipse fill="$x4" layoutX="390.0" layoutY="200.0" radiusX="8.0" radiusY="20.0" rotate="57.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+        <Text layoutX="71.0" layoutY="109.0" scaleX="1.178827705295472" scaleY="0.991215545757441" strokeType="OUTSIDE" strokeWidth="0.0" text="23">
+          <font>
+            <Font size="10.0" fx:id="x9" />
+          </font>
+        </Text>
+        <Text font="$x9" layoutX="90.0" layoutY="145.0" scaleX="1.178827705295472" scaleY="0.991215545757441" strokeType="OUTSIDE" strokeWidth="0.0" text="22" />
+        <Text font="$x9" layoutX="102.0" layoutY="110.0" scaleX="1.178827705295472" scaleY="0.8594699432715386" strokeType="OUTSIDE" strokeWidth="0.0" text="2" />
+        <Text font="$x9" layoutX="160.0" layoutY="80.0" scaleX="1.178827705295472" scaleY="0.8594699432715386" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+        <Text font="$x9" layoutX="240.0" layoutY="72.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="4" />
+        <Text font="$x9" layoutX="291.0" layoutY="50.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="24" />
+        <Text font="$x9" layoutX="315.0" layoutY="32.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="25" />
+        <Text font="$x9" layoutX="330.0" layoutY="72.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="9" />
+        <Text font="$x9" layoutX="360.0" layoutY="100.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="10" />
+        <Text font="$x9" layoutX="330.0" layoutY="117.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="8" />
+        <Text font="$x9" layoutX="330.0" layoutY="167.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="11" />
+        <Text font="$x9" layoutX="291.0" layoutY="95.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="6" />
+        <Text font="$x9" layoutX="360.0" layoutY="185.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="12" />
+        <Text font="$x9" layoutX="340.0" layoutY="200.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="13" />
+        <Text font="$x9" layoutX="305.0" layoutY="210.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="14" />
+        <Text font="$x9" layoutX="287.0" layoutY="217.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="15" />
+        <Text font="$x9" layoutX="200.0" layoutY="115.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="16" />
+        <Text font="$x9" layoutX="260.0" layoutY="116.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="7" />
+        <Text font="$x9" layoutX="220.0" layoutY="215.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="18" />
+        <Text font="$x9" layoutX="240.0" layoutY="250.0" scaleX="1.178827705295472" scaleY="0.8594625598423424" strokeType="OUTSIDE" strokeWidth="0.0" text="19" />
+        <Text font="$x9" layoutX="112.0" layoutY="220.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="21" />
+        <Text font="$x9" layoutX="168.0" layoutY="170.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="17" />
+        <Text font="$x9" layoutX="160.0" layoutY="250.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="20" />
+        <Text font="$x9" layoutX="115.0" layoutY="170.0" scaleX="1.178827705295472" scaleY="0.8594625599057695" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+        <Text layoutX="30.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plateau Indigo">
+          <font>
+            <Font size="9.0" fx:id="x10" />
+          </font>
+        </Text>
+        <Text font="$x10" layoutX="10.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Route Victoire" />
+        <Text font="$x10" layoutX="100.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Argenta" />
+        <Text font="$x10" layoutX="185.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mt Sélénite" />
+        <Text font="$x10" layoutX="270.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Azuria" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="275.0" layoutY="40.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+        <Text font="$x10" layoutX="240.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grotte Azurée" />
+        <Text font="$x10" layoutX="375.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grotte" />
+        <Text font="$x10" layoutX="375.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Centrale" />
+        <Text font="$x10" layoutX="375.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tour Pokémon" />
+        <Text font="$x10" layoutX="350.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lavanville" />
+        <Text font="$x10" layoutX="270.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Carmin-sur-Mer" />
+        <Text font="$x10" layoutX="192.0" layoutY="146.0" rotate="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cave-Taupiqueur" />
+        <Text font="$x10" layoutX="280.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Safrania" />
+        <Text font="$x10" layoutX="210.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Céladopole" />
+        <Text font="$x10" layoutX="250.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parmanie" />
+        <Text font="$x10" layoutX="200.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iles Ecume" />
+        <Text font="$x10" layoutX="100.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cramois'ile" />
+        <Text font="$x10" layoutX="90.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bourg Palette" />
+        <Text font="$x10" layoutX="105.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jadielle" />
+        <Text font="$x10" layoutX="123.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fôret de Jade" />
+        <Text font="$x10" layoutX="123.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+      </children>
+    </Group>
+  </children>
+</AnchorPane>

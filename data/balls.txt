@@ -1,0 +1,5 @@
+PokéBall;Objet permettant de capturer un Pokémon;200;255
+Super Ball;Plus efficace qu'une Poké Ball;600;200
+Hyper Ball;Plus performante qu'une Super Ball;1200;150
+Master Ball;Ne peut pas échouer	Donnée par le PDG de la Sylphe SARL;0;0
+Safari Ball;Ball spéciale utilisée dans le Parc Safari de Parmanie;0;150

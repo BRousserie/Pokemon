@@ -1,0 +1,8 @@
+.transparentbar > .track {
+  -fx-text-box-border: invisible;
+  -fx-control-inner-background: invisible;
+}
+
+.choosePokemon {
+    -fx-font-size: 6;
+}

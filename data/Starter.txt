@@ -1,0 +1,30 @@
+CHEN: Hé toi, là ! Ne pars pas ! C'est super dangereux ! 
+showDes POKéMON sauvages infestent les hautes herbes !
+showIl te faut un POKéMON pour te protéger... J'ai trouvé !
+showSuis moi !
+showVous suivez le PROF CHEN dans son laboratoire.
+//sound(PROF CHEN LAB)
+show@rivalName: Pépé ! J'en ai marre d'attendre ! 
+showCHEN: @rivalName ? Heu...
+showAh, c'est vrai ! Je t'ai dit de venir...
+showTiens, @playerName! Voici 3 POKéMON!
+showMais... Ils sont dans des POKé BALL.
+showPlus jeune, j'étais un sacré dresseur de POKéMON ! Et oui !
+showMais avec l'âge, il ne m'en reste plus que 3 !
+showChoisis-en un !
+show@rivalName: Ben ! Pépé ! Mon pépé ! Et moi ?
+showCHEN: Patience, @rivalName ! Tu en auras un aussi !
+showBULBIZARRE ? Il est très facile à dresser.
+showCARAPUCE ? Il est facile à dresser, tu ne le regretteras pas.
+showSALAMECHE ? C'est un bon choix. Tu vas devoir t'occuper de lui avec beaucoup de patience.
+qcm
+show@playerName obtient : @playerStarterName
+show@rivalName: Je prends celui-ci !
+show@rivalName reçoit un @rivalStarter
+showAprès avoir remercié le PéPé CHEN comme il se doit,
+showvous sortez du labo quand tout à coup...
+show@rivalName: @playerName ! Voyons lequel de nos POKéMON est le plus fort !
+showAllez viens te battre, minable !
+fight@rival
+heal
+END

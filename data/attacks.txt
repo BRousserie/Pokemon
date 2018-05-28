@@ -1,0 +1,165 @@
+Riposte;COMBAT;Physique;255;100;20;Inflige le double des degats subis par une attaque de type Normal ou Combat durant le tour, echoue sinon
+Frappe atlas;COMBAT;Physique;255;100;20;Inflige des degats egaux au niveau/attacker/
+Double pied;COMBAT;Physique;30;100;30;Frappe deux fois
+Balayage;COMBAT;Physique;50;100;20;Peut apeurer la ennemy / Taux de Coups Critiques eleve
+Mawashi geri;COMBAT;Physique;60;85;15;Peut apeurer la ennemy
+Pied saute;COMBAT;Physique;70;95;25;Enleve 1 PV si l'attaque echoue
+Sacrifice;COMBAT;Physique;80;80;25;Blesse le attacker
+Pied voltige;COMBAT;Physique;85;90;20;Enleve 1 PV si l'attaque echoue
+Draco rage;DRAGON;Speciale;255;100;10;Inflige toujours 40 PV de degats
+Repli;EAU;Autre;255;100;40;stat/def/attacker/1
+Ecume;EAU;Speciale;20;100;30;Peut baisser la vitesse ennemy
+Claquoir;EAU;Speciale;35;75;10;Attaque continue sur deux a cinq tours
+Pistolet a o;EAU;Speciale;40;100;25;Aucun
+Bulles d'o;EAU;Speciale;65;100;20;Peut baisser la vitesse ennemy
+Cascade;EAU;Speciale;80;100;15;Aucun
+Pince masse;EAU;Speciale;90;85;10;Taux de Coups Critiques eleve
+Surf;EAU;Speciale;95;100;15;Aucun
+Hydrocanon;EAU;Speciale;120;80;5;Aucun
+Cage eclair;ELECTR;Autre;255;100;20;Paralyse la ennemy
+Eclair;ELECTR;Speciale;40;100;30;Peut paralyser la ennemy
+Poing eclair;ELECTR;Speciale;75;100;15;Peut paralyser la ennemy
+Tonnerre;ELECTR;Speciale;95;100;15;Peut paralyser la ennemy
+Fatal foudre;ELECTR;Speciale;120;70;5;Peut paralyser la ennemy
+Danseflamme;FEU;Speciale;15;70;15;Attaque continue sur deux a cinq tours
+Flammeche;FEU;Speciale;40;100;25;Peut bruler la ennemy
+Poing de feu;FEU;Speciale;75;100;15;Peut bruler la ennemy
+Lance flamme;FEU;Speciale;95;100;15;Peut bruler la ennemy
+Deflagration;FEU;Speciale;120;85;5;Peut bruler la ennemy
+Brume;GLACE;Autre;255;255;30;Empeche toute variation de stat provoquee par l'adversaire
+Buee noire;GLACE;Autre;255;255;30;Annule toute variation de stat, la confusion, les effets de Puissance, Vampigraine, Mur Lumiere et Protection
+Onde boreale;GLACE;Speciale;65;100;20;Peut baisser l'attaque la ennemy
+Poing glace;GLACE;Speciale;75;100;15;Peut geler la ennemy
+Laser glace;GLACE;Speciale;95;100;10;Peut geler la ennemy
+Blizzard;GLACE;Speciale;120;90;5;Peut geler la ennemy
+Secretion;INSECT;Autre;255;95;40;Diminue la vitesse ennemy
+Dard nuee;INSECT;Physique;14;85;20;Attaque deux a cinq fois
+Vampirisme;INSECT;Physique;20;100;15;heal/damage/2
+Double dard;INSECT;Physique;25;100;20;Attaque deux fois / Peut empoisoner
+Adaptation;NORMAL;Autre;255;255;30;Le attacker devient du meme type que l'adversaire
+Affutage;NORMAL;Autre;255;255;30;stat/atk/attacker/1
+Armure;NORMAL;Autre;255;255;30;stat/def/attacker/1
+Berceuse;NORMAL;Autre;255;55;15;Endort la ennemy
+Boul'armure;NORMAL;Autre;255;255;40;stat/def/attacker/1
+Brouillard;NORMAL;Autre;255;100;20;stat/accuracy/ennemy/-1
+Clonage;NORMAL;Autre;255;255;10;Cree un clone qui prend les dommages a la place/attacker/,enleve 25% des PV/attacker/
+Copie;NORMAL;Autre;255;255;10;Apprend une des attaques de l'advresaire au hasardjusqu'a la fin du combat
+Croissance;NORMAL;Autre;255;255;40;stat/plus le special/attacker/-1
+Cyclone;NORMAL;Autre;255;100;20;Met fin au combat contre un Pokemon sauvage, echoue contre un dresseur
+Danse lames;NORMAL;Autre;255;255;30;stat/atk/attacker/2
+E coque;NORMAL;Autre;255;255;10;Restaure jusqu'a la moitie des PV/attacker/
+Entrave;NORMAL;Autre;255;55;20;Supprime durant un a huit tour une attaque au hasard de la ennemy
+Flash;NORMAL;Autre;255;70;20;stat/accuracy/ennemy/-1
+Grincement;NORMAL;Autre;255;85;40;stat/def/ennemy/-2
+Grobisou;NORMAL;Autre;255;75;10;Endort la ennemy
+Groz'yeux;NORMAL;Autre;255;100;30;stat/def/ennemy/-1
+Hurlement;NORMAL;Autre;255;100;20;Met fin au combat contre un Pokemon sauvage, echoue contre un dresseur
+Intimidation;NORMAL;Autre;255;75;30;Paralyse la ennemy/-1
+Jet de sable;NORMAL;Autre;255;100;15;stat/accuracy/ennemy/-1
+Lilliput;NORMAL;Autre;255;255;20;stat/esquive/attacker/1
+Metronome;NORMAL;Autre;255;255;10;Execute une attaque prise au hasard dans cette liste
+Mimi queue;NORMAL;Autre;255;100;30;stat/def/ennemy/-1
+Morphing;NORMAL;Autre;255;255;10;Transforme le attacker en le Pokemon adverse
+Puissance;NORMAL;Autre;255;255;30;stat/crit/attacker/1
+Reflet;NORMAL;Autre;255;255;15;stat/esq/attacker/1
+Rugissement;NORMAL;Autre;255;255;40;stat/atk/ennemy/-1
+Soin;NORMAL;Autre;255;255;20;Restaure jusqu'a la moitie des PV/attacker/
+Trempette;NORMAL;Autre;255;255;40;Aucun
+Ultrason;NORMAL;Autre;255;55;20;Rend la ennemy confuse
+Croc fatal;NORMAL;Physique;255;90;10;Enleve 50% des PV restants ennemy
+Patience;NORMAL;Physique;255;255;10;Immobilise le attacker deux ou trois tours, puis inflige a l'adversaire le double des degats subis pendant cette periode
+Sonicboom;NORMAL;Physique;255;90;20;Inflige toujours 20 PV de degats
+Empal'korne;NORMAL;Physique;255;30;5;Met l'adversaire KO, echoue s'il a une vitesse superieure a celle/attacker/
+Guillotine;NORMAL;Physique;255;30;5;Met l'adversaire KO, echoue s'il a une vitesse superieure a celle/attacker/
+Constriction;NORMAL;Physique;10;100;35;Peut baisser la vitesse ennemy
+Etreinte;NORMAL;Physique;15;85;20;Attaque continue sur deux a cinq tours
+Furie;NORMAL;Physique;15;85;20;Attaque deux a cinq fois
+Ligotage;NORMAL;Physique;15;90;20;Attaque continue sur deux a cinq tours
+Pilonnage;NORMAL;Physique;15;85;20;Attaque deux a cinq fois
+Torgnoles;NORMAL;Physique;15;85;10;Attaque deux a cinq fois
+Combo griffe;NORMAL;Physique;18;80;15;Attaque deux a cinq fois
+Poing comete;NORMAL;Physique;18;85;15;Attaque deux a cinq fois
+Frenesie;NORMAL;Physique;20;100;20;Attaque sans fin, provoque l'augmentation de l'attaque/attacker/ a chaque fois qu'il subit des degats
+Picanon;NORMAL;Physique;20;100;15;Attaque deux a cinq fois
+Charge;NORMAL;Physique;35;95;35;Aucun
+Tornade;NORMAL;Physique;35;100;40;Aucun
+Ecras'face;NORMAL;Physique;40;100;35;Aucun
+Griffe;NORMAL;Physique;40;100;35;Aucun
+Jackpot;NORMAL;Physique;40;100;20;Fait gagner un peu d'argent a la fin des combats
+Vive attaque;NORMAL;Physique;40;100;30;Attaque en premier
+Coupe;NORMAL;Physique;50;95;30;Aucun
+Poing karate;NORMAL;Physique;50;100;25;Taux de Coups Critiques eleve
+Lutte;NORMAL;Physique;50;100;/;Blesse le attacker
+Force poigne;NORMAL;Physique;55;100;30;Aucun
+Meteores;NORMAL;Physique;60;255;20;N'echoue jamais
+Morsure;NORMAL;Physique;60;100;25;Peut apeurer la ennemy
+Ecrasement;NORMAL;Physique;65;100;20;Peut apeurer la ennemy
+Koud'korne;NORMAL;Physique;65;100;25;Aucun
+Coud'boule;NORMAL;Physique;70;100;15;Peut apeurer la ennemy
+Tranche;NORMAL;Physique;70;100;20;Taux de Coups Critiques eleve
+Uppercut;NORMAL;Physique;70;100;10;Aucun
+Coupe vent;NORMAL;Physique;80;100;10;Attaque en deux tours, n'agit pas au premier
+Croc de mort;NORMAL;Physique;80;90;15;Peut apeurer la ennemy
+Force;NORMAL;Physique;80;100;15;Aucun
+Souplesse;NORMAL;Physique;80;75;20;Aucun
+Triplattaque;NORMAL;Physique;80;100;10;Aucun
+Ultimapoing;NORMAL;Physique;80;85;20;Aucun
+Plaquage;NORMAL;Physique;85;100;15;Peut paralyser la ennemy
+Belier;NORMAL;Physique;90;85;20;Blesse le attacker
+Mania;NORMAL;Physique;90;100;20;Attaque continue sur deux ou trois tours, le attacker devient confus par la suite
+Bomb'oeuf;NORMAL;Physique;100;75;16;Aucun
+Coud'krane;NORMAL;Physique;100;100;15;Attaque en deux tours, n'agit pas au premier
+Damocles;NORMAL;Physique;100;100;15;Blesse le attacker
+Ultimawashi;NORMAL;Physique;120;75;5;Aucun
+Destruction;NORMAL;Physique;260;100;5;attacker KO apres l'attaque
+Ultralaser;NORMAL;Physique;150;90;5;attacker immobilise au tour suivant
+Explosion;NORMAL;Physique;340;100;5;attacker KO apres l'attaque
+Para spore;PLANTE;Autre;255;75;30;Paralyse la ennemy
+Poudre dodo;PLANTE;Autre;255;75;15;Endort la ennemy
+Spore;PLANTE;Autre;255;100;15;Endort la ennemy
+Vampigraine;PLANTE;Autre;255;90;10;Draine a chaque tour des PV de la ennemy vers le attacker
+Vol vie;PLANTE;Speciale;20;100;20;Restaure un nombre de PV au attacker egal a la moitie des degats infliges a la ennemy
+Fouet lianes;PLANTE;Speciale;35;100;10;Aucun
+Mega sangsue;PLANTE;Speciale;40;100;10;Restaure un nombre de PV au attacker egal a la moitie des degats infliges a la ennemy
+Tranch'herbe;PLANTE;Speciale;55;95;25;Taux de Coups Critiques eleve
+Danse fleur;PLANTE;Speciale;70;100;20;Attaque continue sur deux ou trois tour, le attacker devient confus par la suite
+Lance soleil;PLANTE;Speciale;120;100;10;Attaque en deux tours, n'agit pas au premier
+Acidarmure;POISON;Autre;255;255;40;stat/def/attacker/2
+Gaz toxik;POISON;Autre;255;55;40;Empoisonne la ennemy
+Poudre toxik;POISON;Autre;255;75;35;Empoisonne la ennemy
+Toxik;POISON;Autre;255;85;10;Empoisonne gravement la ennemy
+Dard venin;POISON;Physique;15;100;35;Peut empoisonner la ennemy
+Puredpois;POISON;Physique;20;70;20;Peut empoisonner la ennemy
+Acide;POISON;Physique;40;100;30;Peut baisser la defense ennemy
+Detritus;POISON;Physique;65;100;20;Peut empoisonner la ennemy
+Amnesie;PSY;Autre;255;255;20;stat/spe/attacker/2
+Bouclier;PSY;Autre;255;255;30;stat/def/attacker/2
+Hate;PSY;Autre;255;255;30;stat/speed/attacker/2
+Hypnose;PSY;Autre;255;60;20;Endort la ennemy
+Mur lumiere;PSY;Autre;255;255;30;stat/spe/attacker/1
+Protection;PSY;Autre;255;255;20;stat/def/attacker/1
+Repos;PSY;Autre;255;255;10;Restaure tous les PV/attacker/ ainsi que son statut, le attacker est immobilise pendant deux tours
+Telekinesie;PSY;Autre;255;80;15;stat/accuracy/ennemy/-1
+Teleport;PSY;Autre;255;255;20;Met fin au combat contre un Pokemon sauvage, echoue contre un dresseur
+Yoga;PSY;Autre;255;255;40;stat/atk/attacker/1
+Vague psy;PSY;Speciale;255;80;15;Inflige des degats variables
+Choc mental;PSY;Speciale;50;100;25;Peut rendre la ennemy confuse
+Rafale psy;PSY;Speciale;65;100;20;Peut rendre la ennemy confuse
+Psyko;PSY;Speciale;90;100;10;Peut baisser le special ennemy
+Devoreve;PSY;Speciale;100;100;15;Restaure un nombre de PV au attacker egal a la moitie des degats infliges a la ennemy, ne fonctionne que si la ennemy est endormie
+Jet pierres;ROCHE;Physique;50;65;15;Aucun
+Eboulement;ROCHE;Physique;75;90;10;Peut apeurer la ennemy
+Abime;SOL;Physique;255;30;5;Met l'adversaire KO, echoue s'il a une vitesse superieure a celle/attacker/
+Osmerang;SOL;Physique;50;90;10;Attaque deux fois
+Massd'os;SOL;Physique;65;85;10;Peut apeurer la ennemy
+Seisme;SOL;Physique;100;100;10;Aucun
+Tunnel;SOL;Physique;100;100;10;Attaque en deux tours, le attacker ne peut etre atteint que par Meteores et Patience au premier tour
+Onde folie;SPECTR;Autre;255;100;10;Rend la ennemy confuse
+Tenebres;SPECTR;Physique;255;100;15;Inflige des degats egaux au niveau/attacker/
+Lechouille;SPECTR;Physique;20;100;30;Peut paralyser la ennemy
+Mimique;VOL;Autre;255;255;20;Le attacker utilise la derniere attaque lancee par l'adversaire
+Cru aile;VOL;Physique;35;100;35;Aucun
+Picpic;VOL;Physique;35;100;35;Aucun
+Vol;VOL;Physique;70;100;15;Attaque en deux tours, le attacker ne peut etre atteint que par Meteores et Patience au premier tour
+Bec vrille;VOL;Physique;80;100;20;Aucun
+Pique;VOL;Physique;140;90;5;Attaque en deux tours, n'agit pas au premier

@@ -1,0 +1,16 @@
+Argenta;2;Dresseur Jr M;2;Taupiqueur,11;Sabelette,11;Pierre;2;Racaillou,12;Onix,14;CT34 Patience
+Azuria;3;Nageur;2;Hypotrempe,16;Kokiyas,16;Dresseur Jr F;1;Poissirène,19;Ondine;Stari,18;Staross,21;
+Carmin-sur-Mer;4;Marin;2;Pikachu,21;Pikachu,21;Rocker;3;Voltorbe,20;Magneti,20;Voltorbe,20;Gentleman;1,Pikachu,23;Major Bob;3;Voltorbe,21;Pikachu,18;Raichu,24;
+Céladopole;8;Fillette n°1;2;Chetiflor,23;Boustiflor,23;Canon n°1;4;Mysterbe,21;Chétoflor,21;Mysterbe,21;Chétoflor,21;Dresseur Jr F;2;Bulbizarre,24;Herbizarre,24;Canon n°2;2;Chetiflor,24;Chetiflor,24;Canon n°3;1;Noeunoeuf,26;Topdresseur F;3;Boustiflor,24;Ortide,24;Herbizarre,24;Fillette n°2;2;Mystherbe,23;Ortide,23;Erika;3;Empiflor,29;Saquedeneu,24;Rafflesia,29;
+Cramois'Île;8;
+Pillard n°1;3;Caninos,36;Goupix,36;Feunard,36;Intello n°1;3;Goupix,36;Goupix,36;Feunard,36;Intello n°2;4;Ponyta,34;Salamèche,34;Goupix,34;Caninos,34;Pillard n°2;1;Ponyta,41;Intello n°3;1;Galopa,41;Pillard n°3;2;Goupix,37;Caninos,37;Intello n°4;Caninos,37;Goupix,37;Auguste;4;Caninos,42;Ponyta,40;Galopa,42;Arcanin,47;Jadielle;9;Dompteur n°1;2;Arbok,39;Tauros,39;Karateka n°1;1;Machoppeur,43;Topdresseur M n°1;2;Nidorino,39;Nidoking,39;Topdresseur M n°2;1;Rhinocorne,43;Karateka n°2;3;Machoppeur,38;Machoc,38;Machoppeur,38;Topdresseur M n°3;2;Sablaireau,39;Triopikeur,39;Karateka n°3;2;Machoc,40;Machoppeur,40;Dompteur n°2;1;Rhinocorne,43;Giovanni;5;Rhinocorne,45;Triopikeur,42;Nidoqueen,44;Nidoking,45;Rhinoféros,50;
+Parmanie;7;Jongleur n°1;2;Soporifik,34;Kadabra,34;Jongleur n°2;1;Hypnomade,38;Jongleur n°3;4;Soporifik,31;Soporifik,31;Kadabra,31;Soporifik,31;Dompteur n°1;3;Arbok,33;Sablaireau,33;Arbok,33;Dompteur n°2;2;Sabalireau,34;Arbok,34;Jongleur n°4;2;Soporifik,34;Kadabra,34;Koga;4;Smogo,37;Grotadmorv,39;Smogo,37;Smogogo,43;
+Plateau Indigo;4;Olga;5;Lamantine,54;Crustabri,53;Flagadoss,54;Lippoutou,56;Lokhlass,56;Aldo;5;Onix,53;Tygnon,55;Kicklee,55;Onix,56;Mackogneur,58;Agatha;5;Ectoplasma,56;Nosferalto,56;Spectrum,55;Arbok,58;Ectoplasma,60;Peter;5;Léviator,58;Draco,56;Draco,56;Ptéra,60;Dracolosse,62;
+Safrania;8;Kinésiste n°1;Ramoloss,33;Ramoloss,33;Flagadoss,33;
+Kinésiste n°2;2;M. Mime,34;Kadabra,34;
+Exorciste n°1;1;Spectrum,38;
+Kinésiste n°3;1;Flagadoss,38;
+Exorciste n°2;2;Fantominus,34;Spectrum,34;
+Exorciste n°3;3;Fantominus,33;Fantominus,33;Spectrum,33;
+Kinésiste n°4;4;Kadabra,31;Ramoloss,31;M. Mime,31;Kadabra,31;
+Morgane;4;Kadabra,38;M. Mime,37;Aéromite,38;Alakazam,43;

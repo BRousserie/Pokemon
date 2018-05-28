@@ -1,0 +1,55 @@
+CS01;Coupe
+CS02;Vol
+CS03;Surf
+CS04;Force
+CS05;Flash
+CT01;Ultimapoing
+CT02;Coupe-Vent
+CT03;Danse-Lames
+CT04;Cyclone
+CT05;Ultimawashi
+CT06;Toxik
+CT07;Empal'Korne
+CT08;Plaquage
+CT09;Bélier
+CT10;Damoclès
+CT11;Bulles d'O
+CT12;Pistolet à O
+CT13;Laser Glace
+CT14;Blizzard
+CT15;Ultralaser
+CT16;Jackpot
+CT17;Sacrifice
+CT18;Riposte
+CT19;Frappe Atlas
+CT20;Frénésie
+CT21;Méga-Sangsue
+CT22;Lance-Soleil
+CT23;Draco-Rage
+CT24;Tonnerre
+CT25;Fatal-Foudre
+CT26;Séisme
+CT27;Abîme
+CT28;Tunnel
+CT29;Psyko
+CT30;Téléport
+CT31;Copie
+CT32;Reflet
+CT33;Protection
+CT34;Patience
+CT35;Métronome
+CT36;Destruction
+CT37;Bomb'oeuf
+CT38;Déflagration
+CT39;Météores
+CT40;Coud'Krâne
+CT41;E-Coque
+CT42;Dévorêve
+CT43;Piqué
+CT44;Repos
+CT45;Cage-Éclair
+CT46;Vague Psy
+CT47;Explosion
+CT48;Éboulement
+CT49;Triplattaque
+CT50;Clonage

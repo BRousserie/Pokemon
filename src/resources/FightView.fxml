@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.Double?>
+<?import java.net.URL?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FightViewController">
+    <children>
+      <VBox fx:id="displayTeam" layoutX="935.0" layoutY="14.0" prefHeight="421.0" prefWidth="329.0" styleClass="container">
+         <children>
+            <Label styleClass="fixedLabels" text="Nom : " />
+            <Label fx:id="playerName" translateY="0.0" />
+            <Label styleClass="fixedLabels" text="Pokémon :" translateY="10.0" />
+            <Label fx:id="pokemon1" translateY="10.0" />
+            <Label fx:id="pokemon2" translateY="10.0" />
+            <Label fx:id="pokemon3" translateY="10.0" />
+            <Label fx:id="pokemon4" translateY="10.0" />
+            <Label fx:id="pokemon5" translateY="10.0" />
+            <Label fx:id="pokemon6" translateY="10.0" />
+         </children>
+      </VBox>
+      <AnchorPane layoutX="18.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="900.0" styleClass="container">
+         <children>
+            <Group>
+               <children>
+                  <Line layoutX="46.0" layoutY="122.0" startY="-80.0" strokeWidth="4.0" />
+                  <Label fx:id="enmyPkmnLvl" layoutX="53.0" layoutY="72.0" text="EnnemyLevel" />
+                  <Label fx:id="enmyPkmnName" layoutX="53.0" layoutY="42.0" text="EnnemyName" />
+                  <Label layoutX="52.0" layoutY="97.0" text="PV:" />
+                  <ProgressBar fx:id="enmyPkmnHP" layoutX="89.0" layoutY="96.0" prefHeight="20.0" prefWidth="347.0" progress="0.0" />
+                  <Line endX="300.0" layoutX="146.0" layoutY="124.0" startX="-100.0" strokeWidth="4.0" />
+                  <Polygon layoutX="473.0" layoutY="123.0" scaleX="0.5" scaleY="0.25" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" strokeWidth="0.0">
+                     <points>
+                        <Double fx:value="-50.0" />
+                        <Double fx:value="40.0" />
+                        <Double fx:value="50.0" />
+                        <Double fx:value="40.0" />
+                        <Double fx:value="-50.0" />
+                        <Double fx:value="-60.0" />
+                     </points>
+                  </Polygon>
+                  <Arc fx:id="enmyCorpse" layoutX="761.0" layoutY="217.0" length="180.0" radiusX="129.0" radiusY="129.0" rotate="45.0" scaleX="0.75" scaleY="0.75" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="enmyHead" layoutX="734.0" layoutY="106.0" radius="59.0" scaleX="0.75" scaleY="0.75" stroke="BLACK" strokeType="INSIDE" />
+               </children>
+            </Group>
+            <GridPane fx:id="attackNotifierBack" layoutX="66.0" layoutY="450.0" prefHeight="125.0" prefWidth="800.0" styleClass="container">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="message" alignment="CENTER" style="-fx-font-size: ;" GridPane.halignment="CENTER" />
+               </children>
+            </GridPane>
+            <Group>
+               <children>
+                  <Line layoutX="877.0" layoutY="380.0" startY="-100.0" strokeWidth="4.0" />
+                  <Label fx:id="myPkmnLvl" layoutX="792.0" layoutY="303.0" text="MyLevel" textAlignment="RIGHT" />
+                  <Label fx:id="myPkmnName" layoutX="773.0" layoutY="274.0" text="MyName" />
+                  <Label layoutX="484.0" layoutY="342.0" text="PV:" />
+                  <ProgressBar fx:id="myPkmnHP" layoutX="523.0" layoutY="341.0" prefHeight="20.0" prefWidth="349.0" progress="0.0" />
+                  <Label fx:id="myPkmnHealth" layoutX="622.0" layoutY="318.0" text="CurrentHP/MaxHP" textAlignment="CENTER" />
+                  <Line endX="200.0" layoutX="676.0" layoutY="380.0" startX="-200.0" strokeWidth="4.0" />
+                  <Polygon layoutX="449.0" layoutY="379.0" scaleX="0.5" scaleY="0.25" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" strokeWidth="0.0">
+                     <points>
+                        <Double fx:value="-50.0" />
+                        <Double fx:value="40.0" />
+                        <Double fx:value="50.0" />
+                        <Double fx:value="40.0" />
+                        <Double fx:value="50.0" />
+                        <Double fx:value="-60.0" />
+                     </points>
+                  </Polygon>
+                  <Circle fx:id="myHead" layoutX="209.0" layoutY="273.0" radius="59.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Arc fx:id="myCorpse" layoutX="200.0" layoutY="414.0" length="180.0" radiusX="129.0" radiusY="129.0" rotate="45.0" startAngle="45.0" stroke="BLACK" strokeType="INSIDE" />
+                  <ProgressBar fx:id="myPkmnXP" layoutX="471.0" layoutY="363.0" prefHeight="18.0" prefWidth="407.0" progress="0.0" scaleY="0.75" style="-fx-control-inner-background:: transparent;" styleClass="transparentbar" />
+               </children>
+            </Group>
+         </children>
+      </AnchorPane>
+      <Group layoutX="-13.0" layoutY="-13.0">
+         <children>
+            <GridPane fx:id="chooseTypeGrid" hgap="50.0" layoutX="100.0" layoutY="472.0" prefHeight="221.0" prefWidth="790.0" vgap="50.0" visible="false">
+               <children>
+                  <Button fx:id="selectAttack" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="ATTAQUE" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button fx:id="selectItem" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="SAC" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Button fx:id="selectPokemon" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="POKéMON" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button fx:id="fleeFromFight" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" text="FUITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <Group>
+               <children>
+                  <GridPane fx:id="chooseAtkGrid" hgap="50.0" layoutX="100.0" layoutY="472.0" prefHeight="221.0" prefWidth="790.0" stylesheets="@fightsheet.css" vgap="50.0" visible="false">
+                     <children>
+                        <Button fx:id="atk1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="atk2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="atk3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="atk4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="50.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane fx:id="choosePkmnGrid" hgap="50.0" layoutX="30.0" layoutY="472.0" prefHeight="221.0" prefWidth="900.0" vgap="25.0" visible="false">
+                     <children>
+                        <Button fx:id="pkmn1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="10.0" style="-fx-font-size: 14;" styleClass="choosePokemon" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="pkmn2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="10.0" style="-fx-font-size: 14;" styleClass="choosePokemon" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="pkmn4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="10.0" style="-fx-font-size: 14;" styleClass="choosePokemon" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button fx:id="pkmn3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="10.0" style="-fx-font-size: 14;" styleClass="choosePokemon" textOverrun="WORD_ELLIPSIS" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button fx:id="pkmn6" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="10.0" style="-fx-font-size: 14;" styleClass="choosePokemon" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="pkmn5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="10.0" style="-fx-font-size: 14;" styleClass="choosePokemon" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <GridPane fx:id="itemsContainer" disable="true" layoutX="28.0" layoutY="457.0" prefHeight="261.0" prefWidth="1249.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+                  <Button fx:id="cancelTypeChoice" layoutX="1180.0" layoutY="675.0" mnemonicParsing="false" text="Back" visible="false" />
+               </children>
+            </Group>
+         </children>
+      </Group>
+    </children>
+   <stylesheets>
+      <URL value="@fightsheet.css" />
+      <URL value="@generalsheet.css" />
+   </stylesheets>
+</AnchorPane>

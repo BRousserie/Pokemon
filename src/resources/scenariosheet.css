@@ -1,0 +1,13 @@
+
+
+.titleFront {
+    -fx-font-family: "Pokemon Hollow Normal";
+    -fx-font-color: black;
+    -fx-font-size: 48;
+}
+
+.titleBack {
+    -fx-font-family: "Pokemon Solid Normal";
+    -fx-font-color: #ffcc00;
+    -fx-font-size: 48;
+}

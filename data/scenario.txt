@@ -1,0 +1,3 @@
+0;ROUTE 1;Starter;true
+1;JADIELLE;colis;false
+2;BOURG PALETTE;carte;false

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.net.URL?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.ShopViewController">
+  <children>
+    <Text fill="#fff500" layoutX="540.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass=", titleBack" text="PokéShop" />
+    <VBox layoutX="460.0" layoutY="104.0" prefHeight="559.0" prefWidth="400.0">
+      <children>
+        <TextArea fx:id="displayItems" editable="false" prefHeight="551.0" prefWidth="400.0" styleClass="container" wrapText="true">
+          <stylesheets>
+            <URL value="@scenariosheet.css" />
+          </stylesheets>
+        </TextArea>
+      </children>
+    </VBox>
+    <Button id="retour" fx:id="goBack" layoutX="69.0" layoutY="636.0" mnemonicParsing="false" onAction="#goToMainView" prefHeight="43.0" text="Retour" />
+    <VBox layoutX="860.0" layoutY="104.0" prefHeight="559.0" prefWidth="400.0">
+      <children>
+        <TextArea fx:id="displayPrice" editable="false" prefHeight="553.0" prefWidth="366.0" styleClass="container" />
+      </children>
+    </VBox>
+    <Group id="Group" layoutX="26.0" layoutY="30.0">
+      <children>
+        <Arc fill="WHITE" layoutX="204.0" layoutY="200.0" length="180.0" radiusX="200.0" radiusY="200.0" startAngle="180.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+        <Arc fill="RED" layoutX="204.0" layoutY="200.0" length="180.0" radiusX="200.0" radiusY="200.0" startAngle="360.0" stroke="BLACK" strokeType="INSIDE" type="ROUND" />
+        <Line endX="283.0" endY="-1.0" layoutX="110.0" layoutY="201.0" startX="-96.0" startY="0.0" strokeWidth="20.0" />
+        <Circle fill="BLACK" layoutX="204.0" layoutY="200.0" radius="60.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="WHITE" layoutX="204.0" layoutY="201.0" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+        <Ellipse fill="WHITE" layoutX="140.0" layoutY="60.0" opacity="0.62" radiusX="70.70514678955078" radiusY="23.0" rotate="151.0" stroke="WHITE" strokeType="INSIDE" />
+        <Button id="achetter" fx:id="buy" layoutX="121.0" layoutY="350.0" mnemonicParsing="false" onAction="#buy" prefHeight="43.0" prefWidth="166.0" text="Acheter" />
+        <TextArea fx:id="itemQuantity" layoutX="264.0" layoutY="170.0" prefHeight="31.0" prefWidth="107.0" styleClass="container" text="1" wrapText="true" />
+        <ChoiceBox id="choice" fx:id="itemChoice" layoutX="35.0" layoutY="170.0" maxHeight="-1.0" maxWidth="-1.0" minWidth="-1.0" prefHeight="60.0" prefWidth="200.0" rotate="0.0" styleClass="container">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+          <stylesheets>
+            <URL value="@generalsheet.css" />
+          </stylesheets>
+        </ChoiceBox>
+        <TextArea fx:id="totalPrice" editable="false" layoutX="100.0" layoutY="290.0" prefHeight="43.0" prefWidth="200.0" styleClass="container" wrapText="true" />
+        <TextArea id="momey" fx:id="money" editable="false" layoutX="35.0" layoutY="75.0" prefHeight="35.0" prefWidth="336.0" styleClass="container" visible="true" wrapText="true" />
+        <Label layoutX="50.0" layoutY="145.0" styleClass="textField" text="Item" />
+        <Label layoutX="280.0" layoutY="145.0" styleClass="textField" text="Quantité" />
+      </children>
+    </Group>
+    <Text fill="#0021cc" layoutX="540.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass=", titleFront" text="PokéShop" />
+    <TextArea fx:id="displayInfo" editable="false" layoutX="30.0" layoutY="449.0" prefHeight="160.0" prefWidth="401.0" styleClass="container" wrapText="true" />
+  </children>
+  <stylesheets>
+    <URL value="@generalsheet.css" />
+    <URL value="@scenariosheet.css" />
+  </stylesheets>
+</AnchorPane>

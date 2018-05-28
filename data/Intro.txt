@@ -1,0 +1,18 @@
+//sound(Musique) cf https://www.youtube.com/watch?v=a_zo_FygnIQ
+showBien le bonjour ! Bienvenue dans le monde magique des POKéMON !
+showMon nom est CHEN : Les gens souvent m'appellent PROF POKéMON !
+showCe monde est peuplé des créatures du nom de POKéMON !
+//soundfx(CriNidorina)
+showPour certains, les POKéMON sont des animaux domestiques, pour d'autres, ils sont un moyen de combattre.
+showPour ma part... L'étude des POKéMON est ma profession.
+qcm1
+showTout d'abord, quel est ton nom ?
+showOk ! Ton nom est @playerName
+showVoici mon petit-fils. Il est ton rival depuis sa toute jeunesse.
+qcm2
+show...Heu...C'est quoi donc son nom déjà ?
+showAh oui ! Je me souviens ! Son nom est @rivalName
+show@playerName !
+showTa quête des POKéMON est sur le point de commencer !
+showUn tout nouveau monde de rêves, d'aventures et de POKéMON t'attend ! Bonne chance !
+END

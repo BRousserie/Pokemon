@@ -1,0 +1,5 @@
+Pierre Eau;Permet de faire évoluer Têtarte, Kokiyas, Stari et Évoli;2100
+Pierre Feu;Permet de faire évoluer Goupix, Caninos et Évoli;2100
+Pierrefoudre;Permet de faire évoluer Pikachu et Évoli;2100
+Pierreplante;Permet de faire évoluer Ortide, Boustiflor et Noeunoeuf;2100
+Pierre Lune;Permet de faire évoluer Nidorina, Nidorino, Melofée et Rondoudou;0

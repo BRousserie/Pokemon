@@ -1,0 +1,42 @@
+.mainFxmlClass {
+    -fx-background-color: #004080;
+}
+
+.container {
+    -fx-background-color: #00264d;
+    -fx-padding: 5;
+    -fx-border-insets: -2;
+    -fx-border-width: 2;
+    -fx-border-color: black;
+    -fx-border-radius: 5;
+    -fx-font-family: "Pokemon Classic Regular";
+    -fx-text-fill: #b4b4b4;
+}
+
+.container * {
+    -fx-font-family: "Pokemon Classic Regular";
+    -fx-text-fill: #b4b4b4;
+}
+
+.textField, .button {
+    -fx-font-size: 18;
+}
+
+.button {
+    -fx-font-family: "Pokemon Classic Regular";
+    -fx-background-color : linear-gradient(#ffb700, #cc9c00);
+    -fx-effect: dropshadow( three-pass-box, rgba(0,0,0,0.4) , 15, 0.0 , 0 , 0 );
+}
+
+.button:hover {
+    -fx-background-color : linear-gradient(#cc9c00, #ffb700);
+    -fx-cursor: hand;
+}
+
+.tooLongButton {
+    -fx-font-size: 14;
+}
+
+.trucs {
+    -fx-background-color:  #f0bb58;
+}

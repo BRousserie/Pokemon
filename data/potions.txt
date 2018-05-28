@@ -1,0 +1,20 @@
+Potion;Un spray qui soigne les blessures. Restaure 20 PV à un Pokémon.;300
+Super Potion;Un spray qui soigne les blessures. Restaure 50 PV à un Pokémon.;700
+Hyper Potion;Un spray qui soigne les blessures. Restaure 200 PV à un Pokémon.;1200
+Potion Max;Un spray qui soigne les blessures. Restaure tous les PV d'un Pokémon.;2500
+Guérison;Un médicament qui restaure tous les PV d'un Pokémon et soigne tous ses problèmes de statut.;3000
+Antidote;Médicament sous forme de spray qui soigne un Pokémon empoisonné.;100
+Anti-Para;Médicament sous forme de spray qui soigne un Pokémon de la paralysie.;200
+Anti-Brûle;Médicament sous forme de spray qui soigne les brûlures d'un Pokémon.;250
+Antigel;Médicament sous forme de spray qui dégèle un Pokémon.;250
+Réveil;Médicament sous forme de spray qui réveille un Pokémon endormi.;200
+Total Soin;Médicament sous forme de spray qui soigne tous les problèmes de statut d'un Pokémon.;600
+Eau Fraîche;Boisson qui restaure 50 PV à un Pokémon.;200
+Soda Cool;Boisson qui restaure 60 PV à un Pokémon.;300
+Limonade;Boisson qui restaure 80 PV à un Pokémon.;350
+Rappel;Un médicament qui ranime un Pokémon KO et lui restaure la moitié de ses PV.;1500
+Rappel Max;Un médicament qui ranime un Pokémon KO et lui restaure tous ses PV.;0
+Élixir;Restaure 10 PP de chaque attaque d'un Pokémon;0
+Max Élixir;Restaure tous les PP de chaque attaque d'un Pokémon;0
+Huile;Restaure 10 PP d'une attaque d'un Pokémon;0
+Huile Max;Restaure tous les PP d'une attaque d'un Pokémon;0

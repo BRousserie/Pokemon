@@ -1,0 +1,17 @@
+Bicyclette;Une Bicyclette pliable permettant de se déplacer rapidement.
+Bon de Commande;Un bon à échanger contre une bicyclette.
+Colis de Chen;Un colis destiné au Prof. Chen.
+Carte;Une carte très pratique pouvant être consultée n'importe quand. Elle indique votre position actuelle.
+Passe Bateau;Un ticket permettant de monter à bord de l'Océane.
+Cherch'Objet;Appareil qui indique la localisation des Objets invisibles en émettant un son.
+Boîte Jeton;Un joli coffret pour stocker les jetons du Casino.
+Scope Sylphe;Un appareil qui permet d'identifier les Pokémon spectres.
+Pokéflute;Permet de réveiller n'importe quel Pokémon.
+Carte Magn.;Ouvre les barrières du Siège Social de la Sylphe SARL.
+Clé Asc.;Une clé donnant accès à l'ascenseur du Repère Rocket de Céladopole.
+Clé Secrète;Une clé ouvrant l'arène de Cramois'Île.
+Dent d'Or;Dent en or appartenant au gardien du Parc Safari.
+Canne;Une simple canne à pêche.
+Super Canne;Une canne à pêche améliorée.
+Méga Canne;Une canne à pêche très sophistiquée.
+Pokédex;Une encyclopédie des Pokémon crée par le PROF. CHEN

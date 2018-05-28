@@ -1,0 +1,46 @@
+{
+  "myPlayer": {
+    "dressor": {
+      "name": "RED",
+      "bag": {
+        "money": 5175,
+        "items": [
+          "Potion:1"
+        ]
+      }
+    },
+    "myPokemons": [
+      {
+        "fightingPkmn": {
+          "ID": 0,
+          "name": "Salamèche",
+          "level": 5,
+          "IVhp": 1,
+          "IVatk": 0,
+          "IVdef": 14,
+          "IVspe": 5,
+          "IVspeed": 12,
+          "EVhp": 0,
+          "EVatk": 0,
+          "EVdef": 0,
+          "EVspe": 0,
+          "EVspeed": 0,
+          "hpLost": 0,
+          "pkmnStatus": "OK",
+          "attacks": [
+            "Rugissement",
+            "Griffe"
+          ]
+        },
+        "exp": 80
+      }
+    ],
+    "foundItems": [
+      "BOURG PALETTE:Potion"
+    ],
+    "starter": "Salamèche"
+  },
+  "rivalName": "BLUE",
+  "currentZone": "BOURG PALETTE",
+  "currentStoryEvent": 1
+}
