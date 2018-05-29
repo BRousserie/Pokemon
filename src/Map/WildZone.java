@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class WildZone extends Zone {
 
-    protected final ArrayList<WildPkmn> meetablePkmns;
+    protected final ArrayList<WildPkmn> wildPkmns;
     protected final ArrayList<WildPkmn> surfingPkmns;
     protected final int meetingPkmnProba;
 
@@ -27,7 +27,7 @@ public class WildZone extends Zone {
             String name, ArrayList<String> accessibleZones, ArrayList<String> items,
             int meetingDressorProba ) {
         super(name, meetingDressorProba, description, accessibleZones, items, fishablePkmns);
-        this.meetablePkmns = meetablePkmns;
+        this.wildPkmns = meetablePkmns;
         this.surfingPkmns = surfingPkmns;
         this.meetingPkmnProba = meetingPkmnProba;
     }
@@ -36,7 +36,7 @@ public class WildZone extends Zone {
     public void searchWildPokemon() {
         int dice = (int) (Math.random() * 100);
         int sum = 0;
-        for (WildPkmn pkmn : meetablePkmns) {
+        for (WildPkmn pkmn : wildPkmns) {
             sum += pkmn.getProba();
             if (sum >= dice) {
                 Game.getGame().setFight(new Fight(
@@ -44,11 +44,6 @@ public class WildZone extends Zone {
                 break;
             }
         }
-    }
-    
-    @Override
-    public void searchWildFish() {
-        //TODO
     }
 
     @Override
@@ -62,7 +57,7 @@ public class WildZone extends Zone {
     }
 
     public ArrayList<WildPkmn> getMeetablePkmns() {
-        return meetablePkmns;
+        return wildPkmns;
     }
 
     public ArrayList<WildPkmn> getFishablePkmns() {

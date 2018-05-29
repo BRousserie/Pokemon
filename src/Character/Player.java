@@ -63,6 +63,16 @@ public class Player extends Trainer implements Savable<JsonObject>{
         }
         
         starter = save.getString("starter", null);
+        
+        wonFightsInArena = new HashMap<>();
+        for(JsonValue arenaInfos : save.get("arenas").asArray()) {
+            String arena = arenaInfos.asString();
+            wonFightsInArena.put(arena.substring(0, arena.indexOf(",")),
+                    Integer.parseInt(arena.substring(arena.indexOf(",")+1)));
+        }
+        
+        lastPokeCenter = Game.getGame().getDatas()
+                .getLoadedZone(save.getString("pokecenter", "BOURG PALETTE"));
     }
 
     /**
@@ -199,10 +209,17 @@ public class Player extends Trainer implements Savable<JsonObject>{
                 foundItems.add(zoneName+":"+item);
             }
         }
+        
+        JsonArray arenasAchievements = new JsonArray();
+        for(String arena : this.wonFightsInArena.keySet()) {
+            arenasAchievements.add(arena+","+wonFightsInArena.get(arena));
+        }
         return new JsonObject().add("dressor", super.save())
                                .add("myPokemons", myPokemons)
                                .add("foundItems", foundItems)
-                               .add("starter", starter);
+                               .add("starter", starter)
+                               .add("arenas", arenasAchievements)
+                               .add("pokecenter", lastPokeCenter.getName());
     }
 
     public void wonAFightIn(String Arena) {

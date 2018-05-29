@@ -50,7 +50,11 @@ public class ScenarioController implements Initializable {
         
         skip.setOnMouseClicked(e -> {
             while (!script.current().startsWith("qcm")
-                    && !script.current().startsWith("END")) {
+                && !script.current().startsWith("END")) {
+                if(script.current().startsWith("give")
+                || script.current().startsWith("rm")) {
+                    executeScript(script.current());
+                }
                 script.next();
             }
             if (script.current().startsWith("qcm")) {

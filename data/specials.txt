@@ -1,0 +1,17 @@
+CENTRALE;0;4;ROUTE10;ITEM;PV Plus;Carbonne;Super Bonbon;PP Plus;Max Elixir;CT25 Fatal-Foudre;CT33 Protection;HERBE;Pikachu;Raichu;Magneti;Magneton;Voltorbe;Élektek;Voltorbe;Électrode;Électhor
+FORET DE JADE;1;0;ROUTE2;ITEM;Potion;Potion;Antidote;Antidote;PokéBall;HERBE;Chenipan;Chrysacier;Aspicot;Coconfort;Pikachu
+GROTTE;5;0;ROUTE10;ITEM;HERBE;Nosferapti;Machoc;Racaillou;Onix
+GROTTE INCONNUE;0;6;AZURIA;ITEM;Max Elixir;Pépite;Guérison;Guérison;PP Plus;Hyper Ball;Hyper Ball;Hyper Ball;Rappel Max;Super Bonbon;HERBE;Arbok;Raichu;Sablaireau;Nosferalto;Parasect;Aéromite;Kadabra;Magneton;Dodrio;Hypnomade;Métamorph;Magicarpe;Ptitard;Poissirène;Flagadoss;Krabboss;Hypocéan;Poissoroy;Grodoudou;Électrode;Ossatueur;Rhinoféros;Leveinard;Métamorph;Mewtwo
+ILES ECUME;0;5;CHENAL20;ITEM;Max Elixir;Pépite;Hyper Ball;HERBE;Nosferapti;Nolsferalto;Artikodin;Psykokwak;Akwakwak;Ramoloss;Flagadoss;Otaria;Kokiyas;Krabby;Hypotrempe;Stari;Lamantine;Krabboss;Hypocéan
+MANOIR DE CRAMOIS'ILE;2;5;CRAMOIS'ILE;ITEM;Corde Sortie;Carbonne;Calcium;Fer;Potion Max;CT14 Blizzard;CT22 Lance-Soleil;Guérison;Super Bonbon;Super Bonbon;Pierre Lune;Pappel Max;HERBE;Goupix;Caninos;Ponyta;Tadmorv;Grotadmorv;Smogo;Smogogo;Magmar
+MONT SELENITE;3;4;ROUTE3;ROUTE4;ITEM;Potion;Potion;Corde Sortie;Pierre Lune;Pierre Lune;PV Plus;Super Bonbon;CT01 Ultimapoing;CT12 Pistolet à O;Nautile;Faussile Dôme;HERBE;Mélofée;Nosferapti;Paras;Racaillou
+L'OCEANE;5;0;CARMIN-SUR-MER;ITEM;Potion Max;Huile;Huile Max;Super Ball;Super Bonbon;CT08 Plaquage;CT44 Repos;CS01 Coupe
+PARC SAFARI;0;0;PARMANIE;ITEM;Pépite;Carbone;Potion Max;Guérison;CT39 Bomb'Œuf;Protéine;CT40 Koud'Krâne;Rappel Max;Potion Max;CT32 Reflet;Dent d'Or;CS03 Surf;Rappel;HERBE;Magicarpe;Ptitard;Poissirène;Psykokwak;Ramoloss;Krabby;Minidraco;Nidoran F;Nidorina;Nidoran M;Nidorino;Parasect;Mimitoss;Noeunoeuf;Rhinocorne;Leveinard;Insécateur;Scarabrute;Paras;Doduo;Kangourex;Aéromite;Tauros
+REPERE ROCKET DU CASINO;11;0;CELADOPOLE;ITEM;Corde Sortie;Hyper Potion;Pépite;Pierre Lune;CT07 Empal'Korne;Super Potion;CT10 Damoclès;Super Bonbon;CT02 Coupe-Vent;PV Plus;Fer;Clé Asc.;Scope Sylphe;HERBE
+ROUTE VICTOIRE;7;5;ROUTE 23;ITEM;Super Bonbon;CT43 Piqué;Total Soin;CT05 Ultimawashi;CT17 Sacrifice;Défense Spec;Rappel Max;CT47 Explosion;Hyper Ball;Guérison;HERBE;Nosferapti;Nosferalto;Machoc;Machopeur;Racaillou;Gravalanch;Onix;Ossatueur;Aéromite;Sulfura
+SIEGE SOCIAL DE LA SYLPHE SARL;10;0;SAFRANIA;ITEM;CT36 Destruction;Hyper Potion;Corde Sortie;Total Soin;Rappel Max;Carte Magn.;CT09 Bélier;Protéine;PV Plus;Précision +;CT03 Danse-Lames;Calcium;Carbone;Super Bonbon;CT26 Séisme;Master Ball
+SOUTERRAIN EST-OUEST;0;0;ROUTE7;ROUTE8;ITEM;Elixir;Pépite
+SOUTERRAIN NORD-SUD;0;0;ROUTE5;ROUTE6;ITEM;Guérison;Spécial +
+TOUR POKEMON;5;0;LAVANVILLE;ITEM;Corde Sortie;Elixir;Elixir;Réveil;PV Plus;Pépite;Précision +;Super Bonbon;HERBE;Fantominus;Spectrum;Osselait
+TUNNEL TAUPIQUEUR;0;5;ROUTE2;ROUTE11;ITEM;HERBE;Taupiqueur;Triopikeur
+VILLA DE LEO;0;0;ROUTE25;ITEM;Passe Bateau

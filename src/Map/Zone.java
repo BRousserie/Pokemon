@@ -22,7 +22,7 @@ public abstract class Zone {
 
     protected final String name;
     protected final String description;
-    protected final int meetingDressorProba;
+    protected final int meetingTrainerProba;
     protected final ArrayList<String> accessibleZones;
     protected final ArrayList<String> items;
     protected final ArrayList<WildPkmn> fishablePkmns;
@@ -31,7 +31,7 @@ public abstract class Zone {
     Zone(String name, int meetingDressorProba,String description, ArrayList<String> accessibleZones,
             ArrayList<String> items, ArrayList<WildPkmn> fishablePkmns) {
         this.name = name;
-        this.meetingDressorProba = meetingDressorProba;
+        this.meetingTrainerProba = meetingDressorProba;
         this.description = description;
         this.accessibleZones = accessibleZones;
         this.items = items;
@@ -54,7 +54,15 @@ public abstract class Zone {
     public List<String> getAccessibleZones() {
         return accessibleZones.stream()
                 .filter(this::unlocked)
+                .map(this::removeCondition)
                 .collect(Collectors.toList());
+    }
+    
+    private String removeCondition(String accessibleZones) {
+        if (accessibleZones.contains("-")) {
+            accessibleZones = accessibleZones.substring(0, accessibleZones.indexOf("-"));
+        }
+        return accessibleZones;
     }
     
     private boolean unlocked(String zone) {
@@ -66,12 +74,13 @@ public abstract class Zone {
         }
     }
 
-    public int getMeetingDressorProba() {
-        return meetingDressorProba;
+    public int getMeetingTrainerProba() {
+        return meetingTrainerProba;
     }
+    
+    public void searchWildFish(){}
 
     public abstract void searchWildPokemon();
-    public abstract void searchWildFish();
     public abstract String getZoneType();
     public abstract int getMeetingPkmnProba() ;
     public abstract ArrayList<String> getShop();

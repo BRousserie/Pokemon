@@ -14,6 +14,7 @@ import FileIO.DataReader;
 import FileIO.ReaderException;
 import Item.Item;
 import Map.Arena;
+import Map.SpecialZone;
 import Map.Town;
 import Map.WildZone;
 import Map.Zone;
@@ -102,7 +103,11 @@ public class DataStorage {
             } catch (Exception wild) {
                 try {
                     loadedZones.put(zoneName, Town.loadZoneFromFile(zoneName));
-                } catch (Exception town) {}
+                } catch (Exception town) {
+                try {
+                    loadedZones.put(zoneName, SpecialZone.loadZoneFromFile(zoneName));
+                } catch (Exception special) {}
+                }
             }
             return loadedZones.get(zoneName);
         }

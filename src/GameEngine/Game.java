@@ -221,7 +221,7 @@ public class Game extends Application implements Savable<JsonObject> {
      * @throws ReaderException
      */
     public boolean possiblyLaunchFight() throws ReaderException {
-        if (Math.random() * currentZone.getMeetingDressorProba() > 1) {
+        if (Math.random() * currentZone.getMeetingTrainerProba() > 1) {
             setFight(new DressorFight(Trainer.generateEnnemy(myPlayer)));
             return true;
         } else if (pokemonMetInZone < currentZone.getMeetingPkmnProba()

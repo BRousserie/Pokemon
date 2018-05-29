@@ -53,11 +53,6 @@ public class Town extends Zone {
     }
 
     @Override
-    public void searchWildFish() {
-        //TODO
-    }
-
-    @Override
     public int getMeetingPkmnProba() {
         return 0;
     }

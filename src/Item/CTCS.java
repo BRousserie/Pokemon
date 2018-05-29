@@ -14,6 +14,6 @@ package Item;
 public class CTCS extends Item {
 
     public CTCS(String[] infos) {
-        super(infos[0], infos[1], "500");
+        super(infos[0]+infos[1], "Capacité "+infos[1], "500");
     }
 }

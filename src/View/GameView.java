@@ -15,9 +15,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 /**
@@ -36,6 +38,9 @@ public class GameView {
         Font.loadFont(this.getClass().getResource("../resources/PokemonHollow.ttf").toString(), 24);
         Font.loadFont(this.getClass().getResource("../resources/PokemonSolid.ttf").toString(), 24);
         Font.loadFont(this.getClass().getResource("../resources/PokemonClassic.ttf").toString(), 16);
+        
+        primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
     
     public void launch() {
@@ -64,6 +69,13 @@ public class GameView {
             System.out.println("Can't load " + filename + " : " + e.getMessage());
             e.printStackTrace();
         }
+        Button exit = new Button("X");
+        exit.setTranslateX(1220);
+        exit.setTranslateY(20);
+        exit.setPrefSize(40, 20);
+        exit.setStyle("-fx-background-color: red;");
+        exit.setOnMouseClicked(e -> System.exit(0));
+        this.group.getChildren().add(exit);
     }
 
     public void setPkmnLabel(Label label, int pkmnIndex) {
