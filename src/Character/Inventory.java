@@ -90,7 +90,6 @@ public class Inventory implements Savable<JsonObject> {
      */
     public void exchangeMoney(int monetaryFlux) {
         pokeDollars += monetaryFlux;
-        System.out.println(pokeDollars);
     }
 
     /**

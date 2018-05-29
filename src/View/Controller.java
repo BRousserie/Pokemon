@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -25,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  * FXML Controller class
@@ -94,6 +96,8 @@ public class Controller implements Initializable {
     private Label badge7;
     @FXML
     private Label badge8;
+    @FXML
+    private Group kanto;        
     // </editor-fold>
 
     Game game = Game.getGame();
@@ -108,7 +112,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         displayZone();
-        displayZoneDesc();
         if (game.getCurrentZone().getZoneType().equals("villes")) {
             initializeTownButtons();
         } else {
@@ -116,34 +119,36 @@ public class Controller implements Initializable {
         }
         initializePlayerInfos();
         initializePermanentButtons();
+        if (!game.getPlayer().getCondition("Carte")) {
+            hide(kanto);
+        }
+        if (!game.getPlayer().getCondition("Pokédex")) {
+            hide(pokedex);
+        }
+        fish.setDisable(true);
     }
 
     private void initializeTownButtons() {
-        if (game.getCurrentZone().hasPokeCenter()) {
-            PC.setDisable(false);
-            centrePokemon.setDisable(false);
-            sac.setOnMouseClicked(e -> displayScenario.setText("SALUT" + showBag()));
+        if (!game.getCurrentZone().hasPokeCenter()) {
+            hide(PC);
+            hide(centrePokemon);
             PC.setOnMouseClicked(e -> game.getGameView().setScene("PCView"));
             centrePokemon.setOnMouseClicked(e -> {
                 game.getPlayer().healPokemon();
                 displayScenario.setText("Vos POKéMON ont été soignés !");
                 setTeam();
             });
-        } else {
-            PC.setDisable(true);
-            centrePokemon.setDisable(true);
         }
+        
         if (!game.getCurrentZone().getShop().isEmpty()) {
             shop.setOnMouseClicked(e -> game.getGameView().setScene("ShopView"));
-            shop.setDisable(false);
         } else {
-            shop.setDisable(true);
+            hide(shop);
         }
         if (game.getCurrentZone().hasArena()) {
             arena.setOnMouseClicked(e -> ((Town) game.getCurrentZone()).fightArena());
-            arena.setDisable(false);
         } else {
-            arena.setDisable(true);
+            hide(arena);
         }
     }
 
@@ -151,7 +156,9 @@ public class Controller implements Initializable {
         PC.setText("Chercher des POKéMON");
         PC.setStyle("-fx-font-size: 14;");
         PC.setOnMouseClicked(e -> game.getCurrentZone().searchWildPokemon());
-        PC.setDisable(false);
+        PC.setPrefHeight(100);
+        PC.setWrapText(true);
+        PC.setTextAlignment(TextAlignment.CENTER);
         hide(centrePokemon);
         hide(shop);
         hide(arena);
@@ -190,14 +197,9 @@ public class Controller implements Initializable {
      * Displays the zone where the player is.
      */
     public void displayZone(){
-      displayScenario.setText(displayScenario.getText() + "Vous vous trouvez à " + game.getCurrentZone().getName() + "\n");
-    }
-    
-    /**
-     * Displays the decription of the zone.
-     */
-    public void displayZoneDesc(){
-      displayScenario.setText(displayScenario.getText() + game.getCurrentZone().getDescription() + "\n \n");
+      displayScenario.setText(displayScenario.getText() + "Vous vous trouvez à "
+              + game.getCurrentZone().getName() + "\n" 
+              + game.getCurrentZone().getDescription());
     }
     
     private void initializePermanentButtons() {

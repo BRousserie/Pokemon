@@ -38,7 +38,15 @@ public class PokedexViewController implements Initializable {
     @FXML
     private Label page;
     @FXML
-    private TextArea displayInfo;
+    private TextArea name;
+    @FXML
+    private TextArea size;
+    @FXML
+    private TextArea weight;
+    @FXML
+    private TextArea description;
+    @FXML
+    private TextArea type;
     @FXML
     private VBox pokeBox;
 
@@ -60,10 +68,19 @@ public class PokedexViewController implements Initializable {
         refreshPage();
     }
 
+    /**
+     * Convert Integers into strings
+     *
+     * @param i
+     * @return
+     */
     private String toString(int i) {
         return "" + i;
     }
 
+    /**
+     * displays on the screen the next page of the pokedex and increase numPage
+     */
     public void nextPage() {
         next.setOnMouseClicked(event -> {
             if (numPage >= MAXPAGE) {
@@ -75,6 +92,10 @@ public class PokedexViewController implements Initializable {
         });
     }
 
+    /**
+     * displays on the screen the previous page of the pokedex and decrease
+     * numPage
+     */
     public void previousPage() {
         previous.setOnMouseClicked(event -> {
             if (numPage <= MINPAGE) {
@@ -86,24 +107,52 @@ public class PokedexViewController implements Initializable {
         });
     }
 
+    /**
+     * Sets all th buttons for all the pokemons of a page
+     */
     public void refreshPage() {
-        page.setText((numPage + 1) + "/19");
+        refreshPageNum();
+        // clear the buttons
         pokeBox.getChildren().clear();
         for (int i = 0; i < 8; i++) {
+            // init new Button
             Button pokemon = new Button();
-            pokeBox.getChildren().add(pokemon);
-            pokemon.setPrefWidth(300);
-            String PkmnName = Pokemons.PkmnStats.getPOKEDEX().get((8 * numPage) + i);
-            pokemon.setText(PkmnName);
-            pokemon.setOnAction(e -> {
+            try {
+                pokeBox.getChildren().add(pokemon);
+                pokemon.setPrefWidth(300);
+                String PkmnName = Pokemons.PkmnStats.getPOKEDEX().get((8 * numPage) + i);
+                pokemon.setText(PkmnName);
+                pokemon.setOnAction(e -> {
+                    try {
+                        String[] datas = FileIO.DataReader.readFileArray("pokemonStats", PkmnName);
+                        System.out.println(datas[0]);
+                        name.setText(datas[0]);
+                        type.setText(datas[1]);
+                        description.setText(datas[12]);
+                        size.setText(datas[13] + " m");
+                        weight.setText(datas[14] + " kg");
+                    } catch (ReaderException ex) {
+                        Logger.getLogger(PokedexViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+
+            } catch (Exception e) {
                 
-                displayInfo.setText("Nom : " + PkmnName);
-            });
+            }
 
         }
-
     }
 
+    /**
+     * Actualise the page number
+     */
+    public void refreshPageNum() {
+        page.setText((numPage + 1) + "/19");
+    }
+
+    /**
+     * Sets the main scene
+     */
     public void goToMainView() {
         game.getGameView().setScene("MainScreen");
     }

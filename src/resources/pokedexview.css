@@ -1,7 +1,10 @@
-/*
- * Empty Stylesheet file.
- */
-
 .mainFxmlClass {
 
+}
+
+.label {
+    -fx-background-color: #00264d;
+    -fx-padding: 5;
+    -fx-font-family: "Pokemon Classic Regular";
+    -fx-text-fill: #b4b4b4;
 }

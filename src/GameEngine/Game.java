@@ -266,7 +266,9 @@ public class Game extends Application implements Savable<JsonObject> {
             rivalName = save.getString("rivalName", null);
             currentZone = datas.getLoadedZone(save.getString("currentZone", null));
             currentStoryEvent = save.getInt("currentStoryEvent", 0);
-            scenario = datas.getScenario().get(currentStoryEvent);
+            scenario = (datas.getScenario().size() > currentStoryEvent) ?
+                    datas.getScenario().get(currentStoryEvent)
+                    : null;
             return true;
         } catch (Exception e) {
             return false;

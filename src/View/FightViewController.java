@@ -383,10 +383,10 @@ public class FightViewController implements Initializable {
         healthBarUpdates.setOnFinished(e -> {
             if (fight.getEnnemy().getHp() == 0) {
                 showMessage(fight.getEnnemy().getName() + " est K.O. !",
-                        whenShown -> lookForWinner(true), 2);
+                        whenShown -> lookForWinner(true), 1);
             } else if (fight.getMyPkmn().getHp() == 0) {
                 showMessage(fight.getMyPkmn().getName() + " est K.O. !",
-                        whenShown -> lookForWinner(false), 2);
+                        whenShown -> lookForWinner(false), 1);
             } else {
                 messageDisappear.playFromStart();
                 healthBarUpdates.getKeyFrames().remove(updateBar);
@@ -422,7 +422,6 @@ public class FightViewController implements Initializable {
 //        messageAppear.setOnFinished(e -> messageDisappear.playFromStart());
 //        messageDisappear.setOnFinished(nextStep);
 //    }
-
     private void chooseRandomEnnemy() {
         fight.setEnnemy(fight.getEnnemyPkmns().stream()
                 .filter(e -> e.getHp() > 0)
@@ -440,9 +439,9 @@ public class FightViewController implements Initializable {
     }
 
     public double calculateDuration(int before, int after, int max) {
-        return (before > after) ? 
-                (double) 5 * (before - after) / max + 1:
-                (double) 5 * (after - before) / max + 1;
+        return (before > after)
+                ? (double) 5 * (before - after) / max + 1
+                : (double) 5 * (after - before) / max + 1;
     }
 
     // </editor-fold>
@@ -450,14 +449,14 @@ public class FightViewController implements Initializable {
     private void flee() {
         if (fight.getClass().toString().contains("Dressor")) {
             showMessage("On ne peut pas s'enfuir d'un combat de dresseurs !",
-                    e -> showChooseTypeGrid(), 2);
+                    e -> showChooseTypeGrid(), 1);
         } else if (fight.fleeSucceeds()) {
             showMessage("Vous prenez la fuite !",
-                    e -> game.getGameView().setScene("MainGame"), 3);
+                    e -> game.getGameView().setScene("MainScreen"), 1);
         } else {
             showMessage("Impossible de fuir !",
                     e -> fight.useAttack(randomAttack(), false, this,
-                            then -> this.showChooseTypeGrid()), 2);
+                            then -> this.showChooseTypeGrid()), 1);
         }
     }
 
@@ -520,14 +519,16 @@ public class FightViewController implements Initializable {
                 chooseRandomEnnemy();
             }
         } else {
-            if (Game.getGame().getScenario().Instructions().next().equals("heal")) {
-                Game.getGame().getPlayer().healPokemon();
+            if (Game.getGame().getScenario() != null) {
+                if (Game.getGame().getScenario().Instructions().next().equals("heal")) {
+                    Game.getGame().getPlayer().healPokemon();
+                }
             }
             showMessage((ennemyDown)
                     ? (fight.getMe().getName() + " a gagné !")
                     : fight.getMe().getName() + " n'a plus de POKéMON !\n"
                     + fight.getMe().getName() + " est Hors-Jeu !",
-                        e -> game.getGameView().setScene("MainScreen"), 2);
+                    e -> game.getGameView().setScene("MainScreen"), 1);
         }
     }
     // </editor-fold>
@@ -551,13 +552,13 @@ public class FightViewController implements Initializable {
     private void useItem(Item item) {
         fight.getMe().getBag().decrement(item);
         if (item.getClass().equals(Ball.class)) {
-            if(fight.getClass().toString().contains("Dressor")) {
-                showMessage("Le dresseur dévie la BALL! Voler, c'est mal!", e -> secondAttack(randomAttack(), false), 2);
+            if (fight.getClass().toString().contains("Dressor")) {
+                showMessage("Le dresseur dévie la BALL! Voler, c'est mal!", e -> secondAttack(randomAttack(), false), 1);
             } else {
-                showMessage(fight.getMe().getName() + " utilise: " + item.getName(), e -> useBall((Ball) item), 2);
+                showMessage(fight.getMe().getName() + " utilise: " + item.getName(), e -> useBall((Ball) item), 1);
             }
         } else {
-            choosePkmn((Potion)item);
+            choosePkmn((Potion) item);
         }
     }
 
@@ -565,19 +566,22 @@ public class FightViewController implements Initializable {
         switch (ball.use(fight.getEnnemy())) {
             case 0:
                 showMessage("La balle a râté le Pokémon!",
-                        e -> secondAttack(randomAttack(), false), 2);
+                        e -> secondAttack(randomAttack(), false), 1);
             case 1:
                 showMessage("Zut de flûte! Il s'est libéré!",
-                        e -> secondAttack(randomAttack(), false), 2);
+                        e -> secondAttack(randomAttack(), false), 1);
             case 2:
                 showMessage("Ah! Il avait l'air d'être pris!",
-                        e -> secondAttack(randomAttack(), false), 2);
+                        e -> secondAttack(randomAttack(), false), 1);
             case 3:
                 showMessage("Oh! Presque!",
-                        e -> secondAttack(randomAttack(), false), 2);
-            case 4 :
-                showMessage("Top cool! "+fight.getEnnemy()+" est capturé!",
-                        e -> capturePkmn(), 2);
+                        e -> secondAttack(randomAttack(), false), 1);
+            case 4:
+                showMessage("Top cool! " + fight.getEnnemy().getName() + " est capturé!",
+                        e -> {
+                            capturePkmn();
+                            game.getGameView().setScene("MainScreen");
+                        }, 2);
         }
     }
 

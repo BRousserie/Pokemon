@@ -5,6 +5,7 @@
  */
 package View;
 
+import Character.Inventory;
 import GameEngine.Game;
 import Item.Item;
 import java.net.URL;
@@ -46,16 +47,8 @@ public class ShopViewController implements Initializable {
     // </editor-fold>
 
     Game game = Game.getGame();
-
-    /**
-     * Convert Integers into Strings
-     *
-     * @param number
-     * @return
-     */
-    public String toString(int number) {
-        return "" + number;
-    }
+    Inventory myBag = game.getPlayer().getBag();
+    Item selectedItem = null;
 
     /**
      * Initialize the controller class.
@@ -89,8 +82,7 @@ public class ShopViewController implements Initializable {
      * Displays the amount of money of the player.
      */
     public void displayMoney() {
-        String playerMoney = "Vous avez : ";
-        money.setText(playerMoney + toString(getMoney()) + "  $");
+        money.setText("Vous avez : " + myBag.getPokeDollars() + "$");
     }
 
     /**
@@ -119,29 +111,6 @@ public class ShopViewController implements Initializable {
      */
     public void itemList() {
         itemChoice.setItems(FXCollections.observableArrayList(game.getCurrentZone().getShop()));
-    }
-
-    /**
-     *
-     * @return the amount of momey of the player.
-     */
-    public int getMoney() {
-        return game.getPlayer().getBag().getPokeDollars();
-    }
-
-    /**
-     * Give the price of one selected item.
-     *
-     * @return the price of one item selected, 0 if no item selected
-     */
-    public int getItemPrice() {
-        Object i = itemChoice.getValue();
-        if (i == null) {
-            return 0;
-        } else {
-            String item = itemChoice.getValue().toString();
-            return Integer.parseInt(String.valueOf(game.getDatas().getItem(item).getBuyPrice()));
-        }
     }
 
     /**
@@ -174,8 +143,10 @@ public class ShopViewController implements Initializable {
      */
     public int getTotalPrice() throws Exception {
         int total;
-        total = getItemPrice() * getItemQtt();
-        totalPrice.setText(toString(total));
+        total = (selectedItem != null) ? 
+                selectedItem.getBuyPrice() * getItemQtt()
+                : 0;
+        totalPrice.setText(total+"");
         return total;
     }
 
@@ -187,12 +158,25 @@ public class ShopViewController implements Initializable {
     public void refresh() throws Exception {
         itemQuantity.setOnKeyReleased(event -> {
             try {
+                if (Integer.parseInt(itemQuantity.getText())
+                   + (myBag.contains(selectedItem.getName()) ?
+                        myBag.getItems().get(selectedItem) : 0)
+                        > 99) {
+                    itemQuantity.setText(""+(99-myBag.getItems().get(selectedItem)));
+                }
                 getTotalPrice();
             } catch (Exception ex) {
             }
         });
         itemChoice.setOnAction(event -> {
             try {
+                selectedItem = game.getDatas().getItem(itemChoice.getValue().toString());
+                if (Integer.parseInt(itemQuantity.getText())
+                   + (myBag.contains(selectedItem.getName()) ?
+                        myBag.getItems().get(selectedItem) : 0)
+                        > 99) {
+                    itemQuantity.setText(""+(99-myBag.getItems().get(selectedItem)));
+                }
                 getTotalPrice();
             } catch (Exception ex) {
                 Logger.getLogger(ShopViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -208,21 +192,17 @@ public class ShopViewController implements Initializable {
     public void buy() throws Exception {
         // Variables
         String player = game.getPlayer().getName();
-        String name = itemChoice.getValue().toString();
-        String description = game.getDatas().getItem(name).getDescription();
-        String buyPrice = toString(getItemPrice());
-        Item item = new Item(name, description, buyPrice) {
-        };
+        String description = selectedItem.getDescription();
+        int buyPrice = selectedItem.getBuyPrice();
         // Exchange System
-        if (getTotalPrice() <= getMoney()) {
-            game.getPlayer().getBag().exchangeMoney(-getTotalPrice());
+        if (getTotalPrice() <= myBag.getPokeDollars()) {
+            myBag.exchangeMoney(-getTotalPrice());
             displayMoney();
             for (int i = 0; i < getItemQtt(); i++) {
-                game.getPlayer().getBag().addItem(item);
-                System.out.println(game.getPlayer().getBag());
+                myBag.addItem(selectedItem);
             }
             displayInfo.setText(displayInfo.getText() + "Tenez! Merci infiniment. \n" 
-            + player + " obtient : " + name + " x " + getItemQtt() + "\n");
+            + player + " obtient : " + selectedItem + " x " + getItemQtt() + "\n");
             displayInfo.setScrollLeft(displayInfo.getScrollLeft()+1);
             
         } else {

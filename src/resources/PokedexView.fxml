@@ -1,23 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
 <?import java.net.URL?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PokedexViewController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.PokedexViewController">
   <children>
     <Button fx:id="retour" layoutX="61.0" layoutY="656.0" mnemonicParsing="false" onAction="#goToMainView" text="Retour" />
-    <Text fill="#fff500" layoutX="538.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleBack" text="Pokedex" />
-    <Text fill="#0021cc" layoutX="538.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleFront" text="Pokedex" />
+    <Text fill="#fff500" layoutX="538.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleBack" text="Pokédex" />
+    <Text fill="#0021cc" layoutX="538.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleFront" text="Pokédex" />
     <Button fx:id="previous" layoutX="215.0" layoutY="656.0" mnemonicParsing="false" onAction="#previousPage" prefHeight="29.0" prefWidth="137.0" text="Precedent" />
     <Button fx:id="next" layoutX="1069.0" layoutY="647.0" mnemonicParsing="false" onAction="#nextPage" prefHeight="29.0" prefWidth="137.0" text="Suivant" />
-      <VBox fx:id="pokeBox" layoutX="43.0" layoutY="114.0" prefHeight="497.0" prefWidth="265.0" spacing="20.0" />
-      <TextArea fx:id="displayInfo" layoutX="352.0" layoutY="114.0" prefHeight="505.0" prefWidth="879.0" />
-      <Label fx:id="page" layoutX="681.0" layoutY="660.0" prefHeight="26.0" prefWidth="122.0" styleClass="container" text="Label" textAlignment="CENTER" />
+    <VBox fx:id="pokeBox" layoutX="43.0" layoutY="114.0" prefHeight="497.0" prefWidth="265.0" spacing="20.0" />
+    <Label fx:id="page" layoutX="681.0" layoutY="660.0" prefHeight="26.0" prefWidth="122.0" styleClass="container" text="Label" textAlignment="CENTER" />
+    <Region layoutX="353.0" layoutY="114.0" prefHeight="516.0" prefWidth="901.0" styleClass="container" />
+    <Label layoutX="778.0" layoutY="149.0" text="Nom :" textFill="#bfbfbf">
+      <stylesheets>
+        <URL value="@pokedexview.css" />
+      </stylesheets>
+    </Label>
+    <TextArea fx:id="name" editable="false" layoutX="704.0" layoutY="181.0" prefHeight="29.0" prefWidth="200.0" styleClass="container" wrapText="true" />
+    <TextArea id="name" fx:id="description" editable="false" layoutX="388.0" layoutY="411.0" prefHeight="200.0" prefWidth="829.0" styleClass="container" wrapText="true" />
+    <TextArea id="name" fx:id="size" editable="false" layoutX="827.0" layoutY="303.0" prefHeight="31.0" prefWidth="122.0" styleClass="container" wrapText="true" />
+    <TextArea id="name" fx:id="weight" editable="false" layoutX="1043.0" layoutY="303.0" prefHeight="31.0" prefWidth="160.0" styleClass="container" wrapText="true" />
+    <Label layoutX="827.0" layoutY="267.0" text="Taille :">
+      <stylesheets>
+        <URL value="@pokedexview.css" />
+      </stylesheets>
+      <textFill>
+        <Color blue="0.749" green="0.749" red="0.749" fx:id="x1" />
+      </textFill>
+    </Label>
+    <Label layoutX="1058.0" layoutY="267.0" text="Poids :" textFill="$x1">
+      <stylesheets>
+        <URL value="@pokedexview.css" />
+      </stylesheets>
+    </Label>
+    <TextArea id="name" fx:id="type" editable="false" layoutX="436.0" layoutY="303.0" prefHeight="31.0" prefWidth="279.0" styleClass="container" wrapText="true" />
+    <Label layoutX="451.0" layoutY="267.0" text="Type :" textFill="$x1">
+      <stylesheets>
+        <URL value="@pokedexview.css" />
+      </stylesheets>
+    </Label>
   </children>
   <stylesheets>
     <URL value="@generalsheet.css" />

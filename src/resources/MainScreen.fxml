@@ -45,7 +45,7 @@
                   <String fx:value="container" />
                   <String fx:value="tooLongButton" />
                </styleClass></ChoiceBox>
-            <Button fx:id="fish" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="Pêcher" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button fx:id="fish" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" text="Pêcher" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Button fx:id="searchItems" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" styleClass="tooLongButton" text="Chercher objets" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button fx:id="goTo" contentDisplay="BOTTOM" maxWidth="75.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="26.0" styleClass="tooLongButton" text="OK" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
       </children>
@@ -123,8 +123,8 @@
             </GridPane>
       </children>
     </VBox>
-    <TextArea fx:id="displayScenario" editable="false" layoutX="14.0" layoutY="16.0" prefHeight="403.0" prefWidth="808.0" styleClass="container" wrapText="true" />
-    <Group id="Group" layoutX="828.0" layoutY="430.0">
+    <TextArea fx:id="displayScenario" editable="false" layoutX="14.0" layoutY="16.0" prefHeight="403.0" prefWidth="802.0" style="-fx-control-inner-background: #00264d;" styleClass="container" wrapText="true" />
+    <Group id="Group" fx:id="kanto" layoutX="828.0" layoutY="430.0">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="0.0" height="276.0" layoutX="0.0" layoutY="0.0" stroke="BLACK" strokeType="INSIDE" width="438.0">
           <fill>
