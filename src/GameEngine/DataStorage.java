@@ -13,6 +13,7 @@ import Fight.Attack;
 import FileIO.DataReader;
 import FileIO.ReaderException;
 import Item.Item;
+import Map.Arena;
 import Map.Town;
 import Map.WildZone;
 import Map.Zone;
@@ -38,6 +39,7 @@ public class DataStorage {
     private HashMap<String, PkmnStats> loadedPkmns = new HashMap<>();
     private HashMap<String, Attack> loadedAtks = new HashMap<>();
     private HashMap<String, Zone> loadedZones = new HashMap<>();
+    private HashMap<String, Arena> loadedArenas = new HashMap<>();
 
     /*Items will also not all be used. However, they are just composed of a
     * short String for the name, a pretty short one for the description and
@@ -103,6 +105,19 @@ public class DataStorage {
                 } catch (Exception town) {}
             }
             return loadedZones.get(zoneName);
+        }
+    }
+    
+    public Arena getLoadedArena() throws ReaderException {
+        String zoneName = Game.getGame().getCurrentZone().getName();
+        if (loadedArenas.containsKey(zoneName)) {
+            return loadedArenas.get(zoneName);
+        } else {
+            try {
+                loadedArenas.put(zoneName, Arena.loadArenaFromFile(zoneName));
+            } catch (Exception wild) {
+            }
+            return loadedArenas.get(zoneName);
         }
     }
 }

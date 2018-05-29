@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
+<?import java.lang.String?>
 <?import java.net.URL?>
-<?import javafx.collections.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.Arc?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.ShopViewController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ShopViewController">
   <children>
-    <Text fill="#fff500" layoutX="540.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass=", titleBack" text="PokéShop" />
+    <Text fill="#ffcc00" layoutX="540.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass=", titleBack" text="PokéShop" />
     <VBox layoutX="460.0" layoutY="104.0" prefHeight="559.0" prefWidth="400.0">
       <children>
         <TextArea fx:id="displayItems" editable="false" prefHeight="551.0" prefWidth="400.0" styleClass="container" wrapText="true">
@@ -61,7 +62,7 @@
         <Label layoutX="280.0" layoutY="145.0" styleClass="textField" text="Quantité" />
       </children>
     </Group>
-    <Text fill="#0021cc" layoutX="540.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass=", titleFront" text="PokéShop" />
+    <Text layoutX="540.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass=", titleFront" text="PokéShop" />
     <TextArea fx:id="displayInfo" editable="false" layoutX="30.0" layoutY="449.0" prefHeight="160.0" prefWidth="401.0" styleClass="container" wrapText="true" />
   </children>
   <stylesheets>

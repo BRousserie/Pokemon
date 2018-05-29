@@ -5,7 +5,7 @@
  */
 package GameEngine;
 
-import Character.Dressor;
+import Character.Trainer;
 import Fight.FightingPkmn;
 import Item.Item;
 import java.util.ArrayList;
@@ -15,11 +15,19 @@ import java.util.ArrayList;
  * @author brousserie
  */
 public class DressorFight extends Fight {
-    private final Dressor ennemyDressor;
-
-    public DressorFight(Dressor ennemyDressor) {
+    private final Trainer ennemyDressor;
+    private final boolean isArena;
+    
+    public DressorFight(Trainer ennemyDressor) {
         super(ennemyDressor.getPkmns().get(0));
         this.ennemyDressor = ennemyDressor;
+        this.isArena = false;
+    }
+    
+    public DressorFight(Trainer ennemyDressor, boolean isArena) {
+        super(ennemyDressor.getPkmns().get(0));
+        this.ennemyDressor = ennemyDressor;
+        this.isArena = isArena;
     }
     
     @Override
@@ -39,6 +47,9 @@ public class DressorFight extends Fight {
             giveExp(super.calculateEarnedXP());
             playerWon = true;
             hasWinner = true;
+            if (isArena) {
+                me.wonAFightIn(Game.getGame().getCurrentZone().getName());
+            }
         } else {
             if (me.getAlivePkmns() == 0) {
                 playerWon = false;

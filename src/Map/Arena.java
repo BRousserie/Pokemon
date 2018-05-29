@@ -9,9 +9,14 @@
  */
 package Map;
 
-import Character.Dressor;
+import Character.Trainer;
+import Fight.FightingPkmn;
+import FileIO.DataReader;
+import FileIO.ReaderException;
 import GameEngine.DressorFight;
-import GameEngine.Fight;
+import GameEngine.Game;
+import Item.Item;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -19,20 +24,52 @@ import java.util.HashMap;
  * @author brousserie
  */
 public class Arena {
-    private final String name;
-    private final HashMap<Dressor, Boolean> dressors;
 
-    public Arena(HashMap<Dressor, Boolean> dressors, String name) {
-        this.name = name;
+    private static FightingPkmn pkmnFromData(String pkmn, int id) {
+        return new FightingPkmn(pkmn.substring(0, pkmn.indexOf(",")),
+                        Integer.parseInt(pkmn.substring(pkmn.indexOf(",")+1)),
+                        id);
+    }
+    private final ArrayList<Trainer> dressors;
+    private final String prerequisites;
+    public Arena(ArrayList<Trainer> dressors, String prerequisites) {
         this.dressors = dressors;
+        this.prerequisites = prerequisites;
     }
     
-    private Fight challengeNextDressor() {
-        for (Dressor dressor : dressors.keySet()) {
-            if (dressors.get(dressor)) {
-                DressorFight fight = new DressorFight(dressor);
+    public String getPrerequisites() {
+        return prerequisites;
+    }
+    
+    public void fight() {
+        Game.getGame().setFight(new DressorFight(
+                dressors.get(Game.getGame().getPlayer().getNextDressorToFight()), true));
+    }
+
+    public boolean isNextArena() {
+        return Game.getGame().getPlayer().getCondition(prerequisites);
+    }
+    
+    public static Arena loadArenaFromFile(String arena) throws ReaderException {
+        ArrayList<Trainer> dressors = new ArrayList<>();
+        String[] arenaInfos = DataReader.readFileArray("arenes", arena);
+        int i = 2;
+        while(i < arenaInfos.length) {
+            int id = 0;
+            String name = arenaInfos[i];
+            ArrayList<FightingPkmn> pokemon = new ArrayList<>();
+            HashMap<Item, Integer> items = new HashMap<>();
+            while(!arenaInfos[i].equals("TRAINER") && !arenaInfos[i].equals("ITEMS")) {
+                pokemon.add(pkmnFromData(arenaInfos[i], id));
+                i++;
+                id++;
             }
+            while(!arenaInfos[i].equals("TRAINER")) {
+                items.put(Game.getGame().getDatas().getItem(arenaInfos[i]), 1);
+                i++;
+            }
+            dressors.add(new Trainer(name, pokemon, items, 200));
         }
-        return null;
+        return new Arena(dressors, arenaInfos[1]);
     }
 }

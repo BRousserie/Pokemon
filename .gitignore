@@ -1,6 +1,5 @@
 build/
 dist/
-build.xml
 
 nbproject/
 !nbproject/project.xml

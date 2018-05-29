@@ -16,6 +16,7 @@ import FileIO.ReaderException;
 import FileIO.Savable;
 import GameEngine.Game;
 import Item.Item;
+import Map.Zone;
 import Pokemons.CapturedPkmn;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
@@ -26,12 +27,14 @@ import java.util.HashMap;
 /**
  * Class allowing to create playable dressors (adds a list of stored pokemons)
  */
-public class Player extends Dressor implements Savable<JsonObject>{
+public class Player extends Trainer implements Savable<JsonObject>{
 
     //Player's captured pokemons, accessible by their ID
     private ArrayList<CapturedPkmn> myPokemons;
     private HashMap<String, ArrayList<String>> foundItems;
     private String starter;
+    private HashMap<String, Integer> wonFightsInArena = new HashMap<>();
+    private Zone lastPokeCenter;
 
     /**
      * Constructor for a new player
@@ -88,6 +91,10 @@ public class Player extends Dressor implements Savable<JsonObject>{
     public String getStarter() {
         return starter;
     }
+    
+    public Zone getLastPokeCenter() {
+        return lastPokeCenter;
+    }
 
     public void setStarter(String starter) {
         this.starter = starter;
@@ -99,6 +106,7 @@ public class Player extends Dressor implements Savable<JsonObject>{
     }
 
     public void healPokemon() {
+        lastPokeCenter = Game.getGame().getCurrentZone();
         for (FightingPkmn pkmn : currentPkmns) {
             for (int i = 0; i < pkmn.getStatsVariations().length; i++) {
                 pkmn.getStatsVariations()[i] = 0;
@@ -119,21 +127,21 @@ public class Player extends Dressor implements Savable<JsonObject>{
      */
     public void addNewPokemon(String name, int level) throws ReaderException {
         myPokemons.add(new CapturedPkmn(name, level, myPokemons.size()));
-        if (currentPkmns.size() < Dressor.MAX_CURRENTPKMNS) {
+        if (currentPkmns.size() < Trainer.MAX_CURRENTPKMNS) {
             currentPkmns.add(myPokemons.get(myPokemons.size() - 1));
         }
     }
     
     public void addNewPokemon(FightingPkmn newpkmn) throws ReaderException {
         myPokemons.add(new CapturedPkmn(newpkmn));
-        if (currentPkmns.size() < Dressor.MAX_CURRENTPKMNS) {
+        if (currentPkmns.size() < Trainer.MAX_CURRENTPKMNS) {
             currentPkmns.add(myPokemons.get(myPokemons.size() - 1));
         }
     }
     
     public void addNewPokemon(JsonObject newPkmn) throws ReaderException {
         myPokemons.add(new CapturedPkmn(newPkmn));
-        if (currentPkmns.size() < Dressor.MAX_CURRENTPKMNS) {
+        if (currentPkmns.size() < Trainer.MAX_CURRENTPKMNS) {
             currentPkmns.add(myPokemons.get(myPokemons.size() - 1));
         }
     }
@@ -173,6 +181,13 @@ public class Player extends Dressor implements Savable<JsonObject>{
         return foundItems;
     }
 
+    public int getNextDressorToFight() {
+        String arena = Game.getGame().getCurrentZone().getName();
+        return wonFightsInArena.containsKey(arena) 
+                ? wonFightsInArena.get(arena)
+                : 0;
+    }
+    
     @Override
     public JsonObject save() {
         JsonArray myPokemons = new JsonArray();
@@ -188,5 +203,13 @@ public class Player extends Dressor implements Savable<JsonObject>{
                                .add("myPokemons", myPokemons)
                                .add("foundItems", foundItems)
                                .add("starter", starter);
+    }
+
+    public void wonAFightIn(String Arena) {
+        if (wonFightsInArena.containsKey(name)) {
+            wonFightsInArena.put(Arena, wonFightsInArena.get(Arena)+1);
+        } else {
+            wonFightsInArena.put(Arena, 1);
+        }
     }
 }

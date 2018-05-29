@@ -12,7 +12,7 @@ package View;
 import FileIO.DataWriter;
 import FileIO.ReaderException;
 import GameEngine.Game;
-import Map.Town;
+import Map.Arena;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -132,6 +132,7 @@ public class Controller implements Initializable {
         if (!game.getCurrentZone().hasPokeCenter()) {
             hide(PC);
             hide(centrePokemon);
+        } else {
             PC.setOnMouseClicked(e -> game.getGameView().setScene("PCView"));
             centrePokemon.setOnMouseClicked(e -> {
                 game.getPlayer().healPokemon();
@@ -146,7 +147,18 @@ public class Controller implements Initializable {
             hide(shop);
         }
         if (game.getCurrentZone().hasArena()) {
-            arena.setOnMouseClicked(e -> ((Town) game.getCurrentZone()).fightArena());
+            arena.setOnMouseClicked(e -> {
+                try {
+                    Arena arena = Game.getGame().getDatas().getLoadedArena();
+                    if (arena.isNextArena())
+                        arena.fight();
+                    else displayScenario.setText("Vous ne pouvez pas encore "
+                            + "combattre dans cette Arène. Vous avez besoin du "
+                            + arena.getPrerequisites());
+                } catch (ReaderException ex) {
+                    ex.printStackTrace();
+                }
+            });
         } else {
             hide(arena);
         }
@@ -224,7 +236,7 @@ public class Controller implements Initializable {
         goTo.setOnMouseClicked(e -> 
             {
             try {
-                game.setCurrentZone(
+                game.goToZone(
                         game.getDatas().getLoadedZone(
                                 selectDestination.getValue().toString()));
             } catch (ReaderException ex) {

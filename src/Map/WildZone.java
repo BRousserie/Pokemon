@@ -11,6 +11,7 @@ package Map;
 
 import Fight.FightingPkmn;
 import FileIO.DataReader;
+import FileIO.ReaderException;
 import GameEngine.Fight;
 import GameEngine.Game;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class WildZone extends Zone {
         return surfingPkmns;
     }
     
-    public static WildZone loadZoneFromFile(String name) throws Exception {
+    public static WildZone loadZoneFromFile(String name) throws ReaderException {
             String[] zoneInfos = DataReader.readFileArray("routes", name);
             ArrayList<String> items = new ArrayList<>();
             ArrayList<WildPkmn> meetablePkmns = new ArrayList<>();

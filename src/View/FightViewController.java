@@ -206,13 +206,13 @@ public class FightViewController implements Initializable {
 
     private void setAtkButton(Button attackButton, int attackIndex) {
         try {
-            Attack attack = game.getPlayer()
-                    .getPkmns().get(0)
+            Attack attack = fight.getMyPkmn()
                     .getAttacks()[attackIndex];
             attackButton.setText(attack.getName() + "\n"
                     + attack.getPP() + "/" + attack.getPPMAX());
             attackButton.setOnMouseClicked(e -> doAttack(attack));
         } catch (Exception e) {
+            attackButton.setText("");
             attackButton.setDisable(true);
         }
     }
@@ -221,7 +221,7 @@ public class FightViewController implements Initializable {
         try {
             CapturedPkmn pkmn = game.getPlayer().getCapturedCurrentPkmns().get(pkmnIndex);
             pkmnButton.setText(pkmn.toString());
-            pkmnButton.setOnMouseClicked(e -> choosePokemon(pkmnIndex));
+            pkmnButton.setOnMouseClicked(e -> choosePokemon(pkmn));
         } catch (IndexOutOfBoundsException e) {
             pkmnButton.setDisable(true);
         }
@@ -460,15 +460,15 @@ public class FightViewController implements Initializable {
         }
     }
 
-    private void choosePokemon(int newPkmn) {
-        if (newPkmn != 0) {
-            game.getPlayer().swapPokemons(newPkmn, 0);
-            //les pokemons ont déjà été échangés, donc get(newPkmn) récupère
-            //celui qui vient de quitter le combat et inversement
-            showMessage(fight.getMe().getPkmns().get(newPkmn).getName() + ", reviens !!\n"
-                    + "A toi, " + fight.getMyPkmn().getName(),
+    private void choosePokemon(CapturedPkmn newPkmn) {
+        if (!newPkmn.equals(fight.getMyPkmn())) {
+            showMessage(fight.getMyPkmn().getName() + ", reviens !!\n"
+                    + "A toi, " + newPkmn.getName(),
                     e -> fight.useAttack(randomAttack(), false, this,
                             then -> this.showChooseTypeGrid()), 2);
+            fight.setMyPkmn(newPkmn);
+            game.getPlayer().swapPokemon(newPkmn);
+            refresh();
         }
     }
 
@@ -524,11 +524,23 @@ public class FightViewController implements Initializable {
                     Game.getGame().getPlayer().healPokemon();
                 }
             }
-            showMessage((ennemyDown)
-                    ? (fight.getMe().getName() + " a gagné !")
-                    : fight.getMe().getName() + " n'a plus de POKéMON !\n"
+            if (ennemyDown) {
+                showMessage(fight.getMe().getName() + " a gagné !",
+                    e -> {
+                        game.getGameView().setScene("MainScreen");
+                    }, 1);
+            } else {
+                showMessage(fight.getMe().getName() + " n'a plus de POKéMON !\n"
                     + fight.getMe().getName() + " est Hors-Jeu !",
-                    e -> game.getGameView().setScene("MainScreen"), 1);
+                    e -> {
+                        game.setCurrentZone(fight.getMe().getLastPokeCenter());
+                        fight.getMe().healPokemon();
+                        fight.getMe().getBag().exchangeMoney(
+                                -fight.getMe().getBag().getPokeDollars()/2);
+                        game.getGameView().setScene("MainScreen");
+                    }, 1);
+            }
+           
         }
     }
     // </editor-fold>

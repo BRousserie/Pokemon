@@ -376,7 +376,7 @@ public class FightingPkmn implements Savable<JsonObject> {
                                .add("EVdef", EVs[2])
                                .add("EVspe", EVs[3])
                                .add("EVspeed", EVs[4])
-                               .add("hpLost", EVs[0])
+                               .add("hpLost", statsVariations[0])
                                .add("pkmnStatus", pkmnStatus.name())
                                .add("attacks", attacks);
     }

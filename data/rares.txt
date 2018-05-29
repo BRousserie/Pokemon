@@ -15,3 +15,11 @@ Canne;Une simple canne à pêche.
 Super Canne;Une canne à pêche améliorée.
 Méga Canne;Une canne à pêche très sophistiquée.
 Pokédex;Une encyclopédie des Pokémon crée par le PROF. CHEN
+Badge Roche;Décerné pour avoir vaincu Pierre, le champion d'Argenta
+Badge Cascade;Décerné pour avoir vaincu Ondine, le champion d'Azuria
+Badge Foudre;Décerné pour avoir vaincu Major Bob, le champion de Carmin sur Mer
+Badge Prisme;Décerné pour avoir vaincu Erika, le champion de Céladopole
+Badge Âme;Décerné pour avoir vaincu Koga, le champion de Parmanie
+Badge Marais;Décerné pour avoir vaincu Morgane, le champion de Safranie
+Badge Volcan;Décerné pour avoir vaincu Auguste, le champion de Cramois'Île
+Badge Terre;Décerné pour avoir vaincu Giovanni, le champion de Jadielle

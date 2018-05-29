@@ -13,6 +13,7 @@ import Fight.FightingPkmn;
 import FileIO.ReaderException;
 import FileIO.Savable;
 import Item.Item;
+import Pokemons.CapturedPkmn;
 import Pokemons.PkmnStats;
 import com.eclipsesource.json.JsonObject;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.Objects;
 /**
  * Class allowing to create ready to fight characters
  */
-public class Dressor implements Savable<JsonObject> {
+public class Trainer implements Savable<JsonObject> {
 
     //Dressor's name
     protected String name;
@@ -35,7 +36,7 @@ public class Dressor implements Savable<JsonObject> {
     /**
      * Constructor for creating Dressors that reward you with one Item
      */
-    public Dressor(String name, ArrayList<FightingPkmn> currentPkmns, Item item, int money) {
+    public Trainer(String name, ArrayList<FightingPkmn> currentPkmns, Item item, int money) {
         this.name = name;
         this.currentPkmns = currentPkmns;
         this.bag = new Inventory(money, item);
@@ -44,7 +45,7 @@ public class Dressor implements Savable<JsonObject> {
     /**
      * Constructor for creating Dressors that reward you with multiple Items
      */
-    public Dressor(String name, ArrayList<FightingPkmn> currentPkmns, HashMap<Item, Integer> items, int money) {
+    public Trainer(String name, ArrayList<FightingPkmn> currentPkmns, HashMap<Item, Integer> items, int money) {
         this.name = name;
         this.currentPkmns = currentPkmns;
         this.bag = new Inventory(money, items);
@@ -53,13 +54,13 @@ public class Dressor implements Savable<JsonObject> {
     /**
      * Constructor for creating Dressors that reward you with money only
      */
-    public Dressor(String name, ArrayList<FightingPkmn> currentPkmns, int money) {
+    public Trainer(String name, ArrayList<FightingPkmn> currentPkmns, int money) {
         this.name = name;
         this.currentPkmns = currentPkmns;
         this.bag = new Inventory(money);
     }
     
-    public Dressor(JsonObject dressor) throws ReaderException {
+    public Trainer(JsonObject dressor) throws ReaderException {
         name = dressor.getString("name", null);
         bag = new Inventory(dressor.get("bag").asObject());
     }
@@ -105,19 +106,11 @@ public class Dressor implements Savable<JsonObject> {
     public ArrayList<FightingPkmn> getPkmns() {
         return currentPkmns;
     }
-
-    /**
-     * Adds a pokemon to the the dressor's current pokemons if the dressor
-     * already has a pokemon at this index, takes his place
-     */
-    public void changePocket(FightingPkmn newPkmn, int index) {
-        currentPkmns.add(index, newPkmn);
-    }
     
-    public void swapPokemons(int pokemon1Index, int pokemon2Index) {
-        FightingPkmn temporaryStoring = currentPkmns.get(pokemon1Index);
-        currentPkmns.add(pokemon1Index, currentPkmns.get(pokemon2Index));
-        currentPkmns.add(pokemon2Index, temporaryStoring);
+    public void swapPokemon(CapturedPkmn newPkmn) {
+        FightingPkmn temporaryStoring = currentPkmns.get(0);
+        currentPkmns.set(0, newPkmn);
+        currentPkmns.set(currentPkmns.indexOf(newPkmn), temporaryStoring);
     }
 
     /**
@@ -132,10 +125,10 @@ public class Dressor implements Savable<JsonObject> {
      *
      * @param myPlayer will be used to know how strong the new ennemy can be
      * @return the generated Ennemy
-     * @throws ReaderException if it fails in loading the Dressor's pokemon or
-     * their attack
+     * @throws ReaderException if it fails in loading the Trainer's pokemon or
+ their attack
      */
-    public static Dressor generateEnnemy(Player myPlayer) throws ReaderException {
+    public static Trainer generateEnnemy(Player myPlayer) throws ReaderException {
         String[] possibleNames = {"Fanny", "Nathan", "Tifanie", "Daphne", "Florentin", "Maxime", "Erwan", "Marwane", "Aurelien", "Cyril", "Guillaume",
             "Morgan", "Corentin", "Elie", "Pierre", "Gwenael", "Dawen", "Line", "Ivan", "Clement", "Aurelie", "Estelle", "Sarah", "Eliot", "Dylan",
             "Evan", "Mathieu", "Leo", "Laurie", "Yoann", "Aymeric", "Paul", "Emmanuel", "Agathe", "Vincent", "Martin", "Julian", "Yassine", "Nicolas",
@@ -157,7 +150,7 @@ public class Dressor implements Savable<JsonObject> {
 
         int pokeDollars = (int) (Math.random() * 200 * nbOfPokemons);
 
-        return new Dressor(name, ennemyPkmns, pokeDollars);
+        return new Trainer(name, ennemyPkmns, pokeDollars);
     }
 
     @Override
@@ -180,7 +173,7 @@ public class Dressor implements Savable<JsonObject> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Dressor other = (Dressor) obj;
+        final Trainer other = (Trainer) obj;
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }

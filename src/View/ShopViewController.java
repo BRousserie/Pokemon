@@ -121,17 +121,22 @@ public class ShopViewController implements Initializable {
      */
     public int getItemQtt() throws Exception {
         String SQuantity = itemQuantity.getText();
-        if ("".equals(SQuantity)){
-            displayInfo.setText(displayInfo.getText() + "Entrez une valeur. \n");
+        if ("".equals(SQuantity)) {
+            displayInfo.setText(displayInfo.getText() + "Entrez une valeur.\n");
             return 0;
         }
-        int IQuantity = Integer.parseInt(SQuantity);
-        if (IQuantity < 0) {
-            displayInfo.setText(displayInfo.getText() + "Vous ne pouvez pas achetter une quantité négative. \n");
+        try {
+            int IQuantity = Integer.parseInt(SQuantity);
+            if (IQuantity < 0) {
+                displayInfo.setText(displayInfo.getText()
+                        + "Vous ne pouvez pas achetter une quantité négative.\n");
+                return 0;
+            } else {
+                return IQuantity;
+            }
+        } catch (NumberFormatException e) {
+            displayInfo.setText(displayInfo.getText() + "Veuillez entrer un nombre entre 0 et 99");
             return 0;
-        }
-        else {
-            return IQuantity;
         }
     }
 
@@ -143,10 +148,10 @@ public class ShopViewController implements Initializable {
      */
     public int getTotalPrice() throws Exception {
         int total;
-        total = (selectedItem != null) ? 
-                selectedItem.getBuyPrice() * getItemQtt()
+        total = (selectedItem != null)
+                ? selectedItem.getBuyPrice() * getItemQtt()
                 : 0;
-        totalPrice.setText(total+"");
+        totalPrice.setText(total + "");
         return total;
     }
 
@@ -159,10 +164,10 @@ public class ShopViewController implements Initializable {
         itemQuantity.setOnKeyReleased(event -> {
             try {
                 if (Integer.parseInt(itemQuantity.getText())
-                   + (myBag.contains(selectedItem.getName()) ?
-                        myBag.getItems().get(selectedItem) : 0)
+                        + (myBag.contains(selectedItem.getName())
+                        ? myBag.getItems().get(selectedItem) : 0)
                         > 99) {
-                    itemQuantity.setText(""+(99-myBag.getItems().get(selectedItem)));
+                    itemQuantity.setText("" + (99 - myBag.getItems().get(selectedItem)));
                 }
                 getTotalPrice();
             } catch (Exception ex) {
@@ -172,10 +177,10 @@ public class ShopViewController implements Initializable {
             try {
                 selectedItem = game.getDatas().getItem(itemChoice.getValue().toString());
                 if (Integer.parseInt(itemQuantity.getText())
-                   + (myBag.contains(selectedItem.getName()) ?
-                        myBag.getItems().get(selectedItem) : 0)
+                        + (myBag.contains(selectedItem.getName())
+                        ? myBag.getItems().get(selectedItem) : 0)
                         > 99) {
-                    itemQuantity.setText(""+(99-myBag.getItems().get(selectedItem)));
+                    itemQuantity.setText("" + (99 - myBag.getItems().get(selectedItem)));
                 }
                 getTotalPrice();
             } catch (Exception ex) {
@@ -190,23 +195,26 @@ public class ShopViewController implements Initializable {
      * @throws Exception
      */
     public void buy() throws Exception {
-        // Variables
-        String player = game.getPlayer().getName();
-        String description = selectedItem.getDescription();
-        int buyPrice = selectedItem.getBuyPrice();
-        // Exchange System
-        if (getTotalPrice() <= myBag.getPokeDollars()) {
-            myBag.exchangeMoney(-getTotalPrice());
-            displayMoney();
-            for (int i = 0; i < getItemQtt(); i++) {
-                myBag.addItem(selectedItem);
+        if (selectedItem != null && getItemQtt() > 0) {
+            // Variables
+            String player = game.getPlayer().getName();
+            String description = selectedItem.getDescription();
+            int buyPrice = selectedItem.getBuyPrice();
+            // Exchange System
+            if (getTotalPrice() <= myBag.getPokeDollars()) {
+                myBag.exchangeMoney(-getTotalPrice());
+                displayMoney();
+                for (int i = 0; i < getItemQtt(); i++) {
+                    myBag.addItem(selectedItem);
+                }
+                displayInfo.setText(displayInfo.getText() + "Tenez! Merci infiniment. \n"
+                        + player + " obtient : " + selectedItem.getName() + " x " + getItemQtt() + "\n");
+                displayInfo.setScrollLeft(displayInfo.getScrollLeft() + 1);
+                itemChoice.setValue(null);
+                selectedItem = null;
+            } else {
+                displayInfo.setText(displayInfo.getText() + "Oups vous n'avez pas assez d'argent. \n");
             }
-            displayInfo.setText(displayInfo.getText() + "Tenez! Merci infiniment. \n" 
-            + player + " obtient : " + selectedItem + " x " + getItemQtt() + "\n");
-            displayInfo.setScrollLeft(displayInfo.getScrollLeft()+1);
-            
-        } else {
-            displayInfo.setText(displayInfo.getText() + "Oups vous n'avez pas assez d'argent. \n");
         }
     }
 

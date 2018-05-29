@@ -10,8 +10,8 @@
  */
 package GameEngine;
 
-import Character.Dressor;
 import Character.Player;
+import Character.Trainer;
 import Fight.FightingPkmn;
 import FileIO.DataReader;
 import FileIO.ReaderException;
@@ -54,6 +54,7 @@ public class Game extends Application implements Savable<JsonObject> {
 
     /**
      * Sets the fight view
+     *
      * @param fight
      */
     public void setFight(Fight fight) {
@@ -71,6 +72,7 @@ public class Game extends Application implements Savable<JsonObject> {
 
     /**
      * Sets the senario of the game
+     *
      * @param scenario
      */
     public void setScenario(Scenario scenario) {
@@ -93,31 +95,43 @@ public class Game extends Application implements Savable<JsonObject> {
         return currentZone;
     }
 
+    public void setCurrentZone(Zone newZone) {
+        currentZone = newZone;
+        lookForScenarioEvent(newZone);
+    }
+
     /**
      * Moves the player
+     *
      * @param newZone
      * @throws ReaderException
      */
-    public void setCurrentZone(Zone newZone) throws ReaderException {
+    public void goToZone(Zone newZone) throws ReaderException {
         if (!possiblyLaunchFight()) {
-            if (datas.getScenario().size() > currentStoryEvent
-                    && datas.getScenario().get(currentStoryEvent).getEventZone()
-                            .equals(newZone.getName())) {
-                scenario = datas.getScenario().get(currentStoryEvent);
-                if (datas.getScenario().get(currentStoryEvent).isHasFXML()) {
-                    gameView.setScene(scenario.getEventFile());
-                } else {
-                    currentZone = newZone;
-                    pokemonMetInZone = 0;
-                    gameView.setScene("Scenario");
-                }
-                currentStoryEvent++;
-            } else {
+            if (!lookForScenarioEvent(newZone)) {
                 currentZone = newZone;
                 pokemonMetInZone = 0;
                 gameView.setScene("MainScreen");
             }
         }
+    }
+
+    private boolean lookForScenarioEvent(Zone newZone) {
+        if (datas.getScenario().size() > currentStoryEvent
+                && datas.getScenario().get(currentStoryEvent).getEventZone()
+                        .equals(newZone.getName())) {
+            scenario = datas.getScenario().get(currentStoryEvent);
+            if (datas.getScenario().get(currentStoryEvent).isHasFXML()) {
+                gameView.setScene(scenario.getEventFile());
+            } else {
+                currentZone = newZone;
+                pokemonMetInZone = 0;
+                gameView.setScene("Scenario");
+            }
+            currentStoryEvent++;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -135,7 +149,7 @@ public class Game extends Application implements Savable<JsonObject> {
             }
 
             setFight(new DressorFight(
-                    new Dressor(rivalName, currentPkmns,
+                    new Trainer(rivalName, currentPkmns,
                             Integer.parseInt(rivalStats[2]))));
         } catch (ReaderException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
@@ -208,9 +222,9 @@ public class Game extends Application implements Savable<JsonObject> {
      */
     public boolean possiblyLaunchFight() throws ReaderException {
         if (Math.random() * currentZone.getMeetingDressorProba() > 1) {
-            setFight(new DressorFight(Dressor.generateEnnemy(myPlayer)));
+            setFight(new DressorFight(Trainer.generateEnnemy(myPlayer)));
             return true;
-        } else if (pokemonMetInZone <= currentZone.getMeetingPkmnProba()
+        } else if (pokemonMetInZone < currentZone.getMeetingPkmnProba()
                 && Math.random() * currentZone.getMeetingPkmnProba() > 1) {
             pokemonMetInZone++;
             currentZone.searchWildPokemon();
@@ -231,7 +245,7 @@ public class Game extends Application implements Savable<JsonObject> {
     @Override
     public void start(final Stage primaryStage) {
         game = this;
-        
+
         gameView = new GameView(game, primaryStage);
         gameView.launch();
 
@@ -259,15 +273,15 @@ public class Game extends Application implements Savable<JsonObject> {
                 .add("currentZone", currentZone.getName())
                 .add("currentStoryEvent", currentStoryEvent);
     }
-    
+
     public boolean loadGame(JsonObject save) {
         try {
             myPlayer = new Player(save.get("myPlayer").asObject());
             rivalName = save.getString("rivalName", null);
             currentZone = datas.getLoadedZone(save.getString("currentZone", null));
             currentStoryEvent = save.getInt("currentStoryEvent", 0);
-            scenario = (datas.getScenario().size() > currentStoryEvent) ?
-                    datas.getScenario().get(currentStoryEvent)
+            scenario = (datas.getScenario().size() > currentStoryEvent)
+                    ? datas.getScenario().get(currentStoryEvent)
                     : null;
             return true;
         } catch (Exception e) {

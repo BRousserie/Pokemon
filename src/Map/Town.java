@@ -109,8 +109,4 @@ public class Town extends Zone {
             return null;
         }
     }
-
-    public void fightArena() {
-        System.out.println("not available yet");
-    }
 }
