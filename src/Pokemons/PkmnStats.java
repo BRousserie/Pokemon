@@ -20,6 +20,7 @@ import java.util.HashMap;
  */
 public class PkmnStats {
 
+    // <editor-fold defaultstate="collapsed" desc="Attributes">
     private static final ArrayList<String> POKEDEX = new ArrayList<>();
 
     private final String name;
@@ -28,8 +29,20 @@ public class PkmnStats {
     private final int captureRate;
     private final HashMap<String, Integer> attackLearningLevel;
     private final int[] EVReward;
-    private final int XPReward = 100; //TODO
+    private final int XPReward = 100;
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Contructor">
+    /**
+     * Constructor of the Class PkmnStats
+     *
+     * @param name
+     * @param type
+     * @param basicStats
+     * @param attackLearningLevel
+     * @param EVs
+     * @param captureRate
+     */
     public PkmnStats(String name, String type, int[] basicStats,
             HashMap<String, Integer> attackLearningLevel,
             HashMap<String, Integer> EVs, int captureRate) {
@@ -40,7 +53,17 @@ public class PkmnStats {
         this.attackLearningLevel = attackLearningLevel;
         EVReward = determinateEVs(EVs);
     }
-    
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Methods">
+    /**
+     *
+     * Load the stats from the file
+     *
+     * @param pkmnName
+     * @return a newPkmn
+     * @throws ReaderException
+     */
     public static PkmnStats loadPkmnStatsFromFile(String pkmnName) throws ReaderException {
         try {
             String[] pkmnLine = DataReader.readFileArray("pokemonStats", pkmnName);
@@ -56,11 +79,17 @@ public class PkmnStats {
             return newPkmn;
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Couldn't load "+pkmnName);
+            System.out.println("Couldn't load " + pkmnName);
             return null;
         }
     }
 
+    /**
+     * Determinates the EVs of the pokemon
+     *
+     * @param EVs
+     * @return EVReward 
+     */
     private static int[] determinateEVs(HashMap<String, Integer> EVs) {
         int[] EVRewards = {0, 0, 0, 0, 0};
         for (String stat : EVs.keySet()) {
@@ -84,63 +113,126 @@ public class PkmnStats {
         }
         return EVRewards;
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Getters / Setters">
+    /**
+     * Gets the list of all the pokemons
+     * @return POKEDEX
+     */
     public static ArrayList<String> getPOKEDEX() {
         return POKEDEX;
     }
 
+    /**
+     * Gets the level when a pokemon learns an attack
+     * @return the level
+     */
     public HashMap<String, Integer> getAttackLearningLevel() {
         return attackLearningLevel;
     }
 
+    /**
+     * Gets the pokemon ID
+     * @param pkmnName
+     * @return the index of the name 
+     */
     public static int getPkmnID(String pkmnName) {
         return POKEDEX.indexOf(pkmnName);
     }
 
+    /**
+     * Gets the pokemon name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the pokemon type
+     * @return type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Gets the pokemon's basic stats
+     * @return the basic stats
+     */
     public int[] getBasicStats() {
         return basicStats;
     }
 
+    /**
+     * gets the HP at the begining
+     * @return the HP
+     */
     public int getBasicHp() {
         return basicStats[0];
     }
 
+    /**
+     * Gets the basic attack
+     * @return the attack
+     */
     public int getBasicAtk() {
         return basicStats[1];
     }
 
+    /**
+     * Gets the basic defense
+     * @return the defense
+     */
     public int getBasicDef() {
         return basicStats[2];
     }
 
+    /**
+     * Gets the special 
+     * @return the special
+     */
     public int getBasicSpe() {
         return basicStats[3];
     }
 
+    /**
+     * Gets the basic speed
+     * @return speed
+     */
     public int getBasicSpeed() {
         return basicStats[4];
     }
 
+    /**
+     * Gets the capture rate of a pokemon
+     * @return captureRate
+     */
     public int getCaptureRate() {
         return captureRate;
     }
 
+    /**
+     * Gets the learnable attacks of a pokemon
+     * @return attackLearningLevel
+     */
     public HashMap<String, Integer> getLearnableAtks() {
         return attackLearningLevel;
     }
 
+    /**
+     * Gets the EV reward
+     * @return
+     */
     public int[] getEVReward() {
         return EVReward;
     }
 
+    /**
+     * Gets the experience curve
+     * @return XPReward
+     */
     public int getXPReward() {
         return XPReward;
     }
@@ -170,7 +262,12 @@ public class PkmnStats {
         }
     }
 
+    /**
+     * Gets a random pokemon
+     * @return a random pokemon
+     */
     public static String getRandomPkmn() {
         return POKEDEX.get((int) (POKEDEX.size() * Math.random()));
     }
+    // </editor-fold>
 }

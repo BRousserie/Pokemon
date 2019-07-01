@@ -14,14 +14,33 @@ import Fight.Status;
 import GameEngine.Game;
 import View.FightViewController;
 
+/**
+ *
+ * @author Baptiste
+ */
 public class Potion extends Item {
 
+    // <editor-fold defaultstate="collapsed" desc="Contructor">
+    /**
+     *
+     * Constructor of the Class Potion
+     *
+     * @param infos
+     */
     public Potion(String[] infos) {
         super(infos[0], infos[1], infos[2]);
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Methods">
+    /**
+     * Method to heal a pokemon with a potion
+     *
+     * @param pkmn
+     * @param view
+     */
     public void use(FightingPkmn pkmn, FightViewController view) {
-        if (description.contains("ranime") 
+        if (description.contains("ranime")
                 && pkmn.getPkmnStatus().equals(Status.KO)) {
             pkmn.setPkmnStatus(Status.OK);
         }
@@ -35,19 +54,22 @@ public class Potion extends Item {
                 pkmn.loseHp(-Integer.parseInt(description.substring(
                         description.indexOf("estaure") + 8,
                         description.indexOf("PV") - 1)));
-                
-                if(Game.getGame().getFight().getMyPkmn().getID() !=pkmn.getID()) {
+
+                if (Game.getGame().getFight().getMyPkmn().getID() != pkmn.getID()) {
                     view.showMessage(
-                        pkmn.getName()+" gagne "+(pkmn.getHp()-hpBefore)+" PV!",
-                        (e -> {view.secondAttack(view.randomAttack(), false);}), 2);
+                            pkmn.getName() + " gagne " + (pkmn.getHp() - hpBefore) + " PV!",
+                            (e -> {
+                                view.secondAttack(view.randomAttack(), false);
+                            }), 2);
                 } else {
                     view.showUpdateBarMessage(
-                        pkmn.getName()+" gagne "+(pkmn.getHp()-hpBefore)+" PV!",
-                        e -> view.secondAttack(view.randomAttack(), false),pkmn,
-                        view.myPkmnHP, view.calculateDuration(
-                                hpBefore, pkmn.getHp(), pkmn.getMaxHP()));
+                            pkmn.getName() + " gagne " + (pkmn.getHp() - hpBefore) + " PV!",
+                            e -> view.secondAttack(view.randomAttack(), false), pkmn,
+                            view.myPkmnHP, view.calculateDuration(
+                                    hpBefore, pkmn.getHp(), pkmn.getMaxHP()));
                 }
             }
         }
     }
+    // </editor-fold>
 }

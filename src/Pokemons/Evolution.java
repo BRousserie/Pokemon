@@ -19,7 +19,14 @@ public class Evolution {
 
     private final String name;
     private final String condition;
+    
+    // <editor-fold defaultstate="collapsed" desc="Contructor">
 
+    /**
+     * Constructor of the class Evolution
+     *
+     * @param evolution
+     */
     public Evolution(String evolution) {
         if (!evolution.equals("")) {
             int cut = evolution.indexOf("-");
@@ -30,29 +37,53 @@ public class Evolution {
             condition = "";
         }
     }
-    
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Method">
+    /**
+     * Sets the evolving conditions
+     *
+     * @param level
+     * @param item
+     * @return
+     */
     public String evolve(int level, Item item) {
-        if (name.equals("stop")) return "";
+        if (name.equals("stop")) {
+            return "";
+        }
         if (condition.contains("PIERRE")) {
             if (item.getName() == condition) {
                 return name;
-            } else
+            } else {
                 return "";
+            }
         } else {
             if (Integer.parseInt(condition) <= level) {
                 return name;
-            } else
+            } else {
                 return "";
+            }
         }
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Getters / Setters">
+    /**
+     * Gets the pokemon name
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the condition to evolve
+     *
+     * @return the condition
+     */
     public String getCondition() {
         return condition;
     }
-    
-    
+    // </editor-fold>
 }

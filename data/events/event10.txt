@@ -1,0 +1,7 @@
+show@rivalName: Yo noobie !
+showC'est gentil de venir me féliciter d'être devenu champion !
+showQuoi ? Tu veux qu'on s'batte pour avoir un Kébab ?
+showT'as oublié que j'te l'filais seulement si tu gagnais...
+showAllez, viens te battre, histoire de distraire un peu mon fanclub. J'ferai comme si le combat n'était pas gagné d'avance.
+fight@rival
+END

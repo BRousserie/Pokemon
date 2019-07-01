@@ -1,0 +1,5 @@
+show@rivalName: Hey noobie, t'as remarqué ?
+showLavanville est aussi vide que ta vie sentimentale !
+showAllez, viens là, minable !
+fight@rival
+END

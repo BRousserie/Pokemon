@@ -1,0 +1,5 @@
+show@rivalName: Alors noobie, c'est maintenant que t'arrives ? J'ai déjà fait sa fête à Ondine !
+showD'ailleurs, elle est nettement plus bonne que toi.
+showAllez, viens là, minable !
+fight@rival
+END

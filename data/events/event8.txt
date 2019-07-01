@@ -1,0 +1,6 @@
+show@rivalName: Salut mec !
+showJ'pense que tu vas écraser Morgane, elle ne va même pas t'atteindre !
+showElle utilise des Pokémon de type PSY, mais t'as pas d'âme.
+showAllez, viens là, minable !
+fight@rival
+END

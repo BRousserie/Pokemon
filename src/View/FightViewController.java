@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * <brousserie@iut.u-bordeaux.fr> and <tpedrero@iut.u-bordeaux.fr>
+ * wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy us a beer in return Baptiste and Tony
+ * ----------------------------------------------------------------------------
  */
 package View;
 
@@ -16,6 +20,9 @@ import Item.Potion;
 import Pokemons.CapturedPkmn;
 import Pokemons.PkmnType;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,89 +49,40 @@ import org.reactfx.util.FxTimer;
  *
  * @author tpedrero
  */
-public class FightViewController implements Initializable {
+public class FightViewController implements Initializable
+{
 
     // <editor-fold defaultstate="collapsed" desc="FXML elements">
     @FXML
-    private GridPane chooseTypeGrid;
+    private GridPane chooseTypeGrid, chooseAtkGrid, choosePkmnGrid,
+            itemsContainer, attackNotifierBack;
     @FXML
-    private GridPane chooseAtkGrid;
+    private Label myPkmnName, enmyPkmnName, myPkmnLvl,
+            enmyPkmnLvl, myPkmnHealth, playerName,
+            pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6, message;
+
+    /**
+     *
+     */
     @FXML
-    private GridPane choosePkmnGrid;
+    public ProgressBar myPkmnHP,
+            /**
+             *
+             */
+            enmyPkmnHP,
+            /**
+             *
+             */
+            myPkmnXP;
     @FXML
-    private Button cancelTypeChoice;
+    private Circle myHead, enmyHead;
     @FXML
-    private Label myPkmnName;
+    private Arc myCorpse, enmyCorpse;
     @FXML
-    private Label enmyPkmnName;
-    @FXML
-    private Label myPkmnLvl;
-    @FXML
-    private Label enmyPkmnLvl;
-    @FXML
-    private Label myPkmnHealth;
-    @FXML
-    public ProgressBar myPkmnHP;
-    @FXML
-    public ProgressBar enmyPkmnHP;
-    @FXML
-    private ProgressBar myPkmnXP;
-    @FXML
-    private Circle myHead;
-    @FXML
-    private Circle enmyHead;
-    @FXML
-    private Arc myCorpse;
-    @FXML
-    private Arc enmyCorpse;
-    @FXML
-    private Button selectAttack;
-    @FXML
-    private Button selectPokemon;
-    @FXML
-    private Button selectItem;
-    @FXML
-    private Button fleeFromFight;
-    @FXML
-    private GridPane itemsContainer;
-    @FXML
-    private Button atk1;
-    @FXML
-    private Button atk2;
-    @FXML
-    private Button atk3;
-    @FXML
-    private Button atk4;
-    @FXML
-    private Button pkmn1;
-    @FXML
-    private Button pkmn2;
-    @FXML
-    private Button pkmn3;
-    @FXML
-    private Button pkmn4;
-    @FXML
-    private Button pkmn5;
-    @FXML
-    private Button pkmn6;
-    @FXML
-    private Label playerName;
-    @FXML
-    private Label pokemon1;
-    @FXML
-    private Label pokemon2;
-    @FXML
-    private Label pokemon3;
-    @FXML
-    private Label pokemon4;
-    @FXML
-    private Label pokemon5;
-    @FXML
-    private Label pokemon6;
-    @FXML
-    private Label message;
-    @FXML
-    private GridPane attackNotifierBack;
+    private Button cancelTypeChoice, selectAttack, selectPokemon, selectItem,
+            fleeFromFight, atk1, atk2, atk3, atk4,
+            pkmn1, pkmn2, pkmn3, pkmn4, pkmn5, pkmn6;
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Variables">
     private final Game game = Game.getGame();
@@ -138,7 +96,8 @@ public class FightViewController implements Initializable {
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Initialization methods">
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         playerName.setText(game.getPlayer().getName());
         game.getGameView().setPkmnLabel(pokemon1, 0);
         game.getGameView().setPkmnLabel(pokemon2, 1);
@@ -152,10 +111,11 @@ public class FightViewController implements Initializable {
         setEnmyPkmnInfos();
         initializeButtons();
         initializeTimeLines();
-        showChooseTypeGrid();
+        showMessage(fight.getStartingMessage(), e -> showChooseTypeGrid(), 1);
     }
 
-    private void refresh() {
+    private void refresh()
+    {
         game.getGameView().setPkmnLabel(pokemon1, 0);
         game.getGameView().setPkmnLabel(pokemon2, 1);
         game.getGameView().setPkmnLabel(pokemon3, 2);
@@ -169,7 +129,8 @@ public class FightViewController implements Initializable {
     }
 
     // <editor-fold defaultstate="collapsed" desc="Buttons Initialization">
-    private void initializeButtons() {
+    private void initializeButtons()
+    {
         selectAttack.setOnMouseClicked(e -> showChooseAtkGrid());
         selectPokemon.setOnMouseClicked(e -> showChoosePkmnGrid());
         selectItem.setOnMouseClicked(e -> showChooseItemGrid());
@@ -179,14 +140,16 @@ public class FightViewController implements Initializable {
         initializePkmnsButtonsChangePkmn();
     }
 
-    private void initializeAtkButtons() {
+    private void initializeAtkButtons()
+    {
         setAtkButton(atk1, 0);
         setAtkButton(atk2, 1);
         setAtkButton(atk3, 2);
         setAtkButton(atk4, 3);
     }
 
-    private void initializePkmnsButtonsChangePkmn() {
+    private void initializePkmnsButtonsChangePkmn()
+    {
         setPkmnButtonChangePkmn(pkmn1, 0);
         setPkmnButtonChangePkmn(pkmn2, 1);
         setPkmnButtonChangePkmn(pkmn3, 2);
@@ -195,7 +158,8 @@ public class FightViewController implements Initializable {
         setPkmnButtonChangePkmn(pkmn6, 5);
     }
 
-    private void initializePkmnsButtonsUseItem(Potion p) {
+    private void initializePkmnsButtonsUseItem(Potion p)
+    {
         setPkmnButtonUseItem(pkmn1, 0, p);
         setPkmnButtonUseItem(pkmn2, 1, p);
         setPkmnButtonUseItem(pkmn3, 2, p);
@@ -204,20 +168,21 @@ public class FightViewController implements Initializable {
         setPkmnButtonUseItem(pkmn6, 5, p);
     }
 
-    private void setAtkButton(Button attackButton, int attackIndex) {
-        try {
-            Attack attack = fight.getMyPkmn()
-                    .getAttacks()[attackIndex];
+    private void setAtkButton(Button attackButton, int attackIndex)
+    {
+        if (fight.getMyPkmn().getAttacks().size() > attackIndex) {
+            Attack attack = fight.getMyPkmn().getAttacks().get(attackIndex);
             attackButton.setText(attack.getName() + "\n"
-                    + attack.getPP() + "/" + attack.getPPMAX());
+                                 + attack.getPP() + "/" + attack.getPPMAX());
             attackButton.setOnMouseClicked(e -> doAttack(attack));
-        } catch (Exception e) {
+        } else {
             attackButton.setText("");
             attackButton.setDisable(true);
         }
     }
 
-    private void setPkmnButtonChangePkmn(Button pkmnButton, int pkmnIndex) {
+    private void setPkmnButtonChangePkmn(Button pkmnButton, int pkmnIndex)
+    {
         try {
             CapturedPkmn pkmn = game.getPlayer().getCapturedCurrentPkmns().get(pkmnIndex);
             pkmnButton.setText(pkmn.toString());
@@ -227,7 +192,8 @@ public class FightViewController implements Initializable {
         }
     }
 
-    private void setPkmnButtonUseItem(Button pkmnButton, int pkmnIndex, Potion p) {
+    private void setPkmnButtonUseItem(Button pkmnButton, int pkmnIndex, Potion p)
+    {
         try {
             CapturedPkmn pkmn = game.getPlayer().getCapturedCurrentPkmns().get(pkmnIndex);
             pkmnButton.setText(pkmn.toString());
@@ -239,7 +205,8 @@ public class FightViewController implements Initializable {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Labels Initialization">
-    private void setMyPkmnInfos() {
+    private void setMyPkmnInfos()
+    {
         myPkmnName.setText(fight.getMyPkmn().getName());
         myPkmnLvl.setText("Niv. " + fight.getMyPkmn().getLevel());
         setMyPkmnHealth();
@@ -249,7 +216,8 @@ public class FightViewController implements Initializable {
         myCorpse.setStyle(fillByMyColor);
     }
 
-    private void setEnmyPkmnInfos() {
+    private void setEnmyPkmnInfos()
+    {
         enmyPkmnName.setText(fight.getEnnemy().getName());
         enmyPkmnLvl.setText("Niv. " + fight.getEnnemy().getLevel());
         setEnmyPkmnHealth();
@@ -258,28 +226,32 @@ public class FightViewController implements Initializable {
         enmyCorpse.setStyle(fillByEnmyColor);
     }
 
-    private void setMyPkmnHealth() {
+    private void setMyPkmnHealth()
+    {
         myPkmnHealth.setText(fight.getMyPkmn().getHp()
-                + "/" + fight.getMyPkmn().getMaxHP());
+                             + "/" + fight.getMyPkmn().getMaxHP());
         myPkmnHP.progressProperty().addListener(c
                 -> myPkmnHP.setStyle(setBarColor(myPkmnHP.getProgress())));
         myPkmnHP.setProgress(getPkmnHealthPercentage(fight.getMyPkmn()));
     }
 
-    private void setEnmyPkmnHealth() {
+    private void setEnmyPkmnHealth()
+    {
         enmyPkmnHP.progressProperty().addListener(c
                 -> enmyPkmnHP.setStyle(setBarColor(enmyPkmnHP.getProgress())));
         enmyPkmnHP.setProgress(getPkmnHealthPercentage(fight.getEnnemy()));
     }
 
-    private void setMyPkmnXP() {
+    private void setMyPkmnXP()
+    {
         myPkmnXP.setProgress((float) fight.getMyPkmn().getExp()
-                / (float) fight.getMyPkmn().getLevelUpXP());
+                             / (float) fight.getMyPkmn().getLevelUpXP());
     }
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Animations Initialization">
-    private void initializeTimeLines() {
+    private void initializeTimeLines()
+    {
         KeyValue showMessage = new KeyValue(
                 message.opacityProperty(), 1, Interpolator.EASE_OUT);
         KeyFrame showAttackmessage = new KeyFrame(Duration.seconds(1), showMessage);
@@ -293,37 +265,40 @@ public class FightViewController implements Initializable {
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Initialization Methods">
-    private double getPkmnHealthPercentage(FightingPkmn pkmn) {
+    private double getPkmnHealthPercentage(FightingPkmn pkmn)
+    {
         return (double) pkmn.getHp() / (double) pkmn.getMaxHP();
     }
 
-    private String setBarColor(double pkmnHealth) {
+    private String setBarColor(double pkmnHealth)
+    {
         return (pkmnHealth > 0.4) ? "-fx-accent: green;"
-                : (pkmnHealth > 0.1) ? "-fx-accent: orange;"
-                        : "-fx-accent: red;";
+               : (pkmnHealth > 0.1) ? "-fx-accent: orange;"
+                 : "-fx-accent: red;";
     }
 
-    private String setShapeColor(String pkmnType) {
+    private String setShapeColor(String pkmnType)
+    {
         String[] colors = {"#d9d9d9", "#cc0000", "#007acc",
-            "#e6e600", "#00cc00", "#80ffff", "#800000", "#6600cc", "#bb9900",
-            "#99ccff", "#ff33cc", "#ccff66", "#996633", "#333399", "#2200c0"};
-        if (!pkmnType.contains("-")) {
-            return colors[PkmnType.indexOf(PkmnType.getType(pkmnType))];
-        } else {
+                           "#e6e600", "#00cc00", "#80ffff", "#800000", "#6600cc", "#bb9900",
+                           "#99ccff", "#ff33cc", "#ccff66", "#996633", "#333399", "#2200c0"};
+        if (!pkmnType.contains("-"))
+            return colors[PkmnType.indexOf(PkmnType.getType(pkmnType)) - 1];
+        else
             return "linear-gradient(to right, "
-                    + setShapeColor(pkmnType
+                   + setShapeColor(pkmnType
                             .substring(0, pkmnType.indexOf("-")))
-                    + " 30%, "
-                    + setShapeColor(pkmnType
+                   + " 30%, "
+                   + setShapeColor(pkmnType
                             .substring(pkmnType.indexOf("-") + 1))
-                    + " 70%)";
-        }
+                   + " 70%)";
     }
 
     // </editor-fold>
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Managing visibility">
-    private void showChooseTypeGrid() {
+    private void showChooseTypeGrid()
+    {
         refresh();
         hide(cancelTypeChoice);
         hide(chooseAtkGrid);
@@ -336,37 +311,52 @@ public class FightViewController implements Initializable {
         }
     }
 
-    private void showChooseAtkGrid() {
+    private void showChooseAtkGrid()
+    {
         show(cancelTypeChoice);
         show(chooseAtkGrid);
         hide(chooseTypeGrid);
     }
 
-    private void showChoosePkmnGrid() {
+    private void showChoosePkmnGrid()
+    {
         show(cancelTypeChoice);
         show(choosePkmnGrid);
         hide(chooseTypeGrid);
     }
 
-    private void showChooseItemGrid() {
+    private void showChooseItemGrid()
+    {
         show(cancelTypeChoice);
         show(itemsContainer);
         hide(chooseTypeGrid);
         itemsContainer.getChildren().clear();
         row = 0;
         col = 0;
-        fight.getMe().getBag().getItemsOfType(Ball.class).forEach(e -> {
-            addItemsToGrid((Item) e);
+        Map<Item, Long> groupedBag = fight.getMe().getBag().regroup();
+        groupedBag.keySet().stream()
+                .filter(i -> i.getClass().equals(Ball.class)).forEach(i -> {
+            addItemsToGrid((Item) i, (int) (long) groupedBag.get(i));
         });
         row = 0;
         col = 1;
-        fight.getMe().getBag().getItemsOfType(Potion.class).forEach(e -> {
-            addItemsToGrid((Item) e);
+        groupedBag.keySet().stream()
+                .filter(i -> i.getClass().equals(Potion.class)).forEach(i -> {
+            addItemsToGrid((Item) i, (int) (long) groupedBag.get(i));
         });
     }
 
+    /**
+     *
+     * @param output
+     * @param nextStep
+     * @param pkmn
+     * @param bar
+     * @param duration
+     */
     public void showUpdateBarMessage(String output, EventHandler nextStep,
-            FightingPkmn pkmn, ProgressBar bar, double duration) {
+                                     FightingPkmn pkmn, ProgressBar bar, double duration)
+    {
         hide(chooseAtkGrid);
         hide(chooseTypeGrid);
         hide(choosePkmnGrid);
@@ -374,20 +364,20 @@ public class FightViewController implements Initializable {
         hide(cancelTypeChoice);
         message.setText(output);
         KeyValue progress = new KeyValue(bar.progressProperty(),
-                getPkmnHealthPercentage(pkmn));
+                                         getPkmnHealthPercentage(pkmn));
         KeyFrame updateBar = new KeyFrame(Duration.seconds(duration), progress);
         healthBarUpdates.getKeyFrames().add(updateBar);
 
         messageAppear.playFromStart();
         messageAppear.setOnFinished(e -> healthBarUpdates.playFromStart());
         healthBarUpdates.setOnFinished(e -> {
-            if (fight.getEnnemy().getHp() == 0) {
+            if (fight.getEnnemy().getHp() == 0)
                 showMessage(fight.getEnnemy().getName() + " est K.O. !",
-                        whenShown -> lookForWinner(true), 1);
-            } else if (fight.getMyPkmn().getHp() == 0) {
+                            whenShown -> lookForWinner(true), 1);
+            else if (fight.getMyPkmn().getHp() == 0)
                 showMessage(fight.getMyPkmn().getName() + " est K.O. !",
-                        whenShown -> lookForWinner(false), 1);
-            } else {
+                            whenShown -> lookForWinner(false), 1);
+            else {
                 messageDisappear.playFromStart();
                 healthBarUpdates.getKeyFrames().remove(updateBar);
             }
@@ -395,7 +385,14 @@ public class FightViewController implements Initializable {
         messageDisappear.setOnFinished(nextStep);
     }
 
-    public void showMessage(String output, EventHandler nextStep, int delay) {
+    /**
+     *
+     * @param output
+     * @param nextStep
+     * @param delay
+     */
+    public void showMessage(String output, EventHandler nextStep, int delay)
+    {
         hide(chooseTypeGrid);
         hide(chooseAtkGrid);
         hide(choosePkmnGrid);
@@ -406,7 +403,7 @@ public class FightViewController implements Initializable {
         messageAppear.playFromStart();
         messageAppear.setOnFinished(e
                 -> FxTimer.runLater(java.time.Duration.ofSeconds(delay),
-                        () -> messageDisappear.playFromStart()));
+                                    () -> messageDisappear.playFromStart()));
         messageDisappear.setOnFinished(nextStep);
     }
 
@@ -422,132 +419,149 @@ public class FightViewController implements Initializable {
 //        messageAppear.setOnFinished(e -> messageDisappear.playFromStart());
 //        messageDisappear.setOnFinished(nextStep);
 //    }
-    private void chooseRandomEnnemy() {
+    private void chooseRandomEnnemy()
+    {
         fight.setEnnemy(fight.getEnnemyPkmns().stream()
                 .filter(e -> e.getHp() > 0)
                 .findAny());
     }
 
-    private void hide(Node n) {
+    private void hide(Node n)
+    {
         n.setVisible(false);
         n.setDisable(true);
     }
 
-    private void show(Node n) {
+    private void show(Node n)
+    {
         n.setVisible(true);
         n.setDisable(false);
     }
 
-    public double calculateDuration(int before, int after, int max) {
+    /**
+     *
+     * @param before
+     * @param after
+     * @param max
+     * @return
+     */
+    public double calculateDuration(int before, int after, int max)
+    {
         return (before > after)
-                ? (double) 5 * (before - after) / max + 1
-                : (double) 5 * (after - before) / max + 1;
+               ? (double) 5 * (before - after) / max + 1
+               : (double) 5 * (after - before) / max + 1;
     }
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Actions">
-    private void flee() {
-        if (fight.getClass().toString().contains("Dressor")) {
+    private void flee()
+    {
+        if (fight.getClass().toString().contains("Dressor"))
             showMessage("On ne peut pas s'enfuir d'un combat de dresseurs !",
-                    e -> showChooseTypeGrid(), 1);
-        } else if (fight.fleeSucceeds()) {
+                        e -> showChooseTypeGrid(), 1);
+        else if (fight.fleeSucceeds())
             showMessage("Vous prenez la fuite !",
-                    e -> game.getGameView().setScene("MainScreen"), 1);
-        } else {
+                        e -> game.getGameView().setScene("MainScreen"), 1);
+        else
             showMessage("Impossible de fuir !",
-                    e -> fight.useAttack(randomAttack(), false, this,
-                            then -> this.showChooseTypeGrid()), 1);
-        }
+                        e -> fight.useAttack(randomAttack(), false, this,
+                                             then -> this.showChooseTypeGrid()), 1);
     }
 
-    private void choosePokemon(CapturedPkmn newPkmn) {
+    private void choosePokemon(CapturedPkmn newPkmn)
+    {
         if (!newPkmn.equals(fight.getMyPkmn())) {
             showMessage(fight.getMyPkmn().getName() + ", reviens !!\n"
-                    + "A toi, " + newPkmn.getName(),
-                    e -> fight.useAttack(randomAttack(), false, this,
-                            then -> this.showChooseTypeGrid()), 2);
+                        + "A toi, " + newPkmn.getName(),
+                        e -> fight.useAttack(randomAttack(), false, this,
+                                             then -> this.showChooseTypeGrid()), 2);
+            fight.getMyPkmn().clearVariations();
             fight.setMyPkmn(newPkmn);
             game.getPlayer().swapPokemon(newPkmn);
             refresh();
         }
     }
 
-    private void doAttack(Attack attack) {
+    private void doAttack(Attack attack)
+    {
         Attack ennemyAtk = randomAttack();
-        if (fight.getMyPkmn().getSpeed() > fight.getEnnemy().getSpeed()) {
+        if (fight.getMyPkmn().getSpeed() > fight.getEnnemy().getSpeed())
             fight.useAttack(attack, true, this, e -> secondAttack(ennemyAtk, false));
-        } else {
+        else
             fight.useAttack(ennemyAtk, false, this, e -> secondAttack(attack, true));
-        }
     }
 
-    public void secondAttack(Attack attack, boolean myPkmn) {
+    /**
+     *
+     * @param attack
+     * @param myPkmn
+     */
+    public void secondAttack(Attack attack, boolean myPkmn)
+    {
         FightingPkmn attacker = (myPkmn) ? fight.getMyPkmn() : fight.getEnnemy();
-        if (attacker.getHp() > 0) {
+        if (attacker.getHp() > 0)
             fight.useAttack(attack, myPkmn, this, e -> showChooseTypeGrid());
-        }
     }
 
     /**
      * Used for the ennemy to attack randomly since we don't have actual IA yet
+     *
+     * @return
      */
-    public Attack randomAttack() {
-        try {
-            Attack a = fight.getEnnemy().getAttacks()[(int) (Math.random() * 4)];
-            a.getName(); //permits to throw nullpointer while the attack slot is empty
-            return a;
-        } catch (NullPointerException e) {
-            return randomAttack();
-        }
+    public Attack randomAttack()
+    {
+        List<Attack> attacks =  fight.getEnnemy().getAttacks();
+        Attack a = attacks.get(new Random().nextInt(attacks.size()));
+        return a;
     }
 
     /**
      * Algorithm to choose the action the IA should do Returns numbers
      * corresponding to the choices made Real algorithm will only be implemented
      * in the final version of the program
+     *
+     * @return
      */
-    public Attack chooseEnnemyAction() {
+    public Attack chooseEnnemyAction()
+    {
         //TODO check if enmy pokemon is weak to my type, changes pokemons if
         //he has a more resistant pokemon to my attacks type
         return randomAttack();
     }
 
-    private void lookForWinner(boolean ennemyDown) {
+    private void lookForWinner(boolean ennemyDown)
+    {
         fight.checkIfHasAWinner(ennemyDown);
         if (!fight.hasWinner()) {
-            if (ennemyDown) {
+            if (ennemyDown)
                 chooseRandomEnnemy();
-            }
         } else {
-            if (Game.getGame().getScenario() != null) {
-                if (Game.getGame().getScenario().Instructions().next().equals("heal")) {
+            if (Game.getGame().getScenario() != null)
+                if (Game.getGame().getScenario().Instructions().next().equals("heal"))
                     Game.getGame().getPlayer().healPokemon();
-                }
-            }
-            if (ennemyDown) {
+            if (ennemyDown)
                 showMessage(fight.getMe().getName() + " a gagné !",
-                    e -> {
-                        game.getGameView().setScene("MainScreen");
-                    }, 1);
-            } else {
+                            e -> {
+                                game.getGameView().setScene("MainScreen");
+                            }, 1);
+            else
                 showMessage(fight.getMe().getName() + " n'a plus de POKéMON !\n"
-                    + fight.getMe().getName() + " est Hors-Jeu !",
-                    e -> {
-                        game.setCurrentZone(fight.getMe().getLastPokeCenter());
-                        fight.getMe().healPokemon();
-                        fight.getMe().getBag().exchangeMoney(
-                                -fight.getMe().getBag().getPokeDollars()/2);
-                        game.getGameView().setScene("MainScreen");
-                    }, 1);
-            }
-           
+                            + fight.getMe().getName() + " est Hors-Jeu !",
+                            e -> {
+                                game.setCurrentZone(fight.getMe().getLastPokeCenter());
+                                fight.getMe().healPokemon();
+                                fight.getMe().getBag().exchangeMoney(
+                                        -fight.getMe().getBag().getPokeDollars() / 2);
+                                game.getGameView().setScene("MainScreen");
+                            }, 1);
+
         }
     }
     // </editor-fold>
 
-    private void addItemsToGrid(Item item) {
-        Button useItem = new Button(item.getName() + "   "
-                + fight.getMe().getBag().getItems().get(item) + "x");
+    private void addItemsToGrid(Item item, int amount)
+    {
+        Button useItem = new Button(item.getName() + "   " + amount + "x");
         useItem.setOnMouseClicked(e -> this.useItem(item));
         useItem.setPrefWidth(235);
         useItem.setAlignment(Pos.CENTER_LEFT);
@@ -561,43 +575,44 @@ public class FightViewController implements Initializable {
         }
     }
 
-    private void useItem(Item item) {
-        fight.getMe().getBag().decrement(item);
-        if (item.getClass().equals(Ball.class)) {
-            if (fight.getClass().toString().contains("Dressor")) {
+    private void useItem(Item item)
+    {
+        fight.getMe().getBag().remove(item);
+        if (item.getClass().equals(Ball.class))
+            if (fight.getClass().toString().contains("Dressor"))
                 showMessage("Le dresseur dévie la BALL! Voler, c'est mal!", e -> secondAttack(randomAttack(), false), 1);
-            } else {
+            else
                 showMessage(fight.getMe().getName() + " utilise: " + item.getName(), e -> useBall((Ball) item), 1);
-            }
-        } else {
+        else
             choosePkmn((Potion) item);
-        }
     }
 
-    private void useBall(Ball ball) {
+    private void useBall(Ball ball)
+    {
         switch (ball.use(fight.getEnnemy())) {
             case 0:
                 showMessage("La balle a râté le Pokémon!",
-                        e -> secondAttack(randomAttack(), false), 1);
+                            e -> secondAttack(randomAttack(), false), 1);
             case 1:
                 showMessage("Zut de flûte! Il s'est libéré!",
-                        e -> secondAttack(randomAttack(), false), 1);
+                            e -> secondAttack(randomAttack(), false), 1);
             case 2:
                 showMessage("Ah! Il avait l'air d'être pris!",
-                        e -> secondAttack(randomAttack(), false), 1);
+                            e -> secondAttack(randomAttack(), false), 1);
             case 3:
                 showMessage("Oh! Presque!",
-                        e -> secondAttack(randomAttack(), false), 1);
+                            e -> secondAttack(randomAttack(), false), 1);
             case 4:
                 showMessage("Top cool! " + fight.getEnnemy().getName() + " est capturé!",
-                        e -> {
-                            capturePkmn();
-                            game.getGameView().setScene("MainScreen");
-                        }, 2);
+                            e -> {
+                                capturePkmn();
+                                game.getGameView().setScene("MainScreen");
+                            }, 2);
         }
     }
 
-    private void capturePkmn() {
+    private void capturePkmn()
+    {
         try {
             fight.getMe().addNewPokemon(fight.getEnnemy());
         } catch (ReaderException ex) {
@@ -605,7 +620,8 @@ public class FightViewController implements Initializable {
         }
     }
 
-    private void choosePkmn(Potion p) {
+    private void choosePkmn(Potion p)
+    {
         hide(itemsContainer);
         initializePkmnsButtonsUseItem(p);
         showChoosePkmnGrid();

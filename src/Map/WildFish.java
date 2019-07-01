@@ -10,11 +10,17 @@ package Map;
  * @author Baptiste
  */
 public class WildFish extends WildPkmn {
+
     private String canne;
 
+    /**
+     * Contructor for the Class WildFish
+     *
+     * @param pkmnInfo
+     * @param canne
+     */
     public WildFish(String pkmnInfo, String canne) {
         super(pkmnInfo);
         this.canne = canne;
     }
 }
-

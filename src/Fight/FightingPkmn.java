@@ -17,41 +17,76 @@ import Pokemons.PkmnStats;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Class allowing to create ready to fight pokemons
- *
- * @param pokemon : name of the pokemon in the pokedex - Pokemons can't have
- * surname in this game
- * @param level : urrent level
- * @param exp : current experience points, at his current level
- * @param levelUpXP : experience points needed to level up, at his current level
- * @param maxHP : maximum amount of HealthPoints, at his current level
- * @param atk : attack points
- * @param def : defense points
- * @param spe : special points
- * @param speed : speed points
- * @param hp : current amount of HealthPoints
- * @param attacks : attacks the pokemon is able to use
- * @param pkmnStatus : tells if the pokemon is paralysed, poisoned, burned...
+ * Class allowing to create ready to fight Pokemon
  */
-public class FightingPkmn implements Savable<JsonObject> {
-
+public class FightingPkmn implements Savable<JsonObject>
+{
+    // <editor-fold defaultstate="collapsed" desc="Attributes">
+    /**
+     * Number of the Pokemon
+     */
     protected int ID;
-    protected PkmnStats pkmnSpecies;
-    protected int level;
-    protected int[] IVs = new int[5];
-    protected int[] EVs = {0, 0, 0, 0, 0};
-    protected int[] stats = new int[5];
-    protected int[] statsVariations = {0, 0, 0, 0, 0};
-    protected Attack[] attacks = new Attack[4];
-    protected Status pkmnStatus = null;
 
-    public FightingPkmn(String name, int level, int ID) {
+    /**
+     * Species of the Pokemon, which provides his basic statistics
+     */
+    protected PkmnStats pkmnSpecies;
+
+    /**
+     * Level of the Pokemon
+     */
+    protected int level;
+
+    /**
+     * Random numbers that are going to give unique statistics to each Pokemon
+     */
+    protected int[] IVs = new int[5];
+
+    /**
+     * Points earned by defeating others Pokmon. They improve Pokemon's stats
+     */
+    protected int[] EVs = {0, 0, 0, 0, 0};
+
+    /**
+     * The global stats of the Pokemon, in order hp/atk/def/spe/speed
+     */
+    protected int[] stats = new int[5];
+
+    /**
+     * Variations applied to Pokemon's stats. They are temporary.
+     */
+    protected int[] statsVariations = {0, 0, 0, 0, 0};
+
+    /**
+     * List of attacks the Pokemon can use
+     */
+    protected Attack[] attacks = new Attack[4];
+
+    /**
+     * Status of the Pokmon -not implemented yet
+     */
+    protected Status pkmnStatus = null;
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Constructors">
+    /**
+     * Constructor for Trainer's fighting Pokemon
+     * 
+     * @param name Pokemon's name
+     * @param level Pokemon's level
+     * @param ID Pokemon's ID
+     */
+    public FightingPkmn(String name, int level, int ID)
+    {
 
         try {
             pkmnSpecies = Game.getGame().getDatas().getLoadedPkmn(name);
@@ -69,46 +104,41 @@ public class FightingPkmn implements Savable<JsonObject> {
         this.pkmnStatus = Status.OK;
     }
 
-    public FightingPkmn(String name, int level, int ID, int[] IV, int[] EV, ArrayList<Attack> attacks) {
-        try {
-            pkmnSpecies = Game.getGame().getDatas().getLoadedPkmn(name);
-        } catch (ReaderException ex) {
-            Logger.getLogger(FightingPkmn.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        this.level = level;
-        this.ID = ID;
-        this.IVs = IV;
-        this.EVs = EV;
-        for (Attack atk : attacks) {
-            this.attacks[attacks.indexOf(atk)] = atk;
-        }
-        this.pkmnStatus = Status.OK;
-    }
-
-    public FightingPkmn(WildPkmn pkmn) {
+    /**
+     * Constructor for wild fighting Pokemon
+     * 
+     * @param pkmn Wild Pokemon's stats
+     */
+    public FightingPkmn(WildPkmn pkmn)
+    {
         try {
             pkmnSpecies = Game.getGame().getDatas().getLoadedPkmn(pkmn.getName());
         } catch (ReaderException ex) {
         }
-        if (pkmn.getLevel().length == 1) {
+        if (pkmn.getLevel().length == 1)
             this.level = pkmn.getLevel()[0];
-        } else {
-            this.level = pkmn.getLevel()[0] + 
-                    (int)(Math.random()*(pkmn.getLevel()[0]-pkmn.getLevel()[1]));
-        }
+        else
+            this.level = pkmn.getLevel()[0]
+                         + (int) (Math.random() * (pkmn.getLevel()[0] - pkmn.getLevel()[1]));
         this.ID = 0;
         determinateIVs();
         determinateStats();
         try {
             determinateAttacks();
         } catch (ReaderException ex) {
+            Logger.getLogger(FightingPkmn.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.pkmnStatus = Status.OK;
 
     }
 
-    public FightingPkmn(FightingPkmn capturedWildPkmn) {
+    /**
+     * Constructor for FightingPokemon that you've captured
+     * 
+     * @param capturedWildPkmn Pokemon you've captured
+     */
+    public FightingPkmn(FightingPkmn capturedWildPkmn)
+    {
         ID = Game.getGame().getPlayer().getMyPokemons().size();
         pkmnSpecies = capturedWildPkmn.pkmnSpecies;
         level = capturedWildPkmn.level;
@@ -120,15 +150,22 @@ public class FightingPkmn implements Savable<JsonObject> {
         pkmnStatus = capturedWildPkmn.pkmnStatus;
     }
 
-    public FightingPkmn(JsonObject pokemon) throws ReaderException {
+    /**
+     * Constructor for previously saved Pokemon
+     * 
+     * @param pokemon the Pokemon saved
+     * @throws ReaderException 
+     */
+    public FightingPkmn(JsonObject pokemon)
+    {
         ID = pokemon.getInt("ID", 0);
-        
+
         try {
             pkmnSpecies = Game.getGame().getDatas()
                     .getLoadedPkmn(pokemon.getString("name", null));
         } catch (ReaderException ex) {
         }
-        
+
         level = pokemon.getInt("level", 0);
         IVs[0] = pokemon.getInt("IVhp", 0);
         IVs[1] = pokemon.getInt("IVatk", 0);
@@ -141,61 +178,28 @@ public class FightingPkmn implements Savable<JsonObject> {
         EVs[3] = pokemon.getInt("EVspe", 0);
         EVs[4] = pokemon.getInt("EVspeed", 0);
         statsVariations[0] = pokemon.getInt("hpLost", 0);
-        for (int i = 1; i < 5; i++) statsVariations[i] = 0;
+        for (int i = 1; i < 5; i++)
+            statsVariations[i] = 0;
         determinateStats();
         pkmnStatus = Status.valueOf(pokemon.getString("pkmnStatus", null));
         int iterator = 0;
         for (JsonValue attack : pokemon.get("attacks").asArray()) {
-            this.attacks[iterator] = Game.getGame().getDatas().getLoadedAtk(attack.asString());
+            try {
+                this.attacks[iterator] = Game.getGame().getDatas().getLoadedAtk(attack.asString());
+            } catch (ReaderException ex) {
+                Logger.getLogger(FightingPkmn.class.getName()).log(Level.SEVERE, null, ex);
+            }
             iterator++;
         }
     }
-
-    protected void doEvolve(String evolution) throws ReaderException {
-        try {
-            pkmnSpecies = Game.getGame().getDatas().getLoadedPkmn(evolution);
-            if (pkmnSpecies == null) {
-                pkmnSpecies = PkmnStats.loadPkmnStatsFromFile(evolution);
-            }
-            determinateStats();
-            determinateAttacks();
-        } catch(Exception e) {};
-    }
-
-    private void determinateIVs() {
-        for (int i = 0; i < 5; i++) {
-            this.IVs[i] = (int) (Math.random() * 16);
-        }
-    }
-
-    public void determinateStats() {
-        this.stats[0] = (int) ((IVs[0] + pkmnSpecies.getBasicHp() + Math.sqrt(EVs[0] / 8) + 50) * level / 50 + 10);
-        for (int i = 1; i < 5; i++) {
-            stats[i] = (int) ((IVs[i] + pkmnSpecies.getBasicStats()[i] + Math.sqrt(EVs[i] / 8)) * level / 50 + 5);
-        }
-    }
-
-    private void determinateAttacks() throws ReaderException {
-        int atkSlot = 0;
-        String[] atksToLearn = {"", "", "", ""};
-        for (String atk : pkmnSpecies.getLearnableAtks().keySet()) {
-            atkSlot = atkSlot < 3 ? atkSlot : 0;
-            if (pkmnSpecies.getLearnableAtks().get(atk) <= level) {
-                atksToLearn[atkSlot++] = atk;
-            }
-        }
-        for (int i = 0; i < 4; i++) {
-            if (atksToLearn[i] != "") {
-                this.attacks[i] = Game.getGame().getDatas().getLoadedAtk(atksToLearn[i]);
-            }
-        }
-    }
-
-    //      GETTERS FOR THE POKEMON INFORMATIONS
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     /**
-     * Get the pokemon's name
+     * @return the pokemon's name
      */
-    public String getName() {
+    public String getName()
+    {
         try {
             return this.pkmnSpecies.getName();
         } catch (NullPointerException e) {
@@ -203,181 +207,282 @@ public class FightingPkmn implements Savable<JsonObject> {
         }
     }
 
-    public int getID() {
+    /**
+     *
+     * @return the Pokemon's ID
+     */
+    public int getID()
+    {
         return ID;
     }
 
     /**
-     * Get the corresponding pokemon in the Pokedex
+     * @return the Pokemon's type
      */
-    public String getType() {
+    public String getType()
+    {
         return this.pkmnSpecies.getType();
     }
 
-    //      GETTERS FOR THE POKEMON'S STATISTICS
     /**
-     * Get the pokemon's maximum amount of health points
+     * @return a number that should indicate an average of the Pokemon's strength
      */
-    public int getMaxHP() {
+    public int getOdds()
+    {
+        int sum = 5 * level;
+        for (int i = 0; i < stats.length; i++)
+            sum += stats[i];
+        return sum;
+    }
+
+    /**
+     * @return the pokemon's maximum amount of health points
+     */
+    public int getMaxHP()
+    {
         return stats[0];
     }
 
     /**
-     * Get the pokemon's amount of health point
+     * @return the pokemon's amount of health point
      */
-    public int getHp() {
+    public int getHp()
+    {
         return stats[0] + statsVariations[0];
     }
 
     /**
-     * Get the pokemon's amount of attack points
+     * @return true if the Pokemon has health points left
      */
-    public float getAtk() {
-        if(statsVariations[1] == 0)
+    public boolean isAlive()
+    {
+        return getHp() != 0;
+    }
+
+    /**
+     * @return the pokemon's amount of attack points
+     */
+    public float getAtk()
+    {
+        if (statsVariations[1] == 0)
             return stats[1];
-        if(statsVariations[1] > 0) 
-            return (float)stats[1] * (float)((float)(2+statsVariations[1])/2);
-        return     (float)stats[1] * (float)(2/(float)(-statsVariations[1]+2));
+        if (statsVariations[1] > 0)
+            return stats[1] * ((float) (2 + statsVariations[1]) / 2);
+        return stats[1] * (2 / (float) (-statsVariations[1] + 2));
     }
 
     /**
-     * Get the pokemon's amount of defense points
+     * @return the pokemon's amount of defense points
      */
-    public float getDef() {
-        if(statsVariations[2] == 0)
+    public float getDef()
+    {
+        if (statsVariations[2] == 0)
             return stats[2];
-        if(statsVariations[2] > 0) 
-            return (float)stats[2] * (float)((float)(2+statsVariations[2])/2);
-        return     (float)stats[2] * (float)(2/(float)(-statsVariations[2]+2));
+        if (statsVariations[2] > 0)
+            return stats[2] * ((float) (2 + statsVariations[2]) / 2);
+        return stats[2] * (2 / (float) (-statsVariations[2] + 2));
     }
 
     /**
-     * Get the pokemon's amount of special points
+     * @return the pokemon's amount of special points
      */
-    public float getSpe() {
-        if(statsVariations[3] == 0)
+    public float getSpe()
+    {
+        if (statsVariations[3] == 0)
             return stats[3];
-        if(statsVariations[3] > 0) 
-            return (float)stats[3] * (float)((float)(2+statsVariations[3])/2);
-        return     (float)stats[3] * (float)(2/(float)(-statsVariations[3]+2));
+        if (statsVariations[3] > 0)
+            return stats[3] * ((float) (2 + statsVariations[3]) / 2);
+        return stats[3] * (2 / (float) (-statsVariations[3] + 2));
     }
 
     /**
-     * Get the pokemon's amount of speed points
+     * @return the pokemon's amount of speed points
      */
-    public float getSpeed() {
-        if(statsVariations[4] == 0)
+    public float getSpeed()
+    {
+        if (statsVariations[4] == 0)
             return stats[4];
-        if(statsVariations[4] > 0) 
-            return (float)stats[4] * (float)((float)(2+statsVariations[4])/2);
-        return     (float)stats[4] * (float)(2/(float)(-statsVariations[4]+2));
+        if (statsVariations[4] > 0)
+            return stats[4] * ((float) (2 + statsVariations[4]) / 2);
+        return stats[4] * (2 / (float) (-statsVariations[4] + 2));
     }
 
-    public int getCaptureRate() {
+    /**
+     * @return the Pokemon's capture rate
+     */
+    public int getCaptureRate()
+    {
         return pkmnSpecies.getCaptureRate();
     }
 
     /**
-     * Get the pokemon's level
+     * @return the pokemon's level
      */
-    public int getLevel() {
+    public int getLevel()
+    {
         return level;
     }
 
-    //      GETTERS AND SETTERS FOR FIGHTING
     /**
-     * Get the list of attacks the pokemon can do
+     * @return the list of attacks the pokemon can do
      */
-    public Attack[] getAttacks() {
-        return attacks;
+    public List<Attack> getAttacks()
+    {
+        return Arrays.asList(attacks)
+                .stream().filter(e -> e != null).collect(Collectors.toList());
     }
 
-    public int[] getIVs() {
-        return IVs;
-    }
-
-    public int[] getEVs() {
-        return EVs;
-    }
-
-    public int[] getStats() {
+    /**
+     * @return the Pokemon's statistics
+     */
+    public int[] getStats()
+    {
         return stats;
     }
 
-    public int[] getStatsVariations() {
+    /**
+     * @return the Pokemon's statistics variations
+     */
+    public int[] getStatsVariations()
+    {
         return statsVariations;
     }
 
-    public void setStatsVariations(int[] statsVariations) {
-        this.statsVariations = statsVariations;
-    }
-
-    public PkmnStats getPkmnSpecies() {
+    /**
+     * @return the species of the Pokemon
+     */
+    public PkmnStats getPkmnSpecies()
+    {
         return pkmnSpecies;
     }
 
     /**
-     * Get the pokemon's status
+     * @return the pokemon's status
      */
-    public Status getPkmnStatus() {
+    public Status getPkmnStatus()
+    {
         return pkmnStatus;
     }
 
     /**
      * Set the pokemon's status
+     *
+     * @param newVar new Status to apply
      */
-    public void setPkmnStatus(Status newVar) {
+    public void setPkmnStatus(Status newVar)
+    {
         pkmnStatus = newVar;
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Methods">
+    /**
+     * Takes a Pokemon to its evolution
+     * 
+     * @param evolution name of the evolution
+     * @throws ReaderException if evolution couldn't be found in files
+     */
+    protected void doEvolve(String evolution) throws ReaderException
+    {
+        pkmnSpecies = Game.getGame().getDatas().getLoadedPkmn(evolution);
+        determinateStats();
+        determinateAttacks();
+    }
+
+    private void determinateIVs()
+    {
+        for (int i = 0; i < 5; i++)
+            this.IVs[i] = (new Random().nextInt(16));
     }
 
     /**
-     * Set the Health Points depending on an amount of damage
+     * Computes the stats of the Pokemon
      */
-    public void loseHp(int damageAmount) {
-        if (!pkmnStatus.equals(Status.KO)) {
-            statsVariations[0] -= damageAmount;
+    public final void determinateStats()
+    {
+        this.stats[0] = (int) ((IVs[0] + pkmnSpecies.getBasicHp() + Math.sqrt(EVs[0] / 8) + 50) * level / 50 + 10);
+        for (int i = 1; i < 5; i++)
+            stats[i] = (int) ((IVs[i] + pkmnSpecies.getBasicStats()[i] + Math.sqrt(EVs[i] / 8)) * level / 50 + 5);
+    }
+
+    protected final void determinateAttacks() throws ReaderException
+    {
+        int atkSlot = 0;
+        String[] atksToLearn = {"", "", "", ""};
+        for (String atk : pkmnSpecies.getLearnableAtks().keySet()) {
+            atkSlot = atkSlot < 3 ? atkSlot : 0;
+            if (pkmnSpecies.getLearnableAtks().get(atk) <= level)
+                atksToLearn[atkSlot++] = atk;
         }
+        for (int i = 0; i < 4; i++)
+            if (!atksToLearn[i].isEmpty())
+                this.attacks[i] = Game.getGame().getDatas().getLoadedAtk(atksToLearn[i]);
+    }
+    
+    /**
+     * Set the Health Points depending on an amount of damage
+     *
+     * @param damageAmount
+     */
+    public void loseHp(int damageAmount)
+    {
+        if (!pkmnStatus.equals(Status.KO))
+            statsVariations[0] -= damageAmount;
         if (stats[0] + statsVariations[0] <= 0) {
             pkmnStatus = Status.KO;
             statsVariations[0] = -stats[0];
         }
-        if (statsVariations[0] > 0) statsVariations[0] = 0;
+        if (statsVariations[0] > 0)
+            statsVariations[0] = 0;
     }
 
     /**
      * Restores EnnemyPkmn's health point
      */
-    public void restoreHP() {
-        if (!pkmnStatus.equals("K.O.")) {
+    public void restoreHP()
+    {
+        if (!pkmnStatus.equals("K.O."))
             statsVariations[0] = 0;
-        }
     }
 
-    public void incrementLevel() {
+    /**
+     * Increments the level of the Pokemon
+     */
+    public void incrementLevel()
+    {
         level++;
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Save to Json">
+    /**
+     * Converts the Fighting Pokemon into a Json Object
+     * 
+     * @return JsonObject containing all needed informations on the Pokemon
+     */
     @Override
-    public JsonObject save() {
+    public JsonObject save()
+    {
         JsonArray attacks = new JsonArray();
         Stream.of(this.attacks).filter(a -> a != null)
-                               .forEach(a -> attacks.add(a.getName()));
-        
+                .forEach(a -> attacks.add(a.getName()));
+
         return new JsonObject().add("ID", ID)
-                               .add("name", getName())
-                               .add("level", level)
-                               .add("IVhp", IVs[0])
-                               .add("IVatk", IVs[1])
-                               .add("IVdef", IVs[2])
-                               .add("IVspe", IVs[3])
-                               .add("IVspeed", IVs[4])
-                               .add("EVhp", EVs[0])
-                               .add("EVatk", EVs[1])
-                               .add("EVdef", EVs[2])
-                               .add("EVspe", EVs[3])
-                               .add("EVspeed", EVs[4])
-                               .add("hpLost", statsVariations[0])
-                               .add("pkmnStatus", pkmnStatus.name())
-                               .add("attacks", attacks);
+                .add("name", getName())
+                .add("level", level)
+                .add("IVhp", IVs[0])
+                .add("IVatk", IVs[1])
+                .add("IVdef", IVs[2])
+                .add("IVspe", IVs[3])
+                .add("IVspeed", IVs[4])
+                .add("EVhp", EVs[0])
+                .add("EVatk", EVs[1])
+                .add("EVdef", EVs[2])
+                .add("EVspe", EVs[3])
+                .add("EVspeed", EVs[4])
+                .add("hpLost", statsVariations[0])
+                .add("pkmnStatus", pkmnStatus.name())
+                .add("attacks", attacks);
     }
+    // </editor-fold>
 }

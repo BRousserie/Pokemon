@@ -1,8 +1,9 @@
 build/
 dist/
+build.xml
 
 nbproject/
 !nbproject/project.xml
 !nbproject/project.properties
 
-data/save.txt
+

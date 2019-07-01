@@ -1,1 +1,8 @@
-0;1;175;Carapuce;5
+1;1;Carapuce;5
+4;2;Roucool;9;Carapuce;8
+5;4;Roucoups;18;Abra;15;Rattata;15;Carapuce;17
+6;4;Roucoups;19;Rattatac;16;Kadabra;18;Carabaffe;20
+7;5;Roucoups;25;Caninos;23;Noeunoeuf;22;Kadabra;20;Carabaffe;25
+8;5;Roucarnage;37;Caninos;38;Noeunoeuf;35;Alakazam;35;Tortank;40
+9;6;Roucarnage;47;Rhinocorne;45;Caninos;45;Noeunoeuf;47;Alakazam;50;Tortank;53
+10;6;Roucarnage;61;Alakazam;59;Rhinoféros;61;Léviator;61;Arcanin;63;Tortank;65

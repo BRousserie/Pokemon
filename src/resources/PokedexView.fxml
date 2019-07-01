@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.PokedexViewController">
   <children>
-    <Button fx:id="retour" layoutX="61.0" layoutY="656.0" mnemonicParsing="false" onAction="#goToMainView" text="Retour" />
+    <Button id="retour" fx:id="goBack" layoutX="61.0" layoutY="656.0" mnemonicParsing="false" onAction="#goToMainScreen" text="Retour" />
     <Text fill="#fff500" layoutX="538.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleBack" text="Pokédex" />
     <Text fill="#0021cc" layoutX="538.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="titleFront" text="Pokédex" />
     <Button fx:id="previous" layoutX="215.0" layoutY="656.0" mnemonicParsing="false" onAction="#previousPage" prefHeight="29.0" prefWidth="137.0" text="Precedent" />

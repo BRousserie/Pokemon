@@ -1,0 +1,5 @@
+show@rivalName: Hey noobie, j'ai pêché un Magicarpe dans le coin !
+showIl était nettement meilleur que toi !
+showAllez, viens là, minable !
+fight@rival
+END

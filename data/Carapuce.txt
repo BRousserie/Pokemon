@@ -1,1 +1,8 @@
-0;1;175;Bulbizarre;5
+1;1;Bulbizarre;5
+4;2;Roucool;9;Bulbizarre;8
+5;4;Roucoups;18;Abra;15;Rattata;15;Bulbizarre;17
+6;4;Roucoups;19;Rattatac;16;Kadabra;18;Herbizarre;20
+7;5;Roucoups;25;Léviator;23;Caninos;22;Kadabra;20;Herbizarre;25
+8;5;Roucarnage;37;Léviator;38;Caninos;35;Alakazam;35;Florizarre;40
+9;6;Roucarnage;47;Rhinocorne;45;Léviator;45;Caninos;47;Alakazam;50;Florizarre;53
+10;6;Roucarnage;61;Alakazam;59;Rhinoféros;61;Léviator;61;Arcanin;63;Florizarre;65

@@ -1,0 +1,5 @@
+show@rivalName: Quoi ? Qu'est-ce que t'as ? Tu cherches l'ambrouille ? Tu veux qu'on s'tape ?
+showVas y s'tu veux on s'retrouve à la Ligue Pokémon, on fait un duel devant toutes mes fans et si tu m'nique, j'te paye un Kébab !
+showEn attendant vient là que j'te mette une râclée !
+fight@rival
+END

@@ -1,0 +1,51 @@
+{
+  "myPlayer": {
+    "dressor": {
+      "name": "PAUL",
+      "bag": {
+        "money": 5175,
+        "items": [
+          "Carte:2",
+          "Pokédex:2"
+        ]
+      }
+    },
+    "myPokemons": [
+      {
+        "fightingPkmn": {
+          "ID": 0,
+          "name": "Salamèche",
+          "level": 7,
+          "IVhp": 15,
+          "IVatk": 12,
+          "IVdef": 9,
+          "IVspe": 7,
+          "IVspeed": 0,
+          "EVhp": 0,
+          "EVatk": 0,
+          "EVdef": 0,
+          "EVspe": 0,
+          "EVspeed": 0,
+          "hpLost": -3,
+          "pkmnStatus": "OK",
+          "attacks": [
+            "Rugissement",
+            "Griffe"
+          ]
+        },
+        "exp": 139
+      }
+    ],
+    "foundItems": [
+      
+    ],
+    "starter": "Salamèche",
+    "arenas": [
+      
+    ],
+    "pokecenter": "JADIELLE"
+  },
+  "rivalName": "JEAN",
+  "currentZone": "JADIELLE",
+  "currentStoryEvent": 3
+}

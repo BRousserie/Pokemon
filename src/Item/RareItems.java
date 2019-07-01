@@ -7,15 +7,21 @@
  * this stuff is worth it, you can buy us a beer in return Baptiste and Tony
  * ----------------------------------------------------------------------------
  */
-
 package Item;
 
 /**
  * Class allowing to create rare items
  */
-public class RareItems extends Item {
-    
-    public RareItems(String[] infos) {
+public class RareItems extends Item
+{
+
+    /**
+     * Contructor of the Class RareItems
+     * 
+     * @param infos
+     */
+    public RareItems(String[] infos)
+    {
         super(infos[0], infos[1], "0");
     }
 }

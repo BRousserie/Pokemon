@@ -23,3 +23,4 @@ Badge Âme;Décerné pour avoir vaincu Koga, le champion de Parmanie
 Badge Marais;Décerné pour avoir vaincu Morgane, le champion de Safranie
 Badge Volcan;Décerné pour avoir vaincu Auguste, le champion de Cramois'Île
 Badge Terre;Décerné pour avoir vaincu Giovanni, le champion de Jadielle
+El Famoso Kebab;Si tu vois cette description, woah ça m'fait plaisir sérieux ! J'te paye un Kébab de bon coeur !

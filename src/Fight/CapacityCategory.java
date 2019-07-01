@@ -7,24 +7,45 @@
  * this stuff is worth it, you can buy us a beer in return Baptiste and Tony
  * ----------------------------------------------------------------------------
  */
-
 package Fight;
 
 /**
  *
  * @author brousserie
  */
-public enum CapacityCategory {
-    Physique, Special, Autre;
+public enum CapacityCategory
+{
+    //The capacity category of attacks is not implemented in fight yet
+    // <editor-fold defaultstate="collapsed" desc="Enum values">
+    /**
+     * "Physique" attacks should use atk and def stats to compute damages
+     */
+    Physique,
+    /**
+     * "Special" attacks should use spe stat to compute damages
+     */
+    Special,
+    /**
+     * "Autre" attacks should not apply damage but apply varied effects
+     */
+    Autre;
+    // </editor-fold>
     
-    public boolean inflictsDamages() {
+    // <editor-fold defaultstate="collapsed" desc="Method">
+    /**
+     *
+     * @return
+     */
+    public boolean inflictsDamages()
+    {
         switch (this) {
-            case Physique :
-            case Special :
+            case Physique:
+            case Special:
                 return true;
-            case Autre :
+            case Autre:
                 return false;
         }
         return true;
     }
+    // </editor-fold>
 }

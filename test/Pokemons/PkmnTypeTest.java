@@ -10,6 +10,7 @@
 package Pokemons;
 
 import FileIO.ReaderException;
+import GameEngine.Game;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,12 +18,17 @@ import org.junit.Test;
  *
  * @author Baptiste
  */
-public class PkmnTypeTest {
+public class PkmnTypeTest
+{
+
     @Test
-    public void testGetDamageRate() throws ReaderException {
-        Assert.assertTrue(0 == PkmnType.getDamageRate(PkmnType.NORMAL, PkmnType.SPECTR, true));
-        Assert.assertTrue(0.5 == PkmnType.getDamageRate(PkmnType.INSECT, PkmnType.FEU, true));
-        Assert.assertTrue(1 == PkmnType.getDamageRate(PkmnType.NORMAL, PkmnType.NORMAL, true));
-        Assert.assertTrue(2 == PkmnType.getDamageRate(PkmnType.DRAGON, PkmnType.DRAGON, true));
+    public void testGetDamageRate() throws ReaderException
+    {
+        Game.initializeGame();
+        
+        Assert.assertTrue(0 == PkmnType.getDamageRate(PkmnType.NORMAL, PkmnType.SPECTR));
+        Assert.assertTrue(0.5 == PkmnType.getDamageRate(PkmnType.INSECT, PkmnType.FEU));
+        Assert.assertTrue(1 == PkmnType.getDamageRate(PkmnType.NORMAL, PkmnType.NORMAL));
+        Assert.assertTrue(2 == PkmnType.getDamageRate(PkmnType.DRAGON, PkmnType.DRAGON));
     }
 }

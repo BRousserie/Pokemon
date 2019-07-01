@@ -14,6 +14,12 @@ package Item;
  * @author Baptiste
  */
 public class Stone extends Item {
+
+    /**
+     * Constructor of the Class Stones
+     *
+     * @param infos
+     */
     public Stone(String[] infos) {
         super(infos[0], infos[1], infos[2]);
     }

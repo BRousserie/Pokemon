@@ -9,9 +9,15 @@ package FileIO;
  *
  * @author brousserie
  */
-public class ReaderException extends Exception {
+public class ReaderException extends Exception
+{
 
-    public ReaderException(String message) {
+    /**
+     * Reads the exception 
+     * @param message
+     */
+    public ReaderException(String message)
+    {
         super(message);
     }
 }

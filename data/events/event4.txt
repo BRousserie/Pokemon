@@ -1,0 +1,3 @@
+show@rivalName: Alors noobie, t'as soudoyé ma soeur pour avoir une carte ?
+showJe n'ai pas envie de perdre mon temps avec toi, on se battra la prochaine fois !
+END

@@ -25,7 +25,8 @@ import javafx.scene.layout.VBox;
  *
  * @author Baptiste
  */
-public class ScenarioController implements Initializable {
+public class ScenarioController implements Initializable
+{
 
     @FXML
     private VBox textOutput;
@@ -35,46 +36,52 @@ public class ScenarioController implements Initializable {
     private Button skip;
 
     Game game = Game.getGame();
-    Scenario.ScenarioScript<String> script = 
-            game.getScenario().Instructions();
+    Scenario.ScenarioScript<String> script
+                                    = game.getScenario().Instructions();
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
+    public void initialize(URL url, ResourceBundle rb)
+    {
         executeScript(script.next());
 
         next.setOnMouseClicked(e -> executeScript(script.next()));
-        
+
         skip.setOnMouseClicked(e -> {
             while (!script.current().startsWith("qcm")
-                && !script.current().startsWith("END")) {
-                if(script.current().startsWith("give")
-                || script.current().startsWith("rm")) {
+                   && !script.current().startsWith("END")
+                   && !script.current().startsWith("fight") ) {
+                System.out.println(script.current());
+                if (script.current().startsWith("give")
+                    || script.current().startsWith("rm"))
                     executeScript(script.current());
-                }
                 script.next();
             }
-            if (script.current().startsWith("qcm")) {
+            if (script.current().startsWith("qcm"))
                 executeScript(script.previous());
-            }
             executeScript(script.next());
         });
     }
 
-    public void executeScript(String instruction) {
+    /**
+     * Exeutes the event
+     *
+     * @param instruction
+     */
+    public void executeScript(String instruction)
+    {
         if (instruction.startsWith("show")) {
-            if (textOutput.getChildren().size() == 15) {
+            if (textOutput.getChildren().size() == 15)
                 textOutput.getChildren().remove(0);
-            }
-            if (instruction.contains("@playerName")) {
+            if (instruction.contains("@playerName"))
                 instruction = instruction.replace("@playerName", game.getPlayer().getName());
-            }
-            if (instruction.contains("@rivalName")) {
-                instruction = instruction.replace("@rivalName", game.getRival());
-            }
+            if (instruction.contains("@rivalName"))
+                instruction = instruction.replace("@rivalName", game.getRivalName());
             Label newLine = new Label(instruction.substring(4));
             newLine.setWrapText(true);
             newLine.setPadding(new Insets(0, 0, 10, 0));
@@ -83,12 +90,13 @@ public class ScenarioController implements Initializable {
             game.getPlayer().getBag().addItem(game.getDatas().getItem(instruction.substring(4)));
             executeScript(script.next());
         } else if (instruction.startsWith("rm")) {
-            game.getPlayer().getBag().decrement(game.getDatas().getItem(instruction.substring(2)));
+            game.getPlayer().getBag().remove(game.getDatas().getItem(instruction.substring(2)));
             executeScript(script.next());
-        } else if (instruction.startsWith("//")) {
+        } else if (instruction.startsWith("fight"))
+            game.fightRival();
+        else if (instruction.startsWith("//"))
             executeScript(script.next());
-        } else if (instruction.contains("END")) {
+        else if (instruction.contains("END"))
             game.getGameView().setScene("MainScreen");
-        }
     }
 }

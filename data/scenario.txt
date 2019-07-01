@@ -1,3 +1,10 @@
-0;ROUTE 1;Starter;true
-1;JADIELLE;colis;false
-2;BOURG PALETTE;carte;false
+1;ROUTE 1;Starter
+2;JADIELLE;events/event2
+3;BOURG PALETTE;events/event3
+4;ROUTE 22;events/event4
+5;AZURIA;events/event5
+6;L'OCEANE;events/event6
+7;LAVANVILLE;events/event7
+8;SAFRANIA;events/event8
+9;ROUTE 22;events/event9
+10;LIGUE POKEMON;events/event10

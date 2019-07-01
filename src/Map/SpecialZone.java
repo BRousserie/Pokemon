@@ -16,9 +16,18 @@ import java.util.ArrayList;
  * @author Baptiste
  */
 public class SpecialZone extends Zone {
+
+    // <editor-fold defaultstate="collapsed" desc="Attributes">
     private int meetingPkmnProba;
     private ArrayList<String> wildPkmns;
+    // </editor-fold>
 
+    /**
+     * Loadsthe special zone from the file
+     *
+     * @param name
+     * @returnc a new special zone
+     */
     public static Zone loadZoneFromFile(String name) {
         try {
             String[] zoneInfos = DataReader.readFileArray("specials", name);
@@ -36,13 +45,13 @@ public class SpecialZone extends Zone {
                         break;
                     default:
                         switch (part) {
-                            case 0 :
+                            case 0:
                                 accessibleZones.add(zoneInfos[i]);
                                 break;
-                            case 1 :
+                            case 1:
                                 items.add(zoneInfos[i]);
                                 break;
-                            case 2 :
+                            case 2:
                                 wildPkmns.add(zoneInfos[i]);
                                 break;
                         }
@@ -56,7 +65,20 @@ public class SpecialZone extends Zone {
             return null;
         }
     }
+    
 
+    // <editor-fold defaultstate="collapsed" desc="Contructor">
+    /**
+     * Contructor of the Class SpecialZone
+     *
+     * @param name
+     * @param meetingDressorProba
+     * @param meetingPkmnProba
+     * @param description
+     * @param accessibleZones
+     * @param items
+     * @param wildPkmns
+     */
     public SpecialZone(String name, int meetingDressorProba, int meetingPkmnProba,
             String description, ArrayList<String> accessibleZones,
             ArrayList<String> items, ArrayList<String> wildPkmns) {
@@ -64,13 +86,18 @@ public class SpecialZone extends Zone {
         this.meetingPkmnProba = meetingPkmnProba;
         this.wildPkmns = wildPkmns;
     }
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Methods">
+    /**
+     * Find a pokemon that appears in the zone
+     */
     @Override
     public void searchWildPokemon() {
         int dice = (int) (Math.random() * 100);
         float sum = 0;
         for (String pkmn : wildPkmns) {
-            sum += 100/wildPkmns.size();
+            sum += 100 / wildPkmns.size();
             if (sum >= dice) {
                 Game.getGame().setFight(new Fight(new FightingPkmn(
                         pkmn, Game.getGame().getPlayer().getAvgLvl(), 0)));
@@ -78,29 +105,58 @@ public class SpecialZone extends Zone {
             }
         }
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Getters / Setters">
+    /**
+     * Gets the probability of meeting a pokemon
+     *
+     * @return the probability
+     */
     @Override
     public int getMeetingPkmnProba() {
         return meetingPkmnProba;
     }
 
+    /**
+     * Gets the shops in the zone
+     *
+     * @return a new list
+     */
     @Override
     public ArrayList<String> getShop() {
         return new ArrayList<>();
     }
 
+    /**
+     * Gets the type of the zone
+     *
+     * @return special
+     */
+    @Override
+    public String getZoneType() {
+        return "special";
+    }
+
+    /**
+     * Says if the zone has an arena
+     *
+     * @return true or false
+     */
     @Override
     public boolean hasArena() {
         return false;
     }
 
+    /**
+     * Says if the zone has a pokecenter
+     *
+     * @return true or false
+     */
     @Override
     public boolean hasPokeCenter() {
         return false;
     }
+    // </editor-fold>
 
-    @Override
-    public String getZoneType() {
-        return "special";
-    }
 }

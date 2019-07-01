@@ -1,0 +1,15 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+
+.selectedButton {
+    -fx-font-size: 18;
+    -fx-font-family: "Pokemon Classic Regular";
+    -fx-background-color : #2100cc;
+    -fx-effect: dropshadow( three-pass-box, rgba(0,0,0,0.4) , 15, 0.0 , 0 , 0 );
+}
+

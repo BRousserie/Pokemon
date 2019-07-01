@@ -12,27 +12,67 @@ package Pokemons;
 import FileIO.DataReader;
 import FileIO.ReaderException;
 
+/**
+ *
+ * @author Baptiste
+ */
 public enum PkmnType {
-    NORMAL, FEU, EAU, ELECTR, PLANTE, GLACE, COMBAT, POISON, SOL, VOL, PSY, INSECT, ROCHE, SPECTR, DRAGON;
+    // The different types
+    NORMAL,
+    FEU,
+    EAU,
+    ELECTR,
+    PLANTE,
+    GLACE,
+    COMBAT,
+    POISON,
+    SOL,
+    VOL,
+    PSY,
+    INSECT,
+    ROCHE,
+    SPECTR,
+    DRAGON;
 
-    public static float getDamageRate(PkmnType atkType, PkmnType defType, boolean firstTry) {
+    /**
+     * Calculates the damages fuction of the types
+     *
+     * @param atkType
+     * @param defType
+     * @return
+     */
+    public static float getDamageRate(PkmnType atkType, PkmnType defType) {
         try {
-            return DataReader.readTypeDamageRate(indexOf(atkType), indexOf(defType));
+            return Float.parseFloat(
+                    DataReader.readFileArray(
+                            "types", atkType.name())[indexOf(defType)]);
         } catch (ReaderException ex) {
             return 1;
         }
     }
-    
+
+    /**
+     * The index of the type
+     *
+     * @param t
+     * @return
+     */
     public static int indexOf(PkmnType t) {
         for (int i = 0; i < PkmnType.values().length; i++) {
             if (PkmnType.values()[i].equals(t)) {
-                return i;
+                return i + 1;
             }
         }
         return -1;
     }
-    
-    public static PkmnType getType (String pkmnType) {
+
+    /**
+     * Gets the pokmon type
+     *
+     * @param pkmnType
+     * @return
+     */
+    public static PkmnType getType(String pkmnType) {
         for (int i = 0; i < PkmnType.values().length; i++) {
             if (PkmnType.values()[i].toString().equals(pkmnType.toUpperCase())) {
                 return PkmnType.values()[i];

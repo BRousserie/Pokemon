@@ -9,6 +9,7 @@
  */
 package View;
 
+import FileIO.DataReader;
 import FileIO.DataWriter;
 import FileIO.ReaderException;
 import GameEngine.Game;
@@ -33,7 +34,8 @@ import javafx.scene.text.TextAlignment;
  *
  * @author tpedrero
  */
-public class Controller implements Initializable {
+public class Controller implements Initializable
+{
 
     // <editor-fold defaultstate="collapsed" desc="FXML elements">
     @FXML
@@ -43,63 +45,18 @@ public class Controller implements Initializable {
     @FXML
     private VBox displayTeam;
     @FXML
-    private Button PC;
-    @FXML
-    private Button centrePokemon;
-    @FXML
-    private Button shop;
-    @FXML
-    private Button arena;
-    @FXML
-    private Button pokedex;
-    @FXML
-    private Button pokemon;
-    @FXML
-    private Button sac;
-    @FXML
-    private Button sauvegarder;
-    @FXML
-    private Button searchItems;
-    @FXML
-    private Button fish;
-    @FXML
     private ChoiceBox selectDestination;
     @FXML
-    private Button goTo;
+    private Group kanto;
     @FXML
-    private Label playerName;
+    private Button PC, centrePokemon, shop, arena, pokedex, pokemon, sac,
+            sauvegarder, searchItems, fish, goTo;
     @FXML
-    private Label pokemon1;
-    @FXML
-    private Label pokemon2;
-    @FXML
-    private Label pokemon3;
-    @FXML
-    private Label pokemon4;
-    @FXML
-    private Label pokemon5;
-    @FXML
-    private Label pokemon6;
-    @FXML
-    private Label badge1;
-    @FXML
-    private Label badge2;
-    @FXML
-    private Label badge3;
-    @FXML
-    private Label badge4;
-    @FXML
-    private Label badge5;
-    @FXML
-    private Label badge6;
-    @FXML
-    private Label badge7;
-    @FXML
-    private Label badge8;
-    @FXML
-    private Group kanto;        
-    // </editor-fold>
+    private Label playerName,
+            pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, pokemon6,
+            badge1, badge2, badge3, badge4, badge5, badge6, badge7, badge8;
 
+    // </editor-fold>
     Game game = Game.getGame();
 
     // <editor-fold defaultstate="collapsed" desc="Initialization methods">
@@ -110,25 +67,27 @@ public class Controller implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         displayZone();
-        if (game.getCurrentZone().getZoneType().equals("villes")) {
+        if (game.getCurrentZone().getZoneType().equals("villes"))
             initializeTownButtons();
-        } else {
+        else
             initializeWildZoneButtons();
-        }
         initializePlayerInfos();
         initializePermanentButtons();
-        if (!game.getPlayer().getCondition("Carte")) {
+        if (!game.getPlayer().getCondition("Carte"))
             hide(kanto);
-        }
-        if (!game.getPlayer().getCondition("Pokédex")) {
+        if (!game.getPlayer().getCondition("Pokédex"))
             hide(pokedex);
-        }
         fish.setDisable(true);
     }
 
-    private void initializeTownButtons() {
+    /**
+     * Initialises the buttons able in towns
+     */
+    private void initializeTownButtons()
+    {
         if (!game.getCurrentZone().hasPokeCenter()) {
             hide(PC);
             hide(centrePokemon);
@@ -136,35 +95,42 @@ public class Controller implements Initializable {
             PC.setOnMouseClicked(e -> game.getGameView().setScene("PCView"));
             centrePokemon.setOnMouseClicked(e -> {
                 game.getPlayer().healPokemon();
-                displayScenario.setText("Vos POKéMON ont été soignés !");
+                displayScenario.setText(displayScenario.getText() + " \n \nVos POKéMON ont été soignés !");
                 setTeam();
+                refreshSaveButton();
+                centrePokemon.setDisable(true);
             });
         }
-        
-        if (!game.getCurrentZone().getShop().isEmpty()) {
+
+        if (!game.getCurrentZone().getShop().isEmpty())
             shop.setOnMouseClicked(e -> game.getGameView().setScene("ShopView"));
-        } else {
+        else
             hide(shop);
-        }
-        if (game.getCurrentZone().hasArena()) {
+        if (game.getCurrentZone().hasArena())
             arena.setOnMouseClicked(e -> {
                 try {
                     Arena arena = Game.getGame().getDatas().getLoadedArena();
                     if (arena.isNextArena())
                         arena.fight();
-                    else displayScenario.setText("Vous ne pouvez pas encore "
-                            + "combattre dans cette Arène. Vous avez besoin du "
-                            + arena.getPrerequisites());
+                    else {
+                        displayScenario.setText(displayScenario.getText() + " \n \nVous ne pouvez pas encore "
+                                                + "combattre dans cette Arène. Vous avez besoin du "
+                                                + arena.getPrerequisites());
+                        this.arena.setDisable(true);
+                    }
                 } catch (ReaderException ex) {
                     ex.printStackTrace();
                 }
             });
-        } else {
+        else
             hide(arena);
-        }
     }
 
-    private void initializeWildZoneButtons() {
+    /**
+     * Initialises the buttons able in wild zones
+     */
+    private void initializeWildZoneButtons()
+    {
         PC.setText("Chercher des POKéMON");
         PC.setStyle("-fx-font-size: 14;");
         PC.setOnMouseClicked(e -> game.getCurrentZone().searchWildPokemon());
@@ -179,13 +145,18 @@ public class Controller implements Initializable {
     /**
      * Displays the informations about the player.
      */
-    private void initializePlayerInfos() {
+    private void initializePlayerInfos()
+    {
         playerName.setText(game.getPlayer().getName());
         setTeam();
         setBadges();
     }
 
-    private void setTeam() {
+    /**
+     * Displays the informations about the player team.
+     */
+    private void setTeam()
+    {
         game.getGameView().setPkmnLabel(pokemon1, 0);
         game.getGameView().setPkmnLabel(pokemon2, 1);
         game.getGameView().setPkmnLabel(pokemon3, 2);
@@ -194,7 +165,11 @@ public class Controller implements Initializable {
         game.getGameView().setPkmnLabel(pokemon6, 5);
     }
 
-    private void setBadges() {
+    /**
+     * Displays the informations about the player badges.
+     */
+    private void setBadges()
+    {
         badge1.setText((game.getPlayer().getBag().contains("Badge Roche")) ? "Badge Roche" : "Aucun");
         badge2.setText((game.getPlayer().getBag().contains("Badge Cascade")) ? "Badge Cascade" : "");
         badge3.setText((game.getPlayer().getBag().contains("Badge Foudre")) ? "Badge Foudre" : "");
@@ -208,33 +183,53 @@ public class Controller implements Initializable {
     /**
      * Displays the zone where the player is.
      */
-    public void displayZone(){
-      displayScenario.setText(displayScenario.getText() + "Vous vous trouvez à "
-              + game.getCurrentZone().getName() + "\n" 
-              + game.getCurrentZone().getDescription());
+    public void displayZone()
+    {
+        displayScenario.setText("Vous vous trouvez à "
+                                + game.getCurrentZone().getName() + "\n"
+                                + game.getCurrentZone().getDescription());
     }
-    
-    private void initializePermanentButtons() {
+
+    /**
+     * Initialises permanent button on MainView
+     */
+    private void initializePermanentButtons()
+    {
         pokedex.setOnMouseClicked(e -> game.getGameView().setScene("PokedexView"));
-        
-        pokemon.setOnMouseClicked(e -> showTeam());
-        
-        sac.setOnMouseClicked(e -> showBag());
-        
-        sauvegarder.setOnMouseClicked(e -> DataWriter.saveGame(game));
-        
-        if (game.getPlayer().getCondition("Canne")) {
+
+        //pokemon.setOnMouseClicked(e -> );
+        sac.setOnMouseClicked(e -> game.getGameView().setScene("BagView"));
+
+        refreshSaveButton();
+        sauvegarder.setOnMouseClicked(e -> {
+            DataWriter.saveGame(game);
+            refreshSaveButton();
+        });
+
+        if (game.getPlayer().getCondition("Canne"))
             fish.setOnMouseClicked(e -> game.getCurrentZone().searchWildFish());
-        }
-        searchItems.setOnMouseClicked(e -> displayScenario.setText(
-                game.getCurrentZone().searchItems()));
-        
+        searchItems.setOnMouseClicked(e -> {
+            try {
+                if (!game.possiblyLaunchFight()) {
+                    displayScenario.setText(
+                            displayScenario.getText() + "\n"
+                            + game.getCurrentZone().searchItems());
+                    refreshSaveButton();
+                }
+            } catch (ReaderException ex) {
+                System.out.println("Tried to launch fight but failed");
+                displayScenario.setText(
+                        displayScenario.getText() + "\n"
+                        + game.getCurrentZone().searchItems());
+                refreshSaveButton();
+            }
+        });
+
         selectDestination.setItems(FXCollections
                 .observableList(game.getCurrentZone().getAccessibleZones()));
-        
+
         goTo.disableProperty().bind(selectDestination.valueProperty().isNull());
-        goTo.setOnMouseClicked(e -> 
-            {
+        goTo.setOnMouseClicked(e -> {
             try {
                 game.goToZone(
                         game.getDatas().getLoadedZone(
@@ -246,21 +241,38 @@ public class Controller implements Initializable {
 
     }
     // </editor-fold>
-    
-    private void hide(Node n) {
+
+    /**
+     * Refreshes the button for save
+     */
+    private void refreshSaveButton()
+    {
+        if (game.getCurrentStoryEvent() > 0
+            && !DataReader.loadGame().toString().equals(game.save().toString()))
+            sauvegarder.setDisable(false);
+        else
+            sauvegarder.setDisable(true);
+    }
+
+    /**
+     * Set property hidden
+     *
+     * @param n
+     */
+    private void hide(Node n)
+    {
         n.setVisible(false);
         n.setDisable(true);
     }
-    private void show(Node n) {
+
+    /**
+     * Set property showed
+     *
+     * @param n
+     */
+    private void show(Node n)
+    {
         n.setVisible(true);
         n.setDisable(false);
-    }
-
-    private void showTeam() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private String showBag() {
-        return game.getPlayer().getBag().getItems().toString();
     }
 }

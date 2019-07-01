@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * <brousserie@iut.u-bordeaux.fr> and <tpedrero@iut.u-bordeaux.fr>
+ * wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy us a beer in return Baptiste and Tony
+ * ----------------------------------------------------------------------------
  */
 package View;
 
@@ -23,27 +27,17 @@ import javafx.scene.control.TextArea;
  *
  * @author tony
  */
-public class ShopViewController implements Initializable {
+public class ShopViewController implements Initializable
+{
 
     // <editor-fold defaultstate="collapsed" desc="FXML elements">
     @FXML
-    private Button goBack;
-    @FXML
-    private Button buy;
+    private Button goBack, buy;
     @FXML
     private ChoiceBox itemChoice;
     @FXML
-    private TextArea displayInfo;
-    @FXML
-    private TextArea displayItems;
-    @FXML
-    private TextArea displayPrice;
-    @FXML
-    private TextArea itemQuantity;
-    @FXML
-    private TextArea totalPrice;
-    @FXML
-    private TextArea money;
+    private TextArea displayInfo, displayItems, displayPrice, itemQuantity,
+            totalPrice, money;
     // </editor-fold>
 
     Game game = Game.getGame();
@@ -57,7 +51,8 @@ public class ShopViewController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         display();
         itemList();
         try {
@@ -71,7 +66,8 @@ public class ShopViewController implements Initializable {
     /**
      * Displays the informations.
      */
-    public void display() {
+    public void display()
+    {
         displayInfo.setText("Bonjour, bienvenue dans notre magasin. \n Que souhaitez-vous acheter ? \n");
         displayMoney();
         displayItems();
@@ -81,14 +77,16 @@ public class ShopViewController implements Initializable {
     /**
      * Displays the amount of money of the player.
      */
-    public void displayMoney() {
+    public void displayMoney()
+    {
         money.setText("Vous avez : " + myBag.getPokeDollars() + "$");
     }
 
     /**
      * Displays the items of the shop.
      */
-    public void displayItems() {
+    public void displayItems()
+    {
         displayItems.setText("Voici nos produits : \n");
         game.getCurrentZone().getShop().forEach(item -> {
             displayItems.setText(displayItems.getText() + "\n" + item);
@@ -98,7 +96,8 @@ public class ShopViewController implements Initializable {
     /**
      * Displays the price of the items
      */
-    public void displayPrice() {
+    public void displayPrice()
+    {
         displayPrice.setText("Prix: \n");
         game.getCurrentZone().getShop().forEach(item -> {
             String price = String.valueOf(game.getDatas().getItem(item).getBuyPrice());
@@ -109,7 +108,8 @@ public class ShopViewController implements Initializable {
     /**
      * Sets the items in the list
      */
-    public void itemList() {
+    public void itemList()
+    {
         itemChoice.setItems(FXCollections.observableArrayList(game.getCurrentZone().getShop()));
     }
 
@@ -119,7 +119,8 @@ public class ShopViewController implements Initializable {
      * @return IQuantity
      * @throws Exception
      */
-    public int getItemQtt() throws Exception {
+    public int getItemQtt() throws Exception
+    {
         String SQuantity = itemQuantity.getText();
         if ("".equals(SQuantity)) {
             displayInfo.setText(displayInfo.getText() + "Entrez une valeur.\n");
@@ -129,11 +130,10 @@ public class ShopViewController implements Initializable {
             int IQuantity = Integer.parseInt(SQuantity);
             if (IQuantity < 0) {
                 displayInfo.setText(displayInfo.getText()
-                        + "Vous ne pouvez pas achetter une quantité négative.\n");
+                                    + "Vous ne pouvez pas achetter une quantité négative.\n");
                 return 0;
-            } else {
+            } else
                 return IQuantity;
-            }
         } catch (NumberFormatException e) {
             displayInfo.setText(displayInfo.getText() + "Veuillez entrer un nombre entre 0 et 99");
             return 0;
@@ -146,7 +146,8 @@ public class ShopViewController implements Initializable {
      * @return total
      * @throws Exception
      */
-    public int getTotalPrice() throws Exception {
+    public int getTotalPrice() throws Exception
+    {
         int total;
         total = (selectedItem != null)
                 ? selectedItem.getBuyPrice() * getItemQtt()
@@ -160,31 +161,32 @@ public class ShopViewController implements Initializable {
      *
      * @throws Exception
      */
-    public void refresh() throws Exception {
+    public void refresh() throws Exception
+    {
         itemQuantity.setOnKeyReleased(event -> {
             try {
                 if (Integer.parseInt(itemQuantity.getText())
-                        + (myBag.contains(selectedItem.getName())
-                        ? myBag.getItems().get(selectedItem) : 0)
-                        > 99) {
-                    itemQuantity.setText("" + (99 - myBag.getItems().get(selectedItem)));
-                }
+                    + (myBag.contains(selectedItem.getName())
+                       ? myBag.regroup().get(selectedItem) : 0)
+                    > 99)
+                    itemQuantity.setText("" + (99 - myBag.regroup().get(selectedItem)));
                 getTotalPrice();
             } catch (Exception ex) {
             }
         });
-        itemChoice.setOnAction(event -> {
+        itemChoice.valueProperty().addListener(c -> {
             try {
-                selectedItem = game.getDatas().getItem(itemChoice.getValue().toString());
+                if (itemChoice.getValue() != null)
+                    selectedItem = game.getDatas()
+                            .getItem(itemChoice.getValue().toString());
                 if (Integer.parseInt(itemQuantity.getText())
-                        + (myBag.contains(selectedItem.getName())
-                        ? myBag.getItems().get(selectedItem) : 0)
-                        > 99) {
-                    itemQuantity.setText("" + (99 - myBag.getItems().get(selectedItem)));
-                }
+                    + (myBag.contains(selectedItem.getName())
+                       ? myBag.regroup().get(selectedItem) : 0)
+                    > 99)
+                    itemQuantity.setText("" + (99 - myBag.regroup().get(selectedItem)));
                 getTotalPrice();
             } catch (Exception ex) {
-                Logger.getLogger(ShopViewController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         });
     }
@@ -194,7 +196,8 @@ public class ShopViewController implements Initializable {
      *
      * @throws Exception
      */
-    public void buy() throws Exception {
+    public void buy() throws Exception
+    {
         if (selectedItem != null && getItemQtt() > 0) {
             // Variables
             String player = game.getPlayer().getName();
@@ -204,24 +207,23 @@ public class ShopViewController implements Initializable {
             if (getTotalPrice() <= myBag.getPokeDollars()) {
                 myBag.exchangeMoney(-getTotalPrice());
                 displayMoney();
-                for (int i = 0; i < getItemQtt(); i++) {
+                for (int i = 0; i < getItemQtt(); i++)
                     myBag.addItem(selectedItem);
-                }
                 displayInfo.setText(displayInfo.getText() + "Tenez! Merci infiniment. \n"
-                        + player + " obtient : " + selectedItem.getName() + " x " + getItemQtt() + "\n");
+                                    + player + " obtient : " + selectedItem.getName() + " x " + getItemQtt() + "\n");
                 displayInfo.setScrollLeft(displayInfo.getScrollLeft() + 1);
                 itemChoice.setValue(null);
                 selectedItem = null;
-            } else {
+            } else
                 displayInfo.setText(displayInfo.getText() + "Oups vous n'avez pas assez d'argent. \n");
-            }
         }
     }
 
     /**
      *
      */
-    public void goToMainView() {
+    public void goToMainView()
+    {
         game.getGameView().setScene("MainScreen");
     }
 }

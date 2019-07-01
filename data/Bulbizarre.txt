@@ -1,1 +1,8 @@
-0;1;175;Salamèche;5
+1;1;Salamèche;5
+4;2;Roucool;9;Salamèche;8
+5;4;Roucoups;18;Abra;15;Rattata;15;Salamèche;17
+6;4;Roucoups;19;Rattatac;16;Kadabra;18;Reptincel;20
+7;5;Roucoups;25;Noeunoeuf;23;Léviator;22;Kadabra;20;Reptincel;25
+8;5;Roucarnage;37;Noeunoeuf;38;Léviator;35;Alakazam;35;Dracaufeu;40
+9;6;Roucarnage;47;Rhinocorne;45;Noeunoeuf;45;Léviator;47;Alakazam;50;Dracaufeu;53
+10;6;Roucarnage;61;Alakazam;59;Rhinoféros;61;Noadkoko;61;Léviator;63;Dracaufeu;65

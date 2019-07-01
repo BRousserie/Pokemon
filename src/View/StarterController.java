@@ -24,42 +24,40 @@ import javafx.scene.layout.GridPane;
  *
  * @author Baptiste
  */
-public class StarterController implements Initializable {
+public class StarterController implements Initializable
+{
 
     @FXML
-    private Button next;
-    @FXML
-    private Button skip;
+    private Button next, skip, chooseBulbizarre, chooseCarapuce,
+            chooseSalameche;
     @FXML
     private GridPane QCM1;
-    @FXML
-    private Button chooseBulbizarre;
-    @FXML
-    private Button chooseCarapuce;
-    @FXML
-    private Button chooseSalameche;
+
     @FXML
     private Label textOutput;
 
     Game game = Game.getGame();
-    private Scenario.ScenarioScript<String> script = 
-            game.getDatas().getScenario().get(0).Instructions();
+    private final Scenario.ScenarioScript<String> script
+                                                  = game.getDatas().getScenario().get(0).Instructions();
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         textOutput.setWrapText(true);
 
         next.setOnMouseClicked(e -> executeScript(script.next()));
 
         skip.setOnMouseClicked(e -> {
             while (!script.current().startsWith("qcm")
-                && !script.current().startsWith("END")
-                && !script.current().startsWith("fight")) {
+                   && !script.current().startsWith("END")
+                   && !script.current().startsWith("fight"))
                 script.next();
-            }
             executeScript(script.next());
         });
 
@@ -67,16 +65,22 @@ public class StarterController implements Initializable {
                 .filter(btn -> btn instanceof Button)
                 .map(btn -> (Button) btn)
                 .forEach(button -> {
-                    button.setOnMouseClicked(e -> 
-                            setPlayerStarter(button.textProperty().getValue()));
+                    button.setOnMouseClicked(e
+                            -> setPlayerStarter(button.textProperty().getValue()));
                 });
         QCM1.setVisible(false);
         QCM1.setDisable(true);
-        
+
         textOutput.setText(script.next());
     }
 
-    private void setPlayerStarter(String name) {
+    /**
+     * Sets the player name
+     *
+     * @param name
+     */
+    private void setPlayerStarter(String name)
+    {
         textOutput.setText("");
         game.getPlayer().setStarter(name);
         QCM1.setVisible(false);
@@ -86,14 +90,19 @@ public class StarterController implements Initializable {
         executeScript(script.next());
     }
 
-    public void executeScript(String instruction) {
+    /**
+     * Executes the event
+     *
+     * @param instruction
+     */
+    public void executeScript(String instruction)
+    {
 
         if (instruction.startsWith("show")) {
-            if (instruction.contains("@")) {
+            if (instruction.contains("@"))
                 instruction = replaceVariables(instruction);
-            }
             textOutput.setText(textOutput.getText() + "\n" + instruction.substring(4));
-        } else if (instruction.startsWith("qcm")) {
+        } else if (instruction.startsWith("qcm"))
             switch (instruction) {
                 case "qcm":
                     QCM1.setDisable(false);
@@ -102,34 +111,33 @@ public class StarterController implements Initializable {
                     skip.setDisable(true);
                     break;
             }
-        }
-        else if (instruction.startsWith("//")) {
+        else if (instruction.startsWith("//"))
             executeScript(script.next());
-        } 
-        else if (instruction.startsWith("fight")) {
+        else if (instruction.startsWith("fight"))
             game.fightRival();
-        } 
-        else if (instruction.contains("END")) {
+        else if (instruction.contains("END"))
             game.getGameView().setScene("MainScreen");
-        }
     }
 
-    private String replaceVariables(String line) {
-        if (line.contains("@playerName")) {
+    /**
+     * Changes viraible by values
+     *
+     * @param line
+     * @return
+     */
+    private String replaceVariables(String line)
+    {
+        if (line.contains("@playerName"))
             line = line.replace("@playerName", game.getPlayer().getName());
-        }
-        if (line.contains("@rivalName")) {
-            line = line.replace("@rivalName", game.getRival());
-        }
-        if (line.contains("@playerStarterName")) {
+        if (line.contains("@rivalName"))
+            line = line.replace("@rivalName", game.getRivalName());
+        if (line.contains("@playerStarterName"))
             line = line.replace("@playerStarterName", game.getPlayer().getStarter());
-        }
-        if (line.contains("@rivalStarter")) {
-            line = line.replace("@rivalStarter", 
-                    game.getPlayer().getStarter().equals("Bulbizarre") ? "Salamèche" :
-                    game.getPlayer().getStarter().equals("Carapuce") ? "Bulbizarre" :
-                            "Carapuce");
-        }
+        if (line.contains("@rivalStarter"))
+            line = line.replace("@rivalStarter",
+                                game.getPlayer().getStarter().equals("Bulbizarre") ? "Salamèche"
+                                : game.getPlayer().getStarter().equals("Carapuce") ? "Bulbizarre"
+                                  : "Carapuce");
         return line;
     }
 }

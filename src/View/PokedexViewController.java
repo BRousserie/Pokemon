@@ -1,25 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * <brousserie@iut.u-bordeaux.fr> and <tpedrero@iut.u-bordeaux.fr>
+ * wrote this file. As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy us a beer in return Baptiste and Tony
+ * ----------------------------------------------------------------------------
  */
 package View;
 
 import FileIO.ReaderException;
 import GameEngine.Game;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -27,26 +27,15 @@ import javafx.scene.layout.VBox;
  *
  * @author tpedrero
  */
-public class PokedexViewController implements Initializable {
+public class PokedexViewController implements Initializable
+{
 
     @FXML
-    private Button retour;
-    @FXML
-    private Button previous;
-    @FXML
-    private Button next;
+    private Button goBack, previous, next;
     @FXML
     private Label page;
     @FXML
-    private TextArea name;
-    @FXML
-    private TextArea size;
-    @FXML
-    private TextArea weight;
-    @FXML
-    private TextArea description;
-    @FXML
-    private TextArea type;
+    private TextArea name, size, weight, description, type;
     @FXML
     private VBox pokeBox;
 
@@ -62,7 +51,8 @@ public class PokedexViewController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         nextPage();
         previousPage();
         refreshPage();
@@ -74,20 +64,21 @@ public class PokedexViewController implements Initializable {
      * @param i
      * @return
      */
-    private String toString(int i) {
+    private String toString(int i)
+    {
         return "" + i;
     }
 
     /**
      * displays on the screen the next page of the pokedex and increase numPage
      */
-    public void nextPage() {
+    public void nextPage()
+    {
         next.setOnMouseClicked(event -> {
-            if (numPage >= MAXPAGE) {
+            if (numPage >= MAXPAGE)
                 numPage = MAXPAGE;
-            } else {
+            else
                 numPage++;
-            }
             refreshPage();
         });
     }
@@ -96,13 +87,13 @@ public class PokedexViewController implements Initializable {
      * displays on the screen the previous page of the pokedex and decrease
      * numPage
      */
-    public void previousPage() {
+    public void previousPage()
+    {
         previous.setOnMouseClicked(event -> {
-            if (numPage <= MINPAGE) {
+            if (numPage <= MINPAGE)
                 numPage = MINPAGE;
-            } else {
+            else
                 numPage--;
-            }
             refreshPage();
         });
     }
@@ -110,7 +101,8 @@ public class PokedexViewController implements Initializable {
     /**
      * Sets all th buttons for all the pokemons of a page
      */
-    public void refreshPage() {
+    public void refreshPage()
+    {
         refreshPageNum();
         // clear the buttons
         pokeBox.getChildren().clear();
@@ -125,7 +117,6 @@ public class PokedexViewController implements Initializable {
                 pokemon.setOnAction(e -> {
                     try {
                         String[] datas = FileIO.DataReader.readFileArray("pokemonStats", PkmnName);
-                        System.out.println(datas[0]);
                         name.setText(datas[0]);
                         type.setText(datas[1]);
                         description.setText(datas[12]);
@@ -135,26 +126,24 @@ public class PokedexViewController implements Initializable {
                         Logger.getLogger(PokedexViewController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-
             } catch (Exception e) {
-                
             }
-
         }
     }
 
     /**
      * Actualise the page number
      */
-    public void refreshPageNum() {
+    public void refreshPageNum()
+    {
         page.setText((numPage + 1) + "/19");
     }
 
     /**
-     * Sets the main scene
+     * Sets the Main Screen
      */
-    public void goToMainView() {
+    public void goToMainScreen()
+    {
         game.getGameView().setScene("MainScreen");
     }
-
 }

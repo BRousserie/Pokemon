@@ -10,6 +10,7 @@
 package Pokemons;
 
 import FileIO.ReaderException;
+import GameEngine.Game;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,16 +18,22 @@ import org.junit.Test;
  *
  * @author Baptiste
  */
-public class EvolutionTest {
+public class EvolutionTest
+{
+
     @Test
-    public void testEvolve() throws ReaderException {
-        CapturedPkmn Salameche = new CapturedPkmn("Salamèche", 15, 0);
+    public void testEvolve() throws ReaderException
+    {
+        Game.initializeGame();
         
+        CapturedPkmn Salameche = new CapturedPkmn("Salamèche", 15, 0);
+
+        Assert.assertTrue("Salamèche".equals(Salameche.getName()));
         Assert.assertTrue("Reptincel".equals(Salameche.getEvolution().getName()));
         Assert.assertTrue("16".equals(Salameche.getEvolution().getCondition()));
-        
+
         Assert.assertTrue("".equals(Salameche.getEvolution().evolve(Salameche.getLevel(), Salameche.getItem())));
         Salameche.levelUp();
-        Assert.assertTrue("Reptincel".equals(Salameche.getEvolution().evolve(Salameche.getLevel(), Salameche.getItem())));
+        Assert.assertTrue("Reptincel".equals(Salameche.getName()));
     }
 }

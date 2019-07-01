@@ -7,13 +7,21 @@
  * this stuff is worth it, you can buy us a beer in return Baptiste and Tony
  * ----------------------------------------------------------------------------
  */
-
 package Item;
 
+/**
+ *
+ * @author Baptiste
+ */
+public class CTCS extends Item
+{
 
-public class CTCS extends Item {
-
-    public CTCS(String[] infos) {
-        super(infos[0]+infos[1], "Capacité "+infos[1], "500");
+    /**
+     * Constructor of the Class CTCS
+     * @param infos
+     */
+    public CTCS(String[] infos)
+    {
+        super(infos[0] +" "+ infos[1], "Capacité " + infos[1], "500");
     }
 }

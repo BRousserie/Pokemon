@@ -26,158 +26,173 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.stage.Stage;
 
-public class Game extends Application implements Savable<JsonObject> {
-
+/**
+ * Main class of the project, that puts things together.
+ * It is a Singleton. You can access it through Game.getGame()
+ * 
+ * @author Baptiste
+ */
+public class Game extends Application implements Savable<JsonObject>
+{
+    
+    // The instance of the singleton class
     private static Game game;
-
-    public static Game getGame() {
+    
+    public static void initializeGame() {
+        game = new Game();
+    }
+    
+    /**
+     * Gets the actual game
+     *
+     * @return the game
+     */
+    public static Game getGame()
+    {
         return game;
     }
-
-    private DataStorage datas = new DataStorage();
-    private Scenario scenario;
-    private Zone currentZone;
-    private int currentStoryEvent;
-    private Player myPlayer = new Player("");
-    private String rivalName;
-    private GameView gameView;
-    private Fight fight;
-    private int pokemonMetInZone = 0;
-
+    
     /**
+     * @param args
      *
-     * @return fight
+     * We've choosed to use french dialogs because we know French names for
+     * Pokemon, towns, items... and the same goes for our classmates.
      */
-    public Fight getFight() {
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+
+    
+    // <editor-fold defaultstate="collapsed" desc="Instances' attributes">
+    // You can access Database using DataStorage
+    private final DataStorage datas = new DataStorage();;
+    
+    // Scenario of the current event, containing Iterable instructions of its script
+    private Scenario scenario;
+    
+    // Zone the player is located in
+    private Zone currentZone;
+    
+    // Number of the next Event the player should see
+    private int nextStoryEvent;
+    
+    // Player's character
+    private Player myPlayer;
+    
+    // Name of the player's rival
+    private String rivalName;
+    
+    // Class handling visual things
+    private GameView gameView;
+    
+    // Current fight the player's engaged in
+    private Fight fight;
+    
+    // Counter of the amounts of Pokemon that attacked the player in this zone
+    private int pokemonMetInZone = 0;
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
+    /**
+     * Gets the fight the player's engaged in
+     * 
+     * @return the fight the player's engaged in
+     */
+    public Fight getFight()
+    {
         return fight;
     }
 
     /**
-     * Sets the fight view
+     * Sets the current fight and changes the game scene
      *
-     * @param fight
+     * @param fight the new fight
      */
-    public void setFight(Fight fight) {
+    public void setFight(Fight fight)
+    {
         this.fight = fight;
         this.gameView.setScene("FightView");
     }
 
     /**
-     *
-     * @return scenario
+     * Gets the current scenario event
+     * 
+     * @return the current scenario event
      */
-    public Scenario getScenario() {
+    public Scenario getScenario()
+    {
         return scenario;
     }
 
     /**
-     * Sets the senario of the game
+     * Sets the current senario event
      *
-     * @param scenario
+     * @param scenario the new Scenario event to execute
      */
-    public void setScenario(Scenario scenario) {
+    public void setScenario(Scenario scenario)
+    {
         this.scenario = scenario;
     }
 
     /**
-     *
-     * @return datas
+     * Gets the data storage of the game
+     * 
+     * @return the data storage of the game
      */
-    public DataStorage getDatas() {
+    public DataStorage getDatas()
+    {
         return datas;
     }
 
     /**
-     *
-     * @return currentZone
+     * Gets the zone where the player is currently
+     * 
+     * @return the zone where the player is currently
      */
-    public Zone getCurrentZone() {
+    public Zone getCurrentZone()
+    {
         return currentZone;
     }
 
-    public void setCurrentZone(Zone newZone) {
+    /**
+     * Sets the zone where the player is, 
+     * and looks for associated scenario event
+     * 
+     * @param newZone the zone where the player goes
+     */
+    public void setCurrentZone(Zone newZone)
+    {
         currentZone = newZone;
         lookForScenarioEvent(newZone);
     }
 
     /**
-     * Moves the player
-     *
-     * @param newZone
-     * @throws ReaderException
+     * Gets the number of the current story event
+     * 
+     * @return the number of the current story event
      */
-    public void goToZone(Zone newZone) throws ReaderException {
-        if (!possiblyLaunchFight()) {
-            if (!lookForScenarioEvent(newZone)) {
-                currentZone = newZone;
-                pokemonMetInZone = 0;
-                gameView.setScene("MainScreen");
-            }
-        }
-    }
-
-    private boolean lookForScenarioEvent(Zone newZone) {
-        if (datas.getScenario().size() > currentStoryEvent
-                && datas.getScenario().get(currentStoryEvent).getEventZone()
-                        .equals(newZone.getName())) {
-            scenario = datas.getScenario().get(currentStoryEvent);
-            if (datas.getScenario().get(currentStoryEvent).isHasFXML()) {
-                gameView.setScene(scenario.getEventFile());
-            } else {
-                currentZone = newZone;
-                pokemonMetInZone = 0;
-                gameView.setScene("Scenario");
-            }
-            currentStoryEvent++;
-            return true;
-        }
-        return false;
+    public int getCurrentStoryEvent()
+    {
+        return nextStoryEvent;
     }
 
     /**
+     * Sets the number of the next story event to play to newValue
      *
+     * @param newValue the value of the next event to play
      */
-    public void fightRival() {
-        try {
-            String[] rivalStats = DataReader.readFileArray(
-                    myPlayer.getStarter(), "" + (currentStoryEvent - 1));
-
-            ArrayList<FightingPkmn> currentPkmns = new ArrayList<>();
-            for (int i = 0; i < Integer.parseInt(rivalStats[1]); i += 2) {
-                currentPkmns.add(new FightingPkmn(
-                        rivalStats[3 + i], Integer.parseInt(rivalStats[4 + i]), i));
-            }
-
-            setFight(new DressorFight(
-                    new Trainer(rivalName, currentPkmns,
-                            Integer.parseInt(rivalStats[2]))));
-        } catch (ReaderException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     *
-     * @return currentStoryEvent
-     */
-    public int getCurrentStoryEvent() {
-        return currentStoryEvent;
-    }
-
-    /**
-     * Sets the events of the game
-     *
-     * @param newValue
-     */
-    public void setCurrentStoryEvent(int newValue) {
-        currentStoryEvent = newValue;
+    public void setCurrentStoryEvent(int newValue)
+    {
+        nextStoryEvent = newValue;
     }
 
     /**
      *
      * @return myPlayer
      */
-    public Player getPlayer() {
+    public Player getPlayer()
+    {
         return myPlayer;
     }
 
@@ -186,7 +201,8 @@ public class Game extends Application implements Savable<JsonObject> {
      *
      * @param myPlayer
      */
-    public void setMyPlayer(Player myPlayer) {
+    public void setMyPlayer(Player myPlayer)
+    {
         this.myPlayer = myPlayer;
     }
 
@@ -194,7 +210,8 @@ public class Game extends Application implements Savable<JsonObject> {
      *
      * @return rivalName
      */
-    public String getRival() {
+    public String getRivalName()
+    {
         return rivalName;
     }
 
@@ -202,7 +219,8 @@ public class Game extends Application implements Savable<JsonObject> {
      *
      * @param rivalName
      */
-    public void setMyRival(String rivalName) {
+    public void setMyRival(String rivalName)
+    {
         this.rivalName = rivalName;
     }
 
@@ -210,22 +228,25 @@ public class Game extends Application implements Savable<JsonObject> {
      *
      * @return gameView
      */
-    public GameView getGameView() {
+    public GameView getGameView()
+    {
         return gameView;
     }
-
+    // </editor-fold>
+    
     /**
      * Says if we can start a fight
      *
      * @return boolean
      * @throws ReaderException
      */
-    public boolean possiblyLaunchFight() throws ReaderException {
+    public boolean possiblyLaunchFight() throws ReaderException
+    {
         if (Math.random() * currentZone.getMeetingTrainerProba() > 1) {
-            setFight(new DressorFight(Trainer.generateEnnemy(myPlayer)));
+            setFight(new TrainerFight(Trainer.generateEnnemy(myPlayer)));
             return true;
         } else if (pokemonMetInZone < currentZone.getMeetingPkmnProba()
-                && Math.random() * currentZone.getMeetingPkmnProba() > 1) {
+                   && Math.random() * currentZone.getMeetingPkmnProba() > 1) {
             pokemonMetInZone++;
             currentZone.searchWildPokemon();
             return true;
@@ -233,8 +254,12 @@ public class Game extends Application implements Savable<JsonObject> {
         return false;
     }
 
-    public void initialize() {
-        currentStoryEvent = 0;
+    /**
+     * 
+     */
+    public void initialize()
+    {
+        nextStoryEvent = 0;
         try {
             currentZone = datas.getLoadedZone("BOURG PALETTE");
         } catch (ReaderException ex) {
@@ -242,10 +267,15 @@ public class Game extends Application implements Savable<JsonObject> {
         }
     }
 
+    /**
+     * Lauches the game view o fthe game
+     * @param primaryStage the stage
+     */
     @Override
-    public void start(final Stage primaryStage) {
+    public void start(final Stage primaryStage)
+    {
         game = this;
-
+        
         gameView = new GameView(game, primaryStage);
         gameView.launch();
 
@@ -255,34 +285,107 @@ public class Game extends Application implements Savable<JsonObject> {
     }
 
     /**
-     * @param args
+     * Moves the player to another zone
      *
-     * /*
-     * We've choosen to use french dialogs because we know French names for
-     * pokemons, towns, items... and the same goes for our classmates.
-     *
+     * @param newZone
+     * @throws ReaderException
      */
-    public static void main(String[] args) {
-        launch(args);
+    public void goToZone(Zone newZone) throws ReaderException
+    {
+        if (!possiblyLaunchFight())
+            if (!lookForScenarioEvent(newZone)) {
+                currentZone = newZone;
+                pokemonMetInZone = 0;
+                gameView.setScene("MainScreen");
+            }
     }
 
+    /**
+     * Says if the is a scenario event 
+     * @param newZone
+     * @return true or false
+     */
+    private boolean lookForScenarioEvent(Zone newZone)
+    {
+        if (datas.getScenario().size() > nextStoryEvent
+            && datas.getScenario().get(nextStoryEvent).getEventZone()
+                        .equals(newZone.getName())) {
+            scenario = datas.getScenario().get(nextStoryEvent);
+            if (datas.getScenario().get(nextStoryEvent).isHasFXML())
+                gameView.setScene(scenario.getEventFile());
+            else {
+                currentZone = newZone;
+                pokemonMetInZone = 0;
+                gameView.setScene("Scenario");
+            }
+            nextStoryEvent++;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Sets the rival
+     */
+    public void fightRival()
+    {
+        setFight(new TrainerFight(getRival()));
+    }
+
+    /**
+     * gets the rival
+     * @return rival 
+     */
+    public Trainer getRival()
+    {
+        try {
+            String[] rivalStats = DataReader.readFileArray(myPlayer.getStarter(), "" + (nextStoryEvent));
+
+            ArrayList<FightingPkmn> currentPkmns = new ArrayList<>();
+            for (int i = 0; i < Integer.parseInt(rivalStats[1]); i++)
+                currentPkmns.add(new FightingPkmn(
+                        rivalStats[2 + i * 2], Integer.parseInt(rivalStats[3 + i * 2]), i));
+            return new Trainer(rivalName, currentPkmns, new ArrayList<>());
+        } catch (ReaderException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+
+    /**
+     * Converts the Game into a JsonObject.
+     *
+     * @return JsonObject containing all needed informations on the game
+     */
     @Override
-    public JsonObject save() {
+    public JsonObject save()
+    {
         return new JsonObject().add("myPlayer", myPlayer.save())
                 .add("rivalName", rivalName)
                 .add("currentZone", currentZone.getName())
-                .add("currentStoryEvent", currentStoryEvent);
+                .add("currentStoryEvent", nextStoryEvent)
+                .add("pkmnMet", pokemonMetInZone);
     }
 
-    public boolean loadGame(JsonObject save) {
+    /**
+     * Says if the game can be loaded
+     * @param save
+     * @return true or false
+     */
+    public boolean loadGame(JsonObject save)
+    {
         try {
             myPlayer = new Player(save.get("myPlayer").asObject());
             rivalName = save.getString("rivalName", null);
             currentZone = datas.getLoadedZone(save.getString("currentZone", null));
-            currentStoryEvent = save.getInt("currentStoryEvent", 0);
-            scenario = (datas.getScenario().size() > currentStoryEvent)
-                    ? datas.getScenario().get(currentStoryEvent)
-                    : null;
+            nextStoryEvent = save.getInt("currentStoryEvent", 0);
+            scenario = (datas.getScenario().size() > nextStoryEvent)
+                       ? datas.getScenario().get(nextStoryEvent)
+                       : null;
+            pokemonMetInZone = save.getInt("pkmnMet", 0);
+            myPlayer.setLastPokeCenter(Game.getGame().getDatas()
+                    .getLoadedZone(save.getString("pokecenter", "BOURG PALETTE")));
             return true;
         } catch (Exception e) {
             return false;
