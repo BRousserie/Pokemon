@@ -1,0 +1,24 @@
+Combat :
+	Algorithme de capture : https://www.dragonflycave.com/mechanics/gen-i-capturing
+	Calcul des dégâts : http://www.pokepedia.fr/Calcul_des_d%C3%A9g%C3%A2ts
+
+Leveling, XP :
+	Courbe d'expérince : http://www.pokepedia.fr/Courbe_d%27exp%C3%A9rience
+	Expérience : 
+
+Map : 
+	Liste des lieux : https://www.pokebip.com/page__jeuxvideo__rbvj__guide_des_lieux__index.html
+	Liste des pokemons par route : http://www.pokemontrash.com/rouge-feu-vert-feuille/localisation-pokemon-routes.php
+	Liste des pokemons par ville : http://www.pokemontrash.com/rouge-feu-vert-feuille/localisation-pokemon-villes.php
+	Liste des pokemons par grotte : http://www.pokemontrash.com/rouge-feu-vert-feuille/localisation-pokemon-grottes.php
+	Liste des pokemons par iles : http://www.pokemontrash.com/rouge-feu-vert-feuille/localisation-pokemon-iles-1-2-3.php
+								  http://www.pokemontrash.com/rouge-feu-vert-feuille/localisation-pokemon-iles-4-5.php
+								  http://www.pokemontrash.com/rouge-feu-vert-feuille/localisation-pokemon-iles-6-7.php
+
+
+Stats : 
+	IV, EV : https://www.pokebip.com/page__jeuxvideo__rbvj__statistiques__IVEV.html
+
+Musiques : 
+	Complete soundtrack :
+	https://www.youtube.com/watch?v=axKDCZd4Mfc

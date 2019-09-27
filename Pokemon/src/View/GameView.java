@@ -47,11 +47,15 @@ public class GameView
     public GameView(Game main, Stage primaryStage)
     {
         this.game = main;
+        
+        System.out.println("--------------------------------------");
+        System.out.println("Searching in : " + this.getClass().getResource("/data").toString());
+        System.out.println("--------------------------------------");
 
         //Load fonts
-        Font.loadFont(this.getClass().getResource("../resources/PokemonHollow.ttf").toString(), 24);
-        Font.loadFont(this.getClass().getResource("../resources/PokemonSolid.ttf").toString(), 24);
-        Font.loadFont(this.getClass().getResource("../resources/PokemonClassic.ttf").toString(), 16);
+        Font.loadFont(this.getClass().getResource("/data/PokemonHollow.ttf").toString(), 24);
+        Font.loadFont(this.getClass().getResource("/data/PokemonSolid.ttf").toString(), 24);
+        Font.loadFont(this.getClass().getResource("/data/PokemonClassic.ttf").toString(), 16);
 
         // Set stage
         primaryStage.setResizable(false);
@@ -117,7 +121,7 @@ public class GameView
         this.group.getChildren().clear();
         try {
             this.group.getChildren().addAll((Parent) new FXMLLoader(
-                    getClass().getResource("../resources/" + filename + ".fxml")).load());
+                    getClass().getResource("/resources/" + filename + ".fxml")).load());
         } catch (Exception e) {
             System.out.println("Can't load " + filename + " : " + e.getMessage());
             e.printStackTrace();

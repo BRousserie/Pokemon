@@ -1,9 +1,1 @@
-build/
-dist/
-build.xml
-
-nbproject/
-!nbproject/project.xml
-!nbproject/project.properties
-
-
+/Pokemon/data/save.txt

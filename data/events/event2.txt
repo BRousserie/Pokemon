@@ -1,6 +1,0 @@
-showEn vous rendant au magasin de Jadielle, la vendeuse vous interpelle :
-showHé ! Tu viens du Bourg Palette ? Tu connais le PROF. CHEN ?
-showSa commande vient d'arriver. Peux-tu la lui apporter ?
-giveColis de Chen
-show@playerName obtient le COLIS DE CHEN !
-END
